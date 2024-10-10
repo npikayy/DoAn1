@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quản lý</title>
+    <link rel="stylesheet" href="/quanly/css/phanconggv.css">
+    <link rel="stylesheet" href="/quanly/css/style.css">
+    <link rel="stylesheet" href="/quanly/css/pcgv.css">
+    <link rel="stylesheet" href="/quanly/css/suapcgv.css">
+</head>
+<body>
+    <header>
+        <h2>CTUT</h2>
+        <a href="">Đăng xuất</a>
+    </header>
+    <section class="main_page">
+            <div class="pages">
+                <section class="user_info">
+                    <img src="img/astronaut.png" alt="" width="30%">
+                    <div class="info">
+                        <p>Nguyễn Văn A</p>
+                        <p>nguyenvana@gmail.com</p> 
+                    </div>  
+                </section> 
+                <section class="body">
+                    <div id="thongbao" class="function" onclick="location.href='thongbao.html'">
+                        <img src="img/notification.png" id="icon">
+                        <p>Quản lý thông báo</p> 
+                    </div>
+                    <div id="trangchu" class="function" onclick="location.href='upload_trangchu.html'">
+                        <img src="img/user.png" id="icon">
+                        <p>Trang Chủ</p>
+                    </div>
+                    <div id="qldetai" class="function" onclick="location.href='upload_qldetai.html'">
+                        <img src="img/student.png" id="icon">
+                        <p>Quản Lý Đề Tài</p>
+                    </div>
+                    <div id="phanconggv" class="function" onclick="location.href='upload_phanconggv.html'">
+                        <img src="img/profile.png" id="icon">
+                        <p>Phân Công Giang Viên</p>
+                    </div>
+                </section>
+            </div>
+            <section class="dashboard">
+                <h1>Phân Công Giang Viên</h1>
+                <div class="upload-section">
+                    <h2>Upload tệp dịnh dạng excel</h2>
+                    <div class="drag-drop">
+                        <p>Thả Tệp Của Bạn Vào Đây</p>
+                    </div>
+                </div>
+    </section>
+    <body>
+        <div class="container">
+            <div class="sidebar">
+            </div>
+            <div class="main-content">
+                <div class="header">
+                    <h1>Danh sách giảng viên</h1>
+                    <div class="user-info">
+                        <div class="user-avatar"></div>
+                        <span>Quản Lý</span>
+                    </div>
+                </div>
+                <button class="btn btn-success">+ Thêm mới </button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên Giảng Viên</th>
+                            <th>Chương trình đào tạo</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nguyễn Văn A </td>
+                            <td>CTĐT/VT</td>
+                            <td>
+                                <a href="#" class="btn btn-primary">Phân công</a>
+                                <a href="#" class="btn btn-warning">Sửa</a>
+                                <a href="#" class="btn btn-danger">Xóa</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <span>Trang 1</span>
+    </div>
+</div>
+</div>
+</body>
+<body>
+    <div class="modal">
+        <div class="modal-header">SỬA PHÂN CÔNG GIẢNG VIÊN</div>
+        <form>
+            <div class="form-row">
+                <div class="form-column">
+                    <div class="form-group">
+                        <label>ThÔNG TIN CỦ</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="old-chairman">Giảng viên 1</label>
+                        <input type="text" id="old-chairman" class="form-control" value="Trần Thanh Liêm" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="old-secretary">Giảng viên 2</label>
+                        <input type="text" id="old-secretary" class="form-control" value="Nguyễn Văn Hiếu" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="old-member">Nhóm sinh viên</label>
+                        <input type="text" id="old-member" class="form-control" value="Trần Cao Đệ" readonly>
+                    </div>
+                </div>
+                <div class="form-column">
+                    <div class="form-group">
+                        <label>THÔNG TIN MỚI</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-chairman">Giảng viên 1</label>
+                        <select id="new-chairman" class="form-control">
+                            <option>Chọn Giảng Viên 1</option>
+                            <option>Trần Cao Đệ</option>
+                            <option>Nguyễn Văn Hiếu</option>
+                            <option>Hoàng Văn Thu</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-secretary">Giảng viên 2</label>
+                        <select id="new-secretary" class="form-control">
+                            <option>Chọn Giảng Viên 2</option>
+                            <option>Trần Cao Đệ</option>
+                            <option>Nguyễn Văn Hiếu</option>
+                            <option>Hoàng Văn Thu</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-member">Nhóm sinh viên </label>
+                        <select id="new-member" class="form-control">
+                            <option>Chọn Nhóm sinh viên</option>
+                            <option>Trần Cao Đệ</option>
+                            <option>Nguyễn Văn Hiếu</option>
+                            <option>Hoàng Văn Thu</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <button type="button" class="btn btn-secondary">Đóng</button>
+            </div>
+        </form>
+    </div>
+</body>
+    <footer>
+        <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+
+spring:
+  datasource:
+    url: "jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=DoAn1Database"
+    username: sa
+    password: 123456789
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+jwt:
+  key-abc: "ADQbLUG7grHERg3yaK/Vho+512TQ1/IJ6axLXuYzOxG/bE5Jue1qEhpwkIZIE/Bz"
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" th:href="@{/assets/css/user.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/admin.css}">
+</head>
+<body>
+    <header>
+        <h2>CTUT</h2>
+        <a href="">Đăng xuất</a>
+    </header>
+    <section class="main_page">
+            <div class="pages">
+                <section class="user_info">
+                    <img th:src="@{/assets/images/astronaut.png}" alt="" width="30%">
+                    <div class="info">
+                        <h4>Nguyễn Phúc Khang</h4>
+                        <h4>khangnguyen@gmail.com</h4>
+                    </div>
+                </section>
+                <section class="body">
+                    <div id="thongbao" class="function" onclick="location.href='http://localhost:8080/admin'">
+                        <img th:src="@{/assets/images/notification.png}" id="icon">
+                        <p>Quản lý thông báo</p>
+                    </div>
+                    <div id="sinhvien" class="function" onclick="location.href='http://localhost:8080/admin/upload/student'">
+                        <img th:src="@{/assets/images/student.png}" id="icon">
+                        <p>Quản Lý Sinh Viên</p>
+                    </div>
+                    <div id="gvien" class="function" onclick="location.href='http://localhost:8080/admin/upload/teacher'">
+                        <img th:src="@{/assets/images/profile.png}" id="icon">
+                        <p>Quản Lý Giảng Viên</p>
+                    </div>
+                    <div id="user" class="function" onclick="location.href='http://localhost:8080/admin/upload/user'">
+                        <img th:src="@{/assets/images/user.png}" id="icon">
+                        <p>Quản Lý Người Dùng</p>
+                    </div>
+                </section>
+            </div>
+            <section class="dashboard">
+                <h1>Quản Lý Tài Khoản</h1>
+                <div class="upload-section">
+                    <h2>Upload tệp dịnh dạng excel</h2>
+                    <div class="drag-drop">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <input type="file" id="fileInput" name="file">
+                            <button type="submit">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+    </section>
+    <footer>
+        <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
+    </footer>
+
+</body>
+</html>
