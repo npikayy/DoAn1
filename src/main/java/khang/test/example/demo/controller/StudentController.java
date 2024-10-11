@@ -44,10 +44,11 @@ public class StudentController {
     @PostMapping("/excel")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
-        int code=0;
+        int code=1000;
         if (ExcelUtility.hasExcelFormat(file)) {
             try {
                 stuService.save(file);
+                code=0;
                 message = "The Excel file is uploaded: " + file.getOriginalFilename();
             } catch (Exception exp) {
                 log.warn(String.valueOf(exp));

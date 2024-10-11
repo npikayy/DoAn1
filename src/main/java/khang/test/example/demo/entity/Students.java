@@ -10,7 +10,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Students {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
         Integer id;
         String studentName;
         Integer mobileNo;

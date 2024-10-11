@@ -11,18 +11,18 @@ public class HomeController {
     }
     @GetMapping("/admin")
     public String admin(){
-        return "admin_page";
+        return "admin_html/admin_page";
     }
     @GetMapping("/admin/upload/student")
     public String uploadSV(){
-        return "/upload/upload_sinhvien";
+        return "admin_html/upload_sinhvien";
     }
     @GetMapping("/admin/upload/teacher")
     public String uploadGV(){
-        return "/upload/upload_teacher";
+        return "admin_html/upload_teacher";
     }
     @GetMapping("/admin/upload/user")
     public String uploadUser(){
-        return "/upload/upload_user";
+        return "admin_html/upload_user";
     }
 }

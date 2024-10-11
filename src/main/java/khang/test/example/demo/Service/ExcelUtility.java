@@ -40,21 +40,17 @@ public class ExcelUtility {
                     Cell currentCell = cellsInRow.next();
                     switch (cellIdx) {
                         case 0:
-                            stu.setStudentName(currentCell.getStringCellValue());
+                            stu.setId((int) currentCell.getNumericCellValue());
                             break;
                         case 1:
-                            stu.setMobileNo((int) currentCell.getNumericCellValue());
+                            stu.setStudentName(currentCell.getStringCellValue());
                             break;
                         case 2:
+                            stu.setMobileNo((int) currentCell.getNumericCellValue());
+                            break;
+                        case 3:
                             stu.setEmail(currentCell.getStringCellValue());
                             break;
-//                        case 3:
-//                            stu.setPassword(1);
-//                            break;
-//                        case 4:
-//                            if (currentCell == null) {
-//                            ;}
-//                            break;
                         default:
                             break;
                     }

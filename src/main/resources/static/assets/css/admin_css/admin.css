@@ -9,7 +9,7 @@ body {
     background-color: #f4f4f4;
 }
 .main_page{
-    display: flex; 
+    display: flex;
 }
 .pages{
     display: flex;
@@ -23,9 +23,9 @@ body {
     margin: 30px 0;
 }
 .function{
-   display: flex;
-   align-items: center;
-   margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 .function:hover{
     background-color: #94bffff3;
@@ -69,7 +69,7 @@ header a{
     width: 50%;
     margin: 20px;
     text-align: left;
-    
+
 }
 .dashboard {
     background-color:#829db3;
@@ -78,7 +78,7 @@ header a{
     padding: 20px;
 }
 
-.drag-drop {
+/* .drag-drop {
     border: 2px dashed #80bdff;
     padding: 20px;
     margin: 30px;
@@ -86,7 +86,7 @@ header a{
     text-align: center;
     border-radius: 4px;
     background-color: #f9f9f9;
-}
+} */
 
 footer {
     text-align: center;
@@ -107,9 +107,10 @@ input {
 }
 
 button[type="submit"] {
-    width: 100%;
-    padding: 15px;
-    margin-top: 50px;
+    width: 30%;
+    padding: 20px;
+    margin: 10px auto;
+    font-size: 20px;
     background-color: #28a745;
     color: #fff;
     border-radius: 4px;
@@ -118,4 +119,56 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: #218838;
+}
+#uploadForm{
+    display: flex;
+    flex-direction: column;
+}
+/* //// */
+.container {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 100px;
+    /* position: absolute; */
+    margin: 20px auto;
+    box-shadow: 0 1.25em 3.43em rgba(0, 0, 0, 0.08);
+    border-radius: 0.5em;
+}
+input[type="file"] {
+    display: none;
+}
+label {
+    display: block;
+    position: relative;
+    background-color: #025bee;
+    color: #ffffff;
+    font-size: 1.1em;
+    text-align: center;
+    width: 16em;
+    padding: 1em 0;
+    border-radius: 0.3em;
+    margin: 0 auto 1em auto;
+    cursor: pointer;
+}
+
+#file-display {
+    /* position: relative; */
+    width: 90%;
+    margin: 0 auto;
+    gap: 1.25em;
+}
+.active {
+    border: 0.2em dashed #025bee;
+}
+#error {
+    text-align: center;
+    color: #ff3030;
+}
+.file-icon{
+    width: 8%;
+}
+.excel-file{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
