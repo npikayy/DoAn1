@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Date;
+
 @Data
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -14,4 +16,9 @@ public class Students {
         String studentName;
         Integer mobileNo;
         String email;
+        String Lop;
+        Integer nienKhoa;
+        Integer maNhom;
+        @Column(columnDefinition = "Date")
+        Date ngaySinh;
 }
