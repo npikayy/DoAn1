@@ -2,7 +2,6 @@ package khang.test.example.demo.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,10 +9,8 @@ import khang.test.example.demo.entity.Students;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
-public class ExcelUtility {
+public class StudentExcelUtility {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    static String[] HEADERs = { "ID", "Student Name", "Mobile No.", "Email", "Lop", "NienKhoa", "MaNhom", "MaTaiKhoan"};
-//    static String[] HEADERs = { "ID", "Student Name", "Email", "Mobile No." };
     static String SHEET = "student";
     public static boolean hasExcelFormat(MultipartFile file) {
         if (!TYPE.equals(file.getContentType())) {
@@ -42,7 +39,7 @@ public class ExcelUtility {
                     Cell currentCell = cellsInRow.next();
                     switch (cellIdx) {
                         case 0:
-                            stu.setId((int) currentCell.getNumericCellValue());
+                            stu.setMSSV((int) currentCell.getNumericCellValue());
                             break;
                         case 1:
                             stu.setStudentName(currentCell.getStringCellValue());

@@ -12,10 +12,12 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Students {
         @Id
-        Integer id;
+        Integer MSSV;
+        @Column(columnDefinition = "nvarchar(255)")
         String studentName;
         Integer mobileNo;
         String email;
+        @Column(columnDefinition = "nvarchar(255)")
         String Lop;
         Integer nienKhoa;
         Integer maNhom;

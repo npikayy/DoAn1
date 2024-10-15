@@ -19,7 +19,7 @@
     border-radius: 2px;
     border-left: 4px solid;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
-    animation: slideInLeft ease .3s,fadeOut linear 1s 1s forwards;
+    animation: slideInLeft ease .3s,fadeOut linear 1s 2s forwards;
 }
 @keyframes slideInLeft{
     from {

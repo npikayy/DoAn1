@@ -3,7 +3,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import khang.test.example.demo.Service.ExcelUtility;
+import khang.test.example.demo.Service.StudentExcelUtility;
 import khang.test.example.demo.Service.StudentService;
 import khang.test.example.demo.entity.Students;
 import khang.test.example.demo.response.apiResponse;
@@ -18,34 +18,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 @RestController
-@RequestMapping("/upload")
+@RequestMapping("/student")
 @Slf4j
 public class StudentController {
     @Autowired
     StudentService stuService;
-
-//    @PostMapping("/excel")
-//    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
-//        String message = "";
-//        if (ExcelUtility.hasExcelFormat(file)) {
-//            try {
-//                stuService.save(file);
-//                message = "The Excel file is uploaded: " + file.getOriginalFilename();
-//                return ResponseEntity.status(HttpStatus.OK).body(message);
-//            } catch (Exception exp) {
-//                log.warn(String.valueOf(exp));
-//                message = "The Excel file is not upload: " + file.getOriginalFilename() + "!";
-//                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
-//            }
-//        }
-//        message = "Please upload an excel file!";
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
-//    }
-    @PostMapping("/excel")
+    @PostMapping("/upload")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         int code=1000;
-        if (ExcelUtility.hasExcelFormat(file)) {
+        if (StudentExcelUtility.hasExcelFormat(file)) {
             try {
                 stuService.save(file);
                 code=0;

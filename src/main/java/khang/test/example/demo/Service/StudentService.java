@@ -13,7 +13,7 @@ public class StudentService {
     StudentRepository stuRepo;
     public void save(MultipartFile file) {
         try {
-            List<Students> stuList = ExcelUtility.excelToStuList(file.getInputStream());
+            List<Students> stuList = StudentExcelUtility.excelToStuList(file.getInputStream());
             stuRepo.saveAll(stuList);
         } catch (IOException ex) {
             throw new RuntimeException("Excel data is failed to store: " + ex.getMessage());
