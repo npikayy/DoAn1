@@ -43,7 +43,7 @@ public class TeacherController {
     }
     @GetMapping("/teacher-list")
     public ResponseEntity<?> getStudents() {
-        Map<String, Object> respStu = new LinkedHashMap<String, Object>();
+        Map<String, Object> respStu = new LinkedHashMap<>();
         List<Teachers> studList = stuService.findAll();
         if (!studList.isEmpty()) {
             respStu.put("status", 1);
