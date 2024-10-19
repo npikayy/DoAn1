@@ -20,14 +20,14 @@ import java.util.Map;
 @Slf4j
 public class TeacherController {
     @Autowired
-    TeacherService stuService;
+    TeacherService teaService;
     @PostMapping("/upload")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         int code=1000;
         if (TeacherExcelUtility.hasExcelFormat(file)) {
             try {
-                stuService.save(file);
+                teaService.save(file);
                 code=0;
                 message = "The Excel file is uploaded: " + file.getOriginalFilename();
             } catch (Exception exp) {
@@ -42,18 +42,18 @@ public class TeacherController {
                 .build();
     }
     @GetMapping("/teacher-list")
-    public ResponseEntity<?> getStudents() {
-        Map<String, Object> respStu = new LinkedHashMap<>();
-        List<Teachers> studList = stuService.findAll();
-        if (!studList.isEmpty()) {
-            respStu.put("status", 1);
-            respStu.put("data", studList);
-            return new ResponseEntity<>(respStu, HttpStatus.OK);
+    public ResponseEntity<?> getTeachers() {
+        Map<String, Object> respTea = new LinkedHashMap<>();
+        List<Teachers> teacherList = teaService.findAll();
+        if (!teacherList.isEmpty()) {
+            respTea.put("status", 1);
+            respTea.put("data", teacherList);
+            return new ResponseEntity<>(respTea, HttpStatus.OK);
         } else {
-            respStu.clear();
-            respStu.put("status", 0);
-            respStu.put("message", "Data is not found");
-            return new ResponseEntity<>(respStu, HttpStatus.NOT_FOUND);
+            respTea.clear();
+            respTea.put("status", 0);
+            respTea.put("message", "Data is not found");
+            return new ResponseEntity<>(respTea, HttpStatus.NOT_FOUND);
         }
     }
 }

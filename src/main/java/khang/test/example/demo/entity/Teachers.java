@@ -12,7 +12,7 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Teachers {
     @Id
-    Integer MaGV;
+    Integer maGV;
     @Column(columnDefinition = "nvarchar(255)")
     String TenGV;
     @Column(columnDefinition = "nvarchar(255)")
@@ -22,4 +22,7 @@ public class Teachers {
     Integer maKhoa;
     @Column(columnDefinition = "Date")
     Date ngaySinh;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ma_tai_khoan", referencedColumnName = "Ma_Tai_Khoan")
+    Accounts maTK;
 }

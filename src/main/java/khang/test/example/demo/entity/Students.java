@@ -1,6 +1,5 @@
 package khang.test.example.demo.entity;
 import jakarta.persistence.*;
-import jakarta.validation.groups.Default;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -16,11 +15,13 @@ public class Students {
         @Column(columnDefinition = "nvarchar(255)")
         String studentName;
         Integer mobileNo;
-        String email;
         @Column(columnDefinition = "nvarchar(255)")
         String Lop;
         Integer nienKhoa;
         Integer maNhom;
         @Column(columnDefinition = "Date")
         Date ngaySinh;
+        @OneToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "ma_tai_khoan", referencedColumnName = "Ma_Tai_Khoan")
+        Accounts maTK;
 }

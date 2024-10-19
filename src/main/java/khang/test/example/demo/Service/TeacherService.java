@@ -12,16 +12,16 @@ import java.util.List;
 @Service
 public class TeacherService {
     @Autowired
-    TeacherRepository stuRepo;
+    TeacherRepository teaRepo;
     public void save(MultipartFile file) {
         try {
-            List<Teachers> stuList = TeacherExcelUtility.excelToStuList(file.getInputStream());
-            stuRepo.saveAll(stuList);
+            List<Teachers> teaList = TeacherExcelUtility.excelToTeacherList(file.getInputStream());
+            teaRepo.saveAll(teaList);
         } catch (IOException ex) {
             throw new RuntimeException("Excel data is failed to store: " + ex.getMessage());
         }
     }
     public List<Teachers> findAll() {
-        return stuRepo.findAll();
+        return teaRepo.findAll();
     }
 }

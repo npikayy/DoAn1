@@ -5,11 +5,32 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+import jakarta.annotation.PostConstruct;
+import khang.test.example.demo.entity.Accounts;
 import khang.test.example.demo.entity.Students;
-import org.apache.poi.ss.usermodel.*;
+import khang.test.example.demo.repository.StudentRepository;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
+
+@Component
 public class StudentExcelUtility {
+    private static StudentRepository stuRepo;
+    @Autowired
+    private StudentRepository stuRepo1;
+
+    @PostConstruct
+    private void initStaticRepo(){
+        stuRepo = this.stuRepo1;
+    }
+
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String SHEET = "student";
     public static boolean hasExcelFormat(MultipartFile file) {
@@ -48,18 +69,15 @@ public class StudentExcelUtility {
                             stu.setMobileNo((int) currentCell.getNumericCellValue());
                             break;
                         case 3:
-                            stu.setEmail(currentCell.getStringCellValue());
-                            break;
-                        case 4:
                             stu.setLop(currentCell.getStringCellValue());
                             break;
-                        case 5:
+                        case 4:
                             stu.setNienKhoa((int) currentCell.getNumericCellValue());
                             break;
-                        case 6:
+                        case 5:
                             stu.setMaNhom((int) currentCell.getNumericCellValue());
                             break;
-                        case 7:
+                        case 6:
                             stu.setNgaySinh(currentCell.getDateCellValue());
                             break;
                         default:
@@ -67,7 +85,16 @@ public class StudentExcelUtility {
                     }
                     cellIdx++;
                 }
-                stuList.add(stu);
+                boolean studentExisted = stuRepo.existsByMSSV(stu.getMSSV());
+                if (!studentExisted)
+                {
+                    Accounts account = new Accounts();
+                    account.setUsername(String.valueOf(stu.getMSSV()));
+                    account.setPassword("1");
+                    account.setLoaiTK("student");
+                    stu.setMaTK(account);
+                    stuList.add(stu);
+                }
             }
             workbook.close();
             return stuList;
