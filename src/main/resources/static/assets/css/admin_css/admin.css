@@ -18,6 +18,7 @@ body {
     width: 450px;
     min-width: 350px;
     height: 95vh;
+    position: relative;
 }
 .body{
     margin: 30px 0;
@@ -25,12 +26,10 @@ body {
 .function{
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
 }
-.function:hover{
-    background-color: #94bffff3;
-    border: 2px solid black;
-}
+
 p{
     font-weight: bold;
     margin-left: 10px;
@@ -72,7 +71,7 @@ header a{
 
 }
 .dashboard {
-    background-color:#829db3;
+    background-color: #829db3;
     width: 100%;
     height: 95vh;
     padding: 20px;
@@ -171,4 +170,17 @@ label {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.body{
+    position: relative;
+}
+.animation{
+    position: absolute;
+    height: 25%;
+    top: 0;
+    z-index: 0;
+    background: #829db3;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transition: all .5s ease 0s;
 }

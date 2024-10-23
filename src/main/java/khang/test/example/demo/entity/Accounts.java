@@ -8,13 +8,12 @@ import lombok.experimental.FieldDefaults;
 @Data
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Accounts {
+public class Accounts<T> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "Ma_Tai_Khoan")
     String maTK;
     String username;
     String password;
-    String email;
     String LoaiTK;
 }

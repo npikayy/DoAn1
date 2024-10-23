@@ -63,15 +63,18 @@ public class TeacherExcelUtility {
                             teacher.setTenGV(currentCell.getStringCellValue());
                             break;
                         case 2:
-                            teacher.setTenNganh(currentCell.getStringCellValue());
+                            teacher.setEmail(currentCell.getStringCellValue());
                             break;
                         case 3:
-                            teacher.setTenKhoa(currentCell.getStringCellValue());
+                            teacher.setTenNganh(currentCell.getStringCellValue());
                             break;
                         case 4:
-                            teacher.setMaKhoa((int) currentCell.getNumericCellValue());
+                            teacher.setTenKhoa(currentCell.getStringCellValue());
                             break;
                         case 5:
+                            teacher.setMaKhoa((int) currentCell.getNumericCellValue());
+                            break;
+                        case 6:
                             teacher.setNgaySinh(currentCell.getDateCellValue());
                             break;
                         default:
@@ -86,7 +89,7 @@ public class TeacherExcelUtility {
                     account.setUsername(String.valueOf(teacher.getMaGV()));
                     account.setPassword("1");
                     account.setLoaiTK("teacher");
-                    teacher.setMaTK(account);
+                    teacher.setThongTinTK(account);
                     teaList.add(teacher);
                 }
             }

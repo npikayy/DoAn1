@@ -21,8 +21,8 @@ public class HomeController {
     public String uploadGV(){
         return "admin_html/upload_teacher";
     }
-    @GetMapping("/admin/upload/user")
+    @GetMapping("/admin/users")
     public String uploadUser(){
-        return "admin_html/upload_user";
+        return "admin_html/users_manager";
     }
 }

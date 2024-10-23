@@ -1,10 +1,21 @@
-
-#thongbao{
-    background-color: #3b89fff3;
-    border: 3px solid black;
+a:nth-child(1){
+    background: transparent;
 }
-#thongbao p{
-    color: #fff;
+.body .start-noti, a:nth-child(1):hover~.animation{
+    width: 100%;
+    top: 0;
+}
+a:nth-child(2):hover~.animation{
+    width: 100%;
+    top: 73px;
+}
+a:nth-child(3):hover~.animation{
+    width: 100%;
+    top: 144px;
+}
+a:nth-child(4):hover~.animation{
+    width: 100%;
+    top: 220px;
 }
 
 

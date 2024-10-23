@@ -69,15 +69,18 @@ public class StudentExcelUtility {
                             stu.setMobileNo((int) currentCell.getNumericCellValue());
                             break;
                         case 3:
-                            stu.setLop(currentCell.getStringCellValue());
+                            stu.setEmail(currentCell.getStringCellValue());
                             break;
                         case 4:
-                            stu.setNienKhoa((int) currentCell.getNumericCellValue());
+                            stu.setLop(currentCell.getStringCellValue());
                             break;
                         case 5:
-                            stu.setMaNhom((int) currentCell.getNumericCellValue());
+                            stu.setNienKhoa((int) currentCell.getNumericCellValue());
                             break;
                         case 6:
+                            stu.setMaNhom((int) currentCell.getNumericCellValue());
+                            break;
+                        case 7:
                             stu.setNgaySinh(currentCell.getDateCellValue());
                             break;
                         default:
@@ -92,7 +95,7 @@ public class StudentExcelUtility {
                     account.setUsername(String.valueOf(stu.getMSSV()));
                     account.setPassword("1");
                     account.setLoaiTK("student");
-                    stu.setMaTK(account);
+                    stu.setThongTinTK(account);
                     stuList.add(stu);
                 }
             }

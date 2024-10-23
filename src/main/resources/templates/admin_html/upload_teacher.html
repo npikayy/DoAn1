@@ -15,33 +15,7 @@
         <a href="">Đăng xuất</a>
     </header>
     <section class="main_page">
-            <div class="pages">
-                <section class="user_info">
-                    <img th:src="@{/assets/images/astronaut.png}" alt="" width="30%">
-                    <div class="info">
-                        <h4>Nguyễn Phúc Khang</h4>
-                        <h4>khangnguyen@gmail.com</h4>
-                    </div>
-                </section>
-                <section class="body">
-                    <div id="thongbao" class="function" onclick="location.href='http://localhost:8080/admin'">
-                        <img th:src="@{/assets/images/notification.png}" id="icon">
-                        <p>Quản lý thông báo</p>
-                    </div>
-                    <div id="sinhvien" class="function" onclick="location.href='http://localhost:8080/admin/upload/student'">
-                        <img th:src="@{/assets/images/student.png}" id="icon">
-                        <p>Quản Lý Sinh Viên</p>
-                    </div>
-                    <div id="gvien" class="function" onclick="location.href='http://localhost:8080/admin/upload/teacher'">
-                        <img th:src="@{/assets/images/profile.png}" id="icon">
-                        <p>Quản Lý Giảng Viên</p>
-                    </div>
-                    <div id="user" class="function" onclick="location.href='http://localhost:8080/admin/upload/user'">
-                        <img th:src="@{/assets/images/user.png}" id="icon">
-                        <p>Quản Lý Người Dùng</p>
-                    </div>
-                </section>
-            </div>
+        <div th:replace="~{admin_html/header :: header}"></div>
             <section class="dashboard">
                 <h1>Quản Lý Giảng Viên</h1>
                 <div class="upload-section">
@@ -62,7 +36,7 @@
         <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
     </footer>
     <script th:src="@{/assets/js/admin_js/teacher-upload.js}"></script>
-    <script th:src="@{/assets/js/admin_js/dragdrop.js}"></script>
+    <script th:src="@{/assets/js/admin_js/drag&drop.js}"></script>
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js}"></script>
 </body>
 </html>

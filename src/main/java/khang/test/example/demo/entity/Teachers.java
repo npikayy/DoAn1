@@ -15,6 +15,7 @@ public class Teachers {
     Integer maGV;
     @Column(columnDefinition = "nvarchar(255)")
     String TenGV;
+    String email;
     @Column(columnDefinition = "nvarchar(255)")
     String TenNganh;
     @Column(columnDefinition = "nvarchar(255)")
@@ -24,5 +25,5 @@ public class Teachers {
     Date ngaySinh;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ma_tai_khoan", referencedColumnName = "Ma_Tai_Khoan")
-    Accounts maTK;
+    Accounts thongTinTK;
 }
