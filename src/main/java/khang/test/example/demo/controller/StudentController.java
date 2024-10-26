@@ -25,17 +25,17 @@ public class StudentController {
     StudentService stuService;
     @PostMapping("/upload")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        String message = "";
+        String message ="";
         int code=1000;
         if (StudentExcelUtility.hasExcelFormat(file)) {
             try {
                 stuService.save(file);
                 code=0;
-                message = "The Excel file is uploaded: " + file.getOriginalFilename();
+                message = "Tệp " + file.getOriginalFilename() + " đã được upload lên hệ thống thành công.";
             } catch (Exception exp) {
                 log.warn(String.valueOf(exp));
                 code=1000;
-                message = "The Excel file is not upload: " + file.getOriginalFilename() + "!";
+                message = "Tệp " + file.getOriginalFilename() + " upload không thành công! Vui lòng kiểm tra lại";
             }
         }
         return apiResponse.<String>builder()

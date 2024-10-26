@@ -3,21 +3,21 @@ a:nth-child(3){
 }
 .body .start-noti{
     width: 100%;
-    top: 144px;
+    background-color: #257981;
+    top: 148px;
 }
 a:nth-child(1):hover~.animation{
     width: 100%;
+    background-color: #328386;
     top: 0;
 }
 a:nth-child(2):hover~.animation{
     width: 100%;
+    background-color: #2c7e84;
     top: 73px;
-}
-a:nth-child(3):hover~.animation{
-    width: 100%;
-    top: 144px;
 }
 a:nth-child(4):hover~.animation{
     width: 100%;
-    top: 220px;
+    background-color: #20757f;
+    top: 222px;
 }

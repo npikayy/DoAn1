@@ -10,10 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header>
-        <h2>CTUT</h2>
-        <a href="">Đăng xuất</a>
-    </header>
     <section class="main_page">
         <div th:replace="~{admin_html/header :: header}"></div>
             <section class="dashboard">
@@ -23,7 +19,7 @@
                     <form id="uploadForm" enctype="multipart/form-data">
                         <div class="container">
                             <input type="file" id="upload-button"/>
-                            <label for="upload-button"><i class="fa-solid fa-upload"></i>&nbsp; Choose Or Drop a File</label>
+                            <label for="upload-button"><i class="fa-solid fa-upload"></i>&nbsp; Chọn hoặc thả file vào đây</label>
                             <div id="error"></div>
                             <div id="file-display"></div>
                         </div>

@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=New+Amsterdam&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
-body {
-    font-family: "Open Sans", sans-serif;
-    background-color: #f4f4f4;
-}
+
 .main_page{
     display: flex;
 }
 .pages{
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: #e5f4f3;
     width: 450px;
     min-width: 350px;
     height: 95vh;
@@ -46,19 +46,6 @@ p{
     flex-direction: column;
     width: 40px
 }
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-}
-header a{
-    color: #fff;
-    text-decoration: none;
-}
-
 .user_info{
     margin: 10px;
     display: flex;
@@ -71,27 +58,21 @@ header a{
 
 }
 .dashboard {
-    background-color: #829db3;
+    background-image: linear-gradient(to left top, #051937, #003553, #00526b, #1a717e, #42908d);
     width: 100%;
-    height: 95vh;
+    height: 100vh;
     padding: 20px;
 }
 
-/* .drag-drop {
-    border: 2px dashed #80bdff;
-    padding: 20px;
-    margin: 30px;
-    height: 50vh;
-    text-align: center;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-} */
+.dashboard h1, h2{
+    color: #e5f4f3;
+}
 
 footer {
     text-align: center;
     padding: 10px;
     background-color: #333;
-    color: #fff;
+    color: #e5f4f3;
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -110,14 +91,11 @@ button[type="submit"] {
     padding: 20px;
     margin: 10px auto;
     font-size: 20px;
-    background-color: #28a745;
-    color: #fff;
+    background-color: #3e7fad;
+    color: #e5f4f3;
+    border: 2px solid white;
     border-radius: 4px;
     cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #218838;
 }
 #uploadForm{
     display: flex;
@@ -125,7 +103,7 @@ button[type="submit"]:hover {
 }
 /* //// */
 .container {
-    background-color: #ffffff;
+    background-color: #e5f4f3;
     width: 100%;
     padding: 100px;
     /* position: absolute; */
@@ -139,8 +117,8 @@ input[type="file"] {
 label {
     display: block;
     position: relative;
-    background-color: #025bee;
-    color: #ffffff;
+    background-color: #3e7fad;
+    color: #e5f4f3;
     font-size: 1.1em;
     text-align: center;
     width: 16em;
@@ -179,8 +157,8 @@ label {
     height: 25%;
     top: 0;
     z-index: 0;
-    background: #829db3;
+    background: #42908d;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    transition: all .5s ease 0s;
+    transition: all .2s ease 0s;
 }
