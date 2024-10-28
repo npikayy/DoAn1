@@ -1,0 +1,20 @@
+.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 213px;
+}
+div:nth-child(1):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 156px;
+}
+div:nth-child(3):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 269px;
+}
+div:nth-child(4):hover~.animation {
+    width: 100%;
+    background: var(--button-color);
+    top: 325px;
+}

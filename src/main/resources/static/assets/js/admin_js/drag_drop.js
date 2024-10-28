@@ -4,7 +4,7 @@ let error = document.getElementById("error");
 let fileDisplay = document.getElementById("file-display");
 const fileHandler = (file, name, type) => {
     if (type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
-        error.innerText = "Please upload an Excel file";
+        error.innerText = "Vui lòng sử dụng tệp định dạng Excel";
         return false;
     }
     error.innerText = "";
