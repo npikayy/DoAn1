@@ -21,11 +21,11 @@ public class HomeController {
     public String ThemGV(){
         return "admin_html/giangvien-uploader";
     }
-    @GetMapping("/admin/quanly-sinhvien/")
+    @GetMapping("/admin/quanly-sinhvien")
     public String QuanlySV(){
         return "admin_html/quanly-sinhvien";
     }
-    @GetMapping("/admin/quanly-giangvien/")
+    @GetMapping("/admin/quanly-giangvien")
     public String QuanlyGV(){
         return "admin_html/quanly-giangvien";
     }

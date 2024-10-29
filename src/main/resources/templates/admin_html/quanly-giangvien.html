@@ -8,16 +8,31 @@
     <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
     <link rel="stylesheet" th:href="@{/assets/css/admin_css/admin.css}">
 </head>
-<body>
+<body onload="layGV()">
     <section class="main_page">
         <div th:replace="~{admin_html/sidebar :: sidebar}"></div>
             <section class="dashboard">
                 <h1>Quản Lý Giảng Viên</h1>
+                <form class="search-bar" >
+                    <label for="search">Nhập mã giảng viên: </label>
+                    <input type="text" id="search" onkeyup="timGVbangMagv(event)">
+                </form>
+                <table id="userList">
+                    <tr>
+                        <th>Mã giảng viên</th>
+                        <th>Tên giảng viên</th>
+                        <th>Ngày sinh</th>
+                        <th>Email</th>
+                        <th>Tên khoa</th>
+                        <th>Mã khoa</th>
+                        <th>Tên ngành</th>
+                    </tr>
+                </table>
+                <footer>
+                    <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
+                </footer>
             </section>
     </section>
-    <footer>
-        <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
-    </footer>
-
+    <script th:src="@{/assets/js/admin_js/laygiangvien.js}"></script>
 </body>
 </html>

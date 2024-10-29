@@ -57,7 +57,7 @@ public class TeacherExcelUtility {
                     Cell currentCell = cellsInRow.next();
                     switch (cellIdx) {
                         case 0:
-                            teacher.setMaGV((int) currentCell.getNumericCellValue());
+                            teacher.setMaGV(currentCell.getStringCellValue());
                             break;
                         case 1:
                             teacher.setTenGV(currentCell.getStringCellValue());
@@ -75,7 +75,7 @@ public class TeacherExcelUtility {
                             teacher.setMaKhoa((int) currentCell.getNumericCellValue());
                             break;
                         case 6:
-                            teacher.setNgaySinh(currentCell.getDateCellValue());
+                            teacher.setNgaySinh(currentCell.getLocalDateTimeCellValue().toLocalDate());
                             break;
                         default:
                             break;

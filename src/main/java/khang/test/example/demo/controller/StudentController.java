@@ -9,6 +9,7 @@ import khang.test.example.demo.entity.Students;
 import khang.test.example.demo.response.apiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 @RestController
-@RequestMapping("/student")
 @Slf4j
 public class StudentController {
     @Autowired
     StudentService stuService;
-    @PostMapping("/upload")
+    @PostMapping("/student/upload")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String message ="";
         int code=1000;
@@ -57,5 +57,14 @@ public class StudentController {
             respStu.put("message", "Data is not found");
             return new ResponseEntity<>(respStu, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/quanly-sinhvien/search")
+    public ResponseEntity<?> SearchMSSV(@Param("mssv") String mssv) {
+        List<Students> studList = null;
+        if (mssv != null) {
+            studList = stuService.SearchByMSSV(mssv);
+        }
+        return new ResponseEntity<>(studList, HttpStatus.OK);
     }
 }

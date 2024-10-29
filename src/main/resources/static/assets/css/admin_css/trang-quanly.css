@@ -1,3 +1,4 @@
+/*///sidebar///*/
 .animation{
     width: 100%;
     background: var(--button-color);
@@ -17,4 +18,44 @@ div:nth-child(3):hover~.animation {
     width: 100%;
     background: var(--button-color);
     top: 269px;
+}
+/*///footer///*/
+footer{
+    margin-top: 200px;
+}
+/*///search-bar//*/
+input {
+    margin-top: 40px;
+    font-size: 15px ;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button{
+    background-color: #3dbdf8;
+    border: none;
+    padding: 5px;
+    border-radius: 2px;
+    color: hsl(0, 0%, 100%);
+}
+/*table*/
+table {
+    margin-top: 10px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #c7dbe4;
+    text-align: left;
+    padding: 10px;
+}
+tr:nth-child(1) {
+    background-color: #3dbdf8;
+}
+input {
+    margin-top: 40px;
+    font-size: 18px ;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }

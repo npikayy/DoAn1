@@ -22,4 +22,9 @@ public class StudentService {
     public List<Students> findAll() {
         return stuRepo.findAll();
     }
+
+    public List<Students> SearchByMSSV(String mssv){
+        return stuRepo.searchByMssv(mssv);
+    }
+
 }
