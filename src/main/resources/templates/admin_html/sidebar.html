@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="sidebar" th:fragment="sidebar">
+  <section class="user_info">
+    <img th:src="@{/assets/images/astronaut.png}" alt="" width="30%">
+    <div class="info">
+      <h4>Nguyễn Phúc Khang</h4>
+      <h4>khangnguyen@gmail.com</h4>
+    </div>
+  </section>
+  <section class="sidebar-body">
+    <div id="thongbao" class="function" onclick="location.href='http://localhost:8080/admin'">
+      <img th:src="@{/assets/images/notification.png}" id="icon">
+      <p>Quản lý thông báo</p>
+    </div>
+    <div id="sinhvien" class="function" onclick="location.href='http://localhost:8080/admin/upload/sinhvien'">
+      <img th:src="@{/assets/images/student.png}" id="icon">
+      <p>Thêm Sinh Viên</p>
+    </div>
+    <div id="gvien" class="function" onclick="location.href='http://localhost:8080/admin/upload/giangvien'">
+      <img th:src="@{/assets/images/teacher.png}" id="icon">
+      <p>Thêm Giảng Viên</p>
+    </div>
+    <div class="dropdown">
+      <div id="user" class="function">
+        <img th:src="@{/assets/images/user.png}" id="icon">
+        <p>Quản Lý Người Dùng</p>
+      </div>
+      <div class="dropdown-content">
+        <a href='http://localhost:8080/admin/quanly-sinhvien'> Sinh Viên </a>
+        <a href='http://localhost:8080/admin/quanly-giangvien'>Giảng Viên</a>
+      </div>
+    </div>
+    <div class="animation start-noti"></div>
+  </section>
+</div>
+</body>
+</html>

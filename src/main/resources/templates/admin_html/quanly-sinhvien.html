@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Admin</title>
+    <link rel="stylesheet" th:href="@{/assets/css/admin_css/trang-quanly.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/admin_css/admin.css}">
+</head>
+<body onload="laySV()">
+    <section class="main_page">
+        <div th:replace="~{admin_html/sidebar :: sidebar}"></div>
+            <section class="dashboard">
+                <h1>Quản Lý Sinh Viên</h1>
+                <form class="search-bar" >
+                    <label for="search">Nhập MSSV: </label>
+                    <input type="text" id="search" onkeyup="timSVbangMssv(event)">
+                </form>
+                <table id="userList">
+                    <tr>
+                        <th>Mã sinh viên</th>
+                        <th>Tên sinh viên</th>
+                        <th>Ngày sinh</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Lớp</th>
+                        <th>Niên khóa</th>
+                        <th>Mã nhóm</th>
+                    </tr>
+                </table>
+                <footer>
+                    <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
+                </footer>
+            </section>
+    </section>
+    <script th:src="@{/assets/js/admin_js/laysinhvien.js}"></script>
+</body>
+</html>

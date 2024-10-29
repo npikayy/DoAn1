@@ -60,13 +60,13 @@ public class StudentExcelUtility {
                     Cell currentCell = cellsInRow.next();
                     switch (cellIdx) {
                         case 0:
-                            stu.setMSSV((int) currentCell.getNumericCellValue());
+                            stu.setMSSV(currentCell.getStringCellValue());
                             break;
                         case 1:
-                            stu.setStudentName(currentCell.getStringCellValue());
+                            stu.setTenSV(currentCell.getStringCellValue());
                             break;
                         case 2:
-                            stu.setMobileNo((int) currentCell.getNumericCellValue());
+                            stu.setSDT((int) currentCell.getNumericCellValue());
                             break;
                         case 3:
                             stu.setEmail(currentCell.getStringCellValue());
@@ -81,7 +81,7 @@ public class StudentExcelUtility {
                             stu.setMaNhom((int) currentCell.getNumericCellValue());
                             break;
                         case 7:
-                            stu.setNgaySinh(currentCell.getDateCellValue());
+                            stu.setNgaySinh(currentCell.getLocalDateTimeCellValue().toLocalDate());
                             break;
                         default:
                             break;

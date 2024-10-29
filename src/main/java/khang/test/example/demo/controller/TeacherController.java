@@ -2,10 +2,12 @@ package khang.test.example.demo.controller;
 
 import khang.test.example.demo.Service.TeacherExcelUtility;
 import khang.test.example.demo.Service.TeacherService;
+import khang.test.example.demo.entity.Students;
 import khang.test.example.demo.entity.Teachers;
 import khang.test.example.demo.response.apiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +18,11 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/teacher")
 @Slf4j
 public class TeacherController {
     @Autowired
     TeacherService teaService;
-    @PostMapping("/upload")
+    @PostMapping("/teacher/upload")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         int code=1000;
@@ -29,11 +30,11 @@ public class TeacherController {
             try {
                 teaService.save(file);
                 code=0;
-                message = "The Excel file is uploaded: " + file.getOriginalFilename();
+                message = "Tệp " + file.getOriginalFilename() + " đã được upload lên hệ thống thành công.";
             } catch (Exception exp) {
                 log.warn(String.valueOf(exp));
                 code=1000;
-                message = "The Excel file is not upload: " + file.getOriginalFilename() + "!";
+                message = "Tệp " + file.getOriginalFilename() + " upload không thành công! Vui lòng kiểm tra lại";
             }
         }
         return apiResponse.<String>builder()
@@ -55,5 +56,14 @@ public class TeacherController {
             respTea.put("message", "Data is not found");
             return new ResponseEntity<>(respTea, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/quanly-giangvien/search")
+    public ResponseEntity<?> SearchMSSV(@Param("magv") String magv) {
+        List<Teachers> teacherList = null;
+        if (magv != null) {
+            teacherList = teaService.SearchByMaGV(magv);
+        }
+        return new ResponseEntity<>(teacherList, HttpStatus.OK);
     }
 }

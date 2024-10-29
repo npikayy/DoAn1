@@ -24,4 +24,7 @@ public class TeacherService {
     public List<Teachers> findAll() {
         return teaRepo.findAll();
     }
+    public List<Teachers> SearchByMaGV(String magv){
+        return teaRepo.searchByMaGV(magv);
+    }
 }

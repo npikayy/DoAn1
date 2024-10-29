@@ -1,15 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=New+Amsterdam&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-/*///////TOAST MESSAGE////////*/
 #toast{
     position: fixed;
     top: 32px;
     right: 32px;
 }
-/*body{*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    padding-top: 100px;*/
-/*}*/
+
 .toast{
     display: flex;
     width: auto;
@@ -21,6 +15,7 @@
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
     animation: slideInLeft ease .3s,fadeOut linear 1s 2s forwards;
 }
+
 @keyframes slideInLeft{
     from {
         transform: translateX(calc(100% + 32px));

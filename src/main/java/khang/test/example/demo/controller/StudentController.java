@@ -9,6 +9,7 @@ import khang.test.example.demo.entity.Students;
 import khang.test.example.demo.response.apiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,24 +19,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 @RestController
-@RequestMapping("/student")
 @Slf4j
 public class StudentController {
     @Autowired
     StudentService stuService;
-    @PostMapping("/upload")
+    @PostMapping("/student/upload")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        String message = "";
+        String message ="";
         int code=1000;
         if (StudentExcelUtility.hasExcelFormat(file)) {
             try {
                 stuService.save(file);
                 code=0;
-                message = "The Excel file is uploaded: " + file.getOriginalFilename();
+                message = "Tệp " + file.getOriginalFilename() + " đã được upload lên hệ thống thành công.";
             } catch (Exception exp) {
                 log.warn(String.valueOf(exp));
                 code=1000;
-                message = "The Excel file is not upload: " + file.getOriginalFilename() + "!";
+                message = "Tệp " + file.getOriginalFilename() + " upload không thành công! Vui lòng kiểm tra lại";
             }
         }
         return apiResponse.<String>builder()
@@ -57,5 +57,14 @@ public class StudentController {
             respStu.put("message", "Data is not found");
             return new ResponseEntity<>(respStu, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/quanly-sinhvien/search")
+    public ResponseEntity<?> SearchMSSV(@Param("mssv") String mssv) {
+        List<Students> studList = null;
+        if (mssv != null) {
+            studList = stuService.SearchByMSSV(mssv);
+        }
+        return new ResponseEntity<>(studList, HttpStatus.OK);
     }
 }
