@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>quản lý</title>
+
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/quanly.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/quanly_css/pcgv.css.css}">
+
 </head>
 <body>
     <header>
@@ -17,13 +20,13 @@
                     <img th:src="@{/assets/images/quanly_img/astronaut.png}" alt="" width="30%">
                     <div class="info">
                         <p>Nguyễn Văn A</p>
-                        <p>nguyenvana@gmail.com</p> 
-                    </div>  
-                </section> 
+                        <p>nguyenvana@gmail.com</p>
+                    </div>
+                </section>
                 <section class="body">
                     <div id="thongbao" class="function" onclick="location.href='http://localhost:8080/quanly'">
                         <img th:src="@{/assets/images/quanly_img/notification.png}" id="icon">
-                        <p>Quản lý thông báo</p> 
+                        <p>Quản lý thông báo</p>
                     </div>
                     <div id="qldetai" class="function" onclick="location.href='http://localhost:8080/qldetai'">
                         <img th:src="@{/assets/images/quanly_img/student.png}" id="icon">
@@ -35,15 +38,40 @@
                     </div>
                 </section>
             </div>
-            <section class="dashboard">
-                <h1>Thông Báo</h1>
-                <div class="upload-section">
-                    <h2>Những thông báo mới nhất sẽ được hiển thị ở đây</h2>
-                    <div class="drag-drop">
-                        
+        <div class="container">
+            <div class="sidebar">
+            </div>
+            <div class="main-content">
+                <div class="header">
+                    <h1>Danh sách giảng viên</h1>
+                    <div class="user-info">
                     </div>
                 </div>
-    </section>
+                <button class="btn btn-success">+ Thêm mới </button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên Giảng Viên</th>
+                            <th>Chương trình đào tạo</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nguyễn Văn A </td>
+                            <td>CTĐT/VT</td>
+                            <td>
+                                <a href="#" class="btn btn-primary">Phân công</a>
+                                <a href="sua_phanconggv.html" target="logweb">Sửa</a>
+                                <a href="#" class="btn btn-danger">Xóa</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+    </div>
+</div>
+</div>
+</body>
     <footer>
         <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
     </footer>

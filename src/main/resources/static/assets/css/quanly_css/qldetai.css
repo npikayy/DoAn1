@@ -1,8 +1,48 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
 
-#gvien{
-    background-color: #3b89fff3;
-    border: 3px solid black;
-}
-#gvien p{
-    color: #fff
-}
+  .excel-actions {
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .btn-primary, .btn-warning, .btn-info {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 10px;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #0e7ef5;
+    color: #fff;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+    color: white;
+  }
+  
+  .btn-info {
+    background-color: #17a2b8;
+    color: white;
+  }
+  
+  .excel-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .excel-table th, .excel-table td {
+    padding: 10px;
+    border-bottom: 1px solid black;
+  }
+  
+  .excel-table th {
+    text-align: left;
+    background-color: #d1d8fd;
+  }

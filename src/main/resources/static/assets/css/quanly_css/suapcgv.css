@@ -1,13 +1,4 @@
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
 .modal {
     background-color: white;
     border-radius: 8px;
