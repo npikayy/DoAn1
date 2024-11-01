@@ -8,24 +8,60 @@
     <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
     <link rel="stylesheet" th:href="@{/assets/css/admin_css/admin.css}">
 </head>
-<body onload="layGV()">
+<body onload="timGVBangDieuKien(event)">
     <section class="main_page">
         <div th:replace="~{admin_html/sidebar :: sidebar}"></div>
             <section class="dashboard">
                 <h1>Quản Lý Giảng Viên</h1>
-                <form class="search-bar" >
-                    <label for="search">Nhập mã giảng viên: </label>
-                    <input type="text" id="search" onkeyup="timGVbangMagv(event)">
-                </form>
+                <div class="dieukienloc">
+                    <br>
+                    <label for="khoa">Chọn khoa:</label>
+                    <select id="khoa">
+                        <option value="none" selected>không có</option>
+                        <!--                        <option value="CNTT">CNTT</option>-->
+                        <!--                        <option value="ANM">ANM</option>-->
+                        <!--                        <option value="CSDL">CSDL</option>-->
+                        <!--                        <option value="CNSH">CNSH</option>-->
+                        <!--                        <option value="LUAT">LUAT</option>-->
+                    </select>
+                    <label for="nganh">Chọn chuyên ngành:</label>
+                    <select id="nganh">
+                        <option value="none" selected>không có</option>
+                        <!--                        <option value="Kỹ thuật phần mềm">Kỹ thuật phần mềm</option>-->
+                        <!--                        <option value="Công nghệ thông tin">Công nghệ thông tin</option>-->
+                        <!--                        <option value="An ninh mạng">An ninh mạng</option>-->
+                        <!--                        <option value="Cơ sở dữ liệu">Cơ sở dữ liệu</option>-->
+                    </select>
+                    <label for="hocvi">Chọn học vị:</label>
+                    <select id="hocvi">
+                        <option value="none" selected>không có</option>
+                        <!--                        <option value="2020">2020</option>-->
+                        <!--                        <option value="2021">2021</option>-->
+                        <!--                        <option value="2022">2022</option>-->
+                        <!--                        <option value="2023">2023</option>-->
+                        <!--                        <option value="2102">2102</option>-->
+                        <!--                        <option value="2322">2322</option>-->
+                        <!--                        <option value="2323">2323</option>-->
+                    </select>
+                    <br>
+                    <label for="search">Nhập tên giảng viên hoặc Email của giảng viên cần tìm: </label>
+                    <select id="tenGVorEmail">
+                        <option value="tenGV" selected>Tên giảng viên</option>
+                        <option value="email">Email</option>
+                    </select>
+                    <input type="text" id="search">
+                    <button onclick="timGVBangDieuKien(event)">Tìm kiếm</button>
+                </div>
                 <table id="userList">
                     <tr>
                         <th>Mã giảng viên</th>
                         <th>Tên giảng viên</th>
                         <th>Ngày sinh</th>
                         <th>Email</th>
+                        <th>Học vị</th>
+                        <th>Chuyên ngành</th>
                         <th>Tên khoa</th>
-                        <th>Mã khoa</th>
-                        <th>Tên ngành</th>
+                        <th>Kinh nghiệm giảng dạy</th>
                     </tr>
                 </table>
                 <footer>

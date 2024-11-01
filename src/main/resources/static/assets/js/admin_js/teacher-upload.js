@@ -6,7 +6,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     if (fileInput.files.length === 0) {
         showToast('Vui lòng chọn 1 tệp trước khi nhấn nút!', 'error');
     } else {
-    fetch('http://localhost:8080/teacher/upload', {
+    fetch('http://localhost:8080/giangvien/upload', {
         method: 'POST',
         body: formData
     }).then(res => res.json()).then(data => {

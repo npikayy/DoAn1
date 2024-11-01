@@ -29,4 +29,8 @@ public class HomeController {
     public String QuanlyGV(){
         return "admin_html/quanly-giangvien";
     }
+    @GetMapping("/login")
+    public String Login(){
+        return "login_html/dangnhap";
+    }
 }

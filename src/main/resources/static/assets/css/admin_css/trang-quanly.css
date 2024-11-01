@@ -1,23 +1,19 @@
 /*///sidebar///*/
 .animation{
     width: 100%;
-    background: var(--button-color);
-    top: 325px;
+    top: 327px;
 }
 div:nth-child(2):hover~.animation{
     width: 100%;
-    background: var(--button-color);
-    top: 213px;
+    top: 215px;
 }
 div:nth-child(1):hover~.animation{
     width: 100%;
-    background: var(--button-color);
-    top: 156px;
+    top: 158px;
 }
 div:nth-child(3):hover~.animation {
     width: 100%;
-    background: var(--button-color);
-    top: 269px;
+    top: 271px;
 }
 /*///footer///*/
 footer{
@@ -25,7 +21,6 @@ footer{
 }
 /*///search-bar//*/
 input {
-    margin-top: 40px;
     font-size: 15px ;
     padding: 5px;
     border: 1px solid #ccc;
@@ -34,10 +29,12 @@ input {
 button{
     background-color: #3dbdf8;
     border: none;
-    padding: 5px;
+    padding: 10px;
     border-radius: 2px;
     color: hsl(0, 0%, 100%);
+    cursor: pointer;
 }
+
 /*table*/
 table {
     margin-top: 10px;

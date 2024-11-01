@@ -10,20 +10,23 @@ import java.time.LocalDate;
 @Data
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Students {
+public class SinhVien {
         @Id
         String MSSV;
         @Column(columnDefinition = "nvarchar(255)")
         String TenSV;
+        @Column(columnDefinition = "Date")
+        @JsonFormat(pattern = "dd/MM/yyyy")
+        LocalDate ngaySinh;
         Integer SDT;
         @Column(columnDefinition = "nvarchar(255)")
         String email;
         String Lop;
         Integer nienKhoa;
-        Integer maNhom;
-        @Column(columnDefinition = "Date")
-        @JsonFormat(pattern = "dd/MM/yyyy")
-        LocalDate ngaySinh;
+        @Column(columnDefinition = "nvarchar(255)")
+        String chuyenNganh;
+        @Column(columnDefinition = "nvarchar(255)")
+        String TenKhoa;
         @OneToOne(cascade = CascadeType.ALL)
         @JoinColumn(name = "ma_tai_khoan", referencedColumnName = "Ma_Tai_Khoan")
         Accounts thongTinTK;

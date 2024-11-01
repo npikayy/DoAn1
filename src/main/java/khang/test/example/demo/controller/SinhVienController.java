@@ -3,9 +3,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import khang.test.example.demo.Service.StudentExcelUtility;
-import khang.test.example.demo.Service.StudentService;
-import khang.test.example.demo.entity.Students;
+import khang.test.example.demo.Service.SinhVienExcelUtility;
+import khang.test.example.demo.Service.SinhVienService;
+import khang.test.example.demo.entity.SinhVien;
 import khang.test.example.demo.response.apiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +14,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 @RestController
 @Slf4j
-public class StudentController {
+public class SinhVienController {
     @Autowired
-    StudentService stuService;
+    SinhVienService stuService;
     @PostMapping("/student/upload")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String message ="";
         int code=1000;
-        if (StudentExcelUtility.hasExcelFormat(file)) {
+        if (SinhVienExcelUtility.hasExcelFormat(file)) {
             try {
                 stuService.save(file);
                 code=0;
@@ -43,10 +42,10 @@ public class StudentController {
                 .result(message)
                 .build();
     }
-    @GetMapping("/student-list")
+    @GetMapping("/sinhvien-list")
     public ResponseEntity<?> getStudents() {
         Map<String, Object> respStu = new LinkedHashMap<String, Object>();
-        List<Students> studList = stuService.findAll();
+        List<SinhVien> studList = stuService.findAll();
         if (!studList.isEmpty()) {
             respStu.put("status", 1);
             respStu.put("data", studList);
@@ -60,11 +59,12 @@ public class StudentController {
     }
 
     @GetMapping("/quanly-sinhvien/search")
-    public ResponseEntity<?> SearchMSSV(@Param("mssv") String mssv) {
-        List<Students> studList = null;
-        if (mssv != null) {
-            studList = stuService.SearchByMSSV(mssv);
-        }
-        return new ResponseEntity<>(studList, HttpStatus.OK);
-    }
+    public List<SinhVien> searchStudents(@RequestParam(required = false) String chuyenNganh,
+                                         @RequestParam(required = false) String tenKhoa,
+                                         @RequestParam(required = false) Integer nienKhoa,
+                                         @RequestParam(required = false) String tenSV,
+                                         @RequestParam(required = false) String mssv
+                                         )
+    { return stuService.timSinhVien(chuyenNganh, tenKhoa, nienKhoa, tenSV, mssv); }
+
 }

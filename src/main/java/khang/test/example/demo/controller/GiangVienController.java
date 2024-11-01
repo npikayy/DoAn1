@@ -1,9 +1,9 @@
 package khang.test.example.demo.controller;
 
-import khang.test.example.demo.Service.TeacherExcelUtility;
-import khang.test.example.demo.Service.TeacherService;
-import khang.test.example.demo.entity.Students;
-import khang.test.example.demo.entity.Teachers;
+import khang.test.example.demo.Service.GiangVienExcelUtility;
+import khang.test.example.demo.Service.GiangVienService;
+import khang.test.example.demo.entity.GiangVien;
+import khang.test.example.demo.entity.SinhVien;
 import khang.test.example.demo.response.apiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +19,16 @@ import java.util.Map;
 
 @RestController
 @Slf4j
-public class TeacherController {
+public class GiangVienController {
     @Autowired
-    TeacherService teaService;
-    @PostMapping("/teacher/upload")
+    GiangVienService gvService;
+    @PostMapping("/giangvien/upload")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         int code=1000;
-        if (TeacherExcelUtility.hasExcelFormat(file)) {
+        if (GiangVienExcelUtility.hasExcelFormat(file)) {
             try {
-                teaService.save(file);
+                gvService.save(file);
                 code=0;
                 message = "Tệp " + file.getOriginalFilename() + " đã được upload lên hệ thống thành công.";
             } catch (Exception exp) {
@@ -42,13 +42,13 @@ public class TeacherController {
                 .result(message)
                 .build();
     }
-    @GetMapping("/teacher-list")
-    public ResponseEntity<?> getTeachers() {
+    @GetMapping("/giangVien-list")
+    public ResponseEntity<?> laygiangVien() {
         Map<String, Object> respTea = new LinkedHashMap<>();
-        List<Teachers> teacherList = teaService.findAll();
-        if (!teacherList.isEmpty()) {
+        List<GiangVien> giangVienList = gvService.findAll();
+        if (!giangVienList.isEmpty()) {
             respTea.put("status", 1);
-            respTea.put("data", teacherList);
+            respTea.put("data", giangVienList);
             return new ResponseEntity<>(respTea, HttpStatus.OK);
         } else {
             respTea.clear();
@@ -59,11 +59,11 @@ public class TeacherController {
     }
 
     @GetMapping("/quanly-giangvien/search")
-    public ResponseEntity<?> SearchMSSV(@Param("magv") String magv) {
-        List<Teachers> teacherList = null;
-        if (magv != null) {
-            teacherList = teaService.SearchByMaGV(magv);
-        }
-        return new ResponseEntity<>(teacherList, HttpStatus.OK);
-    }
+    public List<GiangVien> searchStudents(@RequestParam(required = false) String chuyenNganh,
+                                         @RequestParam(required = false) String tenKhoa,
+                                         @RequestParam(required = false) String hocvi,
+                                         @RequestParam(required = false) String tenGV,
+                                         @RequestParam(required = false) String email
+    )
+    { return gvService.timGiangVien(chuyenNganh, tenKhoa, hocvi, tenGV, email); }
 }
