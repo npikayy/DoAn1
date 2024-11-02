@@ -12,6 +12,10 @@ import java.util.List;
 public interface GiangVienRepository extends JpaRepository<GiangVien, String> {
     boolean existsByEmail(String email);
 
+    GiangVien findByMaGV(String masv);
+
+    void deleteByMaGV(String magv);
+
     @Query("SELECT g FROM GiangVien g " +
             "WHERE (:chuyenNganh IS NULL OR g.chuyenNganh = :chuyenNganh) " +
             "AND (:tenKhoa IS NULL OR g.TenKhoa = :tenKhoa) " +

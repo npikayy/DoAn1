@@ -3,38 +3,48 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.transaction.Transactional;
 import khang.test.example.demo.Service.SinhVienExcelUtility;
 import khang.test.example.demo.Service.SinhVienService;
 import khang.test.example.demo.entity.SinhVien;
 import khang.test.example.demo.response.apiResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.math3.analysis.function.Sin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 @RestController
 @Slf4j
 public class SinhVienController {
     @Autowired
-    SinhVienService stuService;
+    SinhVienService svService;
+
+    @PutMapping("sinhvien/{mssv}")
+    public void updateStudent(@PathVariable String mssv, @RequestBody SinhVien newSinhVien) 
+    {
+        svService.capNhatSV(mssv, newSinhVien);
+    }
+    @Transactional
+    @DeleteMapping("/sinhvien/{mssv}") public void xoaSinhVien(@PathVariable String mssv)
+    {
+        svService.xoaSinhVien(mssv);
+    }
     @PostMapping("/student/upload")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String message ="";
         int code=1000;
         if (SinhVienExcelUtility.hasExcelFormat(file)) {
             try {
-                stuService.save(file);
+                svService.save(file);
                 code=0;
-                message = "Tệp " + file.getOriginalFilename() + " đã được upload lên hệ thống thành công.";
+                message = "Upload tệp " + file.getOriginalFilename() + " lên hệ thống thành công.";
             } catch (Exception exp) {
                 log.warn(String.valueOf(exp));
                 code=1000;
-                message = "Tệp " + file.getOriginalFilename() + " upload không thành công! Vui lòng kiểm tra lại";
+                message = "Upload tệp " + file.getOriginalFilename() + " không thành công! Vui lòng kiểm tra lại";
             }
         }
         return apiResponse.<String>builder()
@@ -45,7 +55,7 @@ public class SinhVienController {
     @GetMapping("/sinhvien-list")
     public ResponseEntity<?> getStudents() {
         Map<String, Object> respStu = new LinkedHashMap<String, Object>();
-        List<SinhVien> studList = stuService.findAll();
+        List<SinhVien> studList = svService.findAll();
         if (!studList.isEmpty()) {
             respStu.put("status", 1);
             respStu.put("data", studList);
@@ -65,6 +75,6 @@ public class SinhVienController {
                                          @RequestParam(required = false) String tenSV,
                                          @RequestParam(required = false) String mssv
                                          )
-    { return stuService.timSinhVien(chuyenNganh, tenKhoa, nienKhoa, tenSV, mssv); }
+    { return svService.timSinhVien(chuyenNganh, tenKhoa, nienKhoa, tenSV, mssv); }
 
 }

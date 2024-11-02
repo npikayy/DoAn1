@@ -15,17 +15,23 @@ div:nth-child(3):hover~.animation {
     width: 100%;
     top: 271px;
 }
+
+.form-container{
+    margin-left: 50px;
+}
+.hidden{
+    display: none;
+}
 /*///footer///*/
 footer{
     margin-top: 200px;
 }
 /*///search-bar//*/
-input {
-    font-size: 15px ;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+/*input {*/
+
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*}*/
 button{
     background-color: #3dbdf8;
     border: none;
@@ -50,9 +56,17 @@ td, th {
 tr:nth-child(1) {
     background-color: #3dbdf8;
 }
-input {
+input{
+    padding: 5px;
     margin-top: 40px;
-    font-size: 18px ;
+    font-size: 16px ;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+select{
+    /*display: block;*/
+    padding: 5px;
+    font-size: 16px ;
     border: 1px solid #ccc;
     border-radius: 4px;
 }

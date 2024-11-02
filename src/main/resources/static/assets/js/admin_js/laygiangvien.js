@@ -29,8 +29,6 @@ async function layKhoaHocViChuyenNganh() {
         selectNganh.appendChild(optionItem)
 
     })
-
-
 }
 layKhoaHocViChuyenNganh();
 async function timGVBangDieuKien(event) {
@@ -66,6 +64,13 @@ async function timGVBangDieuKien(event) {
         .catch(error => console.error('Error:', error));
     }
 }
+function extractDateComponentsFromNgaySinh(ngaySinh) {
+    const date = new Date(ngaySinh);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return { day, month, year };
+}
 function addTabletitle(){
     const list = document.getElementById('userList')
     list.innerHTML =
@@ -78,20 +83,40 @@ function addTabletitle(){
        <th>Chuyên ngành</th>
        <th>Khoa</th>
        <th>Kinh nghiệm giảng dạy</th>
+       <th></th>
         `
 }
 function addDatatoTable(data){
     const list = document.getElementById('userList')
     const divItem2 = document.createElement('tr')
+    const { day, month, year } = extractDateComponentsFromNgaySinh(data.ngaySinh);
+    let email = data.email;
+    let magv = data.maGV
     divItem2.innerHTML=`
         <td>${data.maGV}</td>
         <td>${data.tenGV}</td>
-        <td>${data.ngaySinh}</td>
+        <td>${day}/${month}/${year}</td>
         <td>${data.email}</td>
         <td>${data.hocvi}</td>
         <td>${data.chuyenNganh}</td>
         <td>${data.tenKhoa}</td>
         <td>${data.kinhNghiemGD}</td>
+        <td>
+            <div>
+                <button onclick="laydulieuGV('${email}')">sửa</button>
+                <button onclick="xoaGV('${magv}')">xóa</button>
+            </div>
+        </td>
         `
     list.appendChild(divItem2)
+}
+
+function xoaGV(magv){
+    fetch(`http://localhost:8080/giangvien/${magv}`,{method: 'DELETE'})
+        .then(response => { if (response.ok)
+        {
+            showToast('Xóa giảng viên thành công', 'success');
+            timGVBangDieuKien(new Event('fetch'));
+        }
+        })
 }
