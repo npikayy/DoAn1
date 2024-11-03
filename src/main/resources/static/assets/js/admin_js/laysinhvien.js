@@ -67,6 +67,14 @@ async function timSVBangDieuKien(event) {
     }
 }
 
+function extractDateComponentsFromNgaySinh(ngaySinh) {
+    const date = new Date(ngaySinh);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return { day, month, year };
+}
+
 function addTabletitle(){
     const list = document.getElementById('userList')
     list.innerHTML =
@@ -80,21 +88,43 @@ function addTabletitle(){
        <th>Niên khóa</th>
        <th>Ngành</th>
        <th>Khoa</th>
+       <th></th>
    `
+
 }
+
 function addDatatoTable(data){
     const list = document.getElementById('userList')
     const divItem2 = document.createElement('tr')
+    const { day, month, year } = extractDateComponentsFromNgaySinh(data.ngaySinh);
+    let mssv = data.mssv;
     divItem2.innerHTML = `
        <td>${data.mssv}</td>
         <td>${data.tenSV}</td>
-        <td>${data.ngaySinh}</td>
+        <td>${day}/${month}/${year}</td>
         <td>${data.sdt}</td>
         <td>${data.email}</td>
         <td>${data.lop}</td>
         <td>${data.nienKhoa}</td>
         <td>${data.chuyenNganh}</td>
         <td>${data.tenKhoa}</td>
-       `
+        <td>
+            <div>
+                <button onclick="laydulieuSV('${mssv}')">sửa</button>
+                <button onclick="xoaSV('${mssv}')">xóa</button>
+            </div>
+        </td>
+       `;
     list.appendChild(divItem2)
 }
+
+function xoaSV(mssv){
+    fetch(`http://localhost:8080/sinhvien/${mssv}`,{method: 'DELETE'})
+        .then(response => { if (response.ok)
+        {
+            showToast('Xóa sinh viên thành công', 'success');
+            timSVBangDieuKien(new Event('fetch'));
+        }
+    })
+}
+

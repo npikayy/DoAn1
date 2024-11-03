@@ -17,7 +17,7 @@ public class GiangVien {
     @Column(columnDefinition = "nvarchar(255)")
     String TenGV;
     @Column(columnDefinition = "Date")
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDate ngaySinh;
     String email;
     @Column(columnDefinition = "nvarchar(255)")

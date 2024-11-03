@@ -2,6 +2,9 @@ package khang.test.example.demo.Service;
 
 import khang.test.example.demo.entity.GiangVien;
 import khang.test.example.demo.entity.SinhVien;
+import khang.test.example.demo.exeption.AppException;
+import khang.test.example.demo.exeption.ErrorCode;
+import khang.test.example.demo.mapper.Mapper;
 import khang.test.example.demo.repository.GiangVienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,9 @@ import java.util.List;
 public class GiangVienService {
     @Autowired
     GiangVienRepository gvRepo;
+
+    @Autowired
+    Mapper gvMapper;
     public void save(MultipartFile file) {
         try {
             List<GiangVien> teaList = GiangVienExcelUtility.excelToTeacherList(file.getInputStream());
@@ -28,4 +34,14 @@ public class GiangVienService {
 
     public List<GiangVien> timGiangVien(String chuyenNganh, String tenKhoa, String hocVi, String tenGV, String email)
     { return gvRepo.findByDieukien(chuyenNganh, tenKhoa, hocVi, tenGV, email); }
+
+    public void capNhatGV(String magv, GiangVien newGiangVien) {
+        GiangVien giangVien = gvRepo.findByMaGV(magv);
+        gvMapper.capNhatGV(giangVien, newGiangVien);
+        gvRepo.save(giangVien);
+    }
+
+    public void xoaGiangVien(String magv) {
+        gvRepo.deleteByMaGV(magv);
+    }
 }

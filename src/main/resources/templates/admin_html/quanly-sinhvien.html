@@ -7,41 +7,77 @@
     <link rel="stylesheet" th:href="@{/assets/css/admin_css/trang-quanly.css}">
     <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
     <link rel="stylesheet" th:href="@{/assets/css/admin_css/admin.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body onload="timSVBangDieuKien(event)">
     <section class="main_page">
         <div th:replace="~{admin_html/sidebar :: sidebar}"></div>
-            <section class="dashboard">
+            <section class="dashboard" id="dashboard">
+                <div class="hidden" id="form-container">
+                    <button onclick="hideUpdateInput()">Quay về</button>
+                    <br>
+                    <h2>Chỉnh Sửa Thông Tin Của Sinh Viên</h2>
+                    <form id="updateSVForm" action="#" method="post">
+                        <div class="form-group">
+                            <label for="masosv">MSSV:</label>
+                            <input type="text" id="masosv" name="masosv" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenSV">Tên SV:</label>
+                            <input type="text" id="tenSV" name="tenSV" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ngaySinh">Ngày Sinh:</label>
+                            <input type="date" id="ngaySinh" name="ngaySinh" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sdt">Số Điện Thoại:</label>
+                            <input type="text" id="sdt" name="sdt" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lop">Lớp:</label>
+                            <input type="text" id="lop" name="lop" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="tenKhoa">Chọn khoa:</label>
+                            <select id="tenKhoa"></select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="chuyenNganh">Chọn chuyên ngành:</label>
+                            <select id="chuyenNganh"></select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="khoaHoc">Chọn niên khóa:</label>
+                            <select id="khoaHoc"></select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button type="submit">Cập Nhật Thông Tin</button>
+                        </div>
+                    </form>
+                    <br>
+                </div>
                 <h1>Quản Lý Sinh Viên</h1>
                 <div class="dieukienloc">
                     <br>
                     <label for="khoa">Chọn khoa:</label>
                     <select id="khoa">
                         <option value="none" selected>không có</option>
-<!--                        <option value="CNTT">CNTT</option>-->
-<!--                        <option value="ANM">ANM</option>-->
-<!--                        <option value="CSDL">CSDL</option>-->
-<!--                        <option value="CNSH">CNSH</option>-->
-<!--                        <option value="LUAT">LUAT</option>-->
                     </select>
                     <label for="nganh">Chọn ngành:</label>
                     <select id="nganh">
                         <option value="none" selected>không có</option>
-<!--                        <option value="Kỹ thuật phần mềm">Kỹ thuật phần mềm</option>-->
-<!--                        <option value="Công nghệ thông tin">Công nghệ thông tin</option>-->
-<!--                        <option value="An ninh mạng">An ninh mạng</option>-->
-<!--                        <option value="Cơ sở dữ liệu">Cơ sở dữ liệu</option>-->
                     </select>
                     <label for="nienKhoa">Chọn khóa:</label>
                     <select id="nienKhoa">
                         <option value="none" selected>không có</option>
-<!--                        <option value="2020">2020</option>-->
-<!--                        <option value="2021">2021</option>-->
-<!--                        <option value="2022">2022</option>-->
-<!--                        <option value="2023">2023</option>-->
-<!--                        <option value="2102">2102</option>-->
-<!--                        <option value="2322">2322</option>-->
-<!--                        <option value="2323">2323</option>-->
                     </select>
                     <br>
                     <label for="search">Nhập tên sinh viên hoặc mssv cần tìm: </label>
@@ -63,6 +99,7 @@
                         <th>Khóa</th>
                         <th>Ngành</th>
                         <th>Khoa</th>
+                        <th></th>
                     </tr>
                 </table>
                 <footer>
@@ -71,5 +108,7 @@
             </section>
     </section>
     <script th:src="@{/assets/js/admin_js/laysinhvien.js}"></script>
+    <script th:src="@{/assets/js/admin_js/showToast.js}"></script>
+    <script th:src="@{/assets/js/admin_js/capNhatTTSinhVien.js}"></script>
 </body>
 </html>

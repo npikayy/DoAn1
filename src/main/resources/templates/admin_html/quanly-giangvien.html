@@ -7,41 +7,73 @@
     <link rel="stylesheet" th:href="@{/assets/css/admin_css/trang-quanly.css}">
     <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
     <link rel="stylesheet" th:href="@{/assets/css/admin_css/admin.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body onload="timGVBangDieuKien(event)">
     <section class="main_page">
         <div th:replace="~{admin_html/sidebar :: sidebar}"></div>
             <section class="dashboard">
+                <div class="hidden" id="form-container">
+                    <button onclick="hideUpdateInput()">Quay về</button>
+                    <br>
+                    <h2>Chỉnh Sửa Thông Tin Của Giảng Viên</h2>
+                    <form id="updateGVForm" action="#" method="post">
+                        <div class="form-group">
+                            <label for="masogv">Mã giảng viên:</label>
+                            <input type="text" id="masogv" name="masogv" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenGv">Tên GV:</label>
+                            <input type="text" id="tenGv" name="tenGv" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ngaySinh">Ngày Sinh:</label>
+                            <input type="date" id="ngaySinh" name="ngaySinh" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="tenKhoa">Chọn khoa:</label>
+                            <select id="tenKhoa"></select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="chuyenNganh">Chọn chuyên ngành:</label>
+                            <select id="chuyenNganh"></select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="danhHieu">Chọn học vị:</label>
+                            <select id="danhHieu"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="kinhNghiemGD">Kinh nghiệm giảng dạy:</label>
+                            <input type="text" id="kinhNghiemGD" name="kinhNghiemGD" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button type="submit">Cập Nhật Thông Tin</button>
+                        </div>
+                    </form>
+                    <br>
+                </div>
                 <h1>Quản Lý Giảng Viên</h1>
                 <div class="dieukienloc">
                     <br>
                     <label for="khoa">Chọn khoa:</label>
                     <select id="khoa">
                         <option value="none" selected>không có</option>
-                        <!--                        <option value="CNTT">CNTT</option>-->
-                        <!--                        <option value="ANM">ANM</option>-->
-                        <!--                        <option value="CSDL">CSDL</option>-->
-                        <!--                        <option value="CNSH">CNSH</option>-->
-                        <!--                        <option value="LUAT">LUAT</option>-->
                     </select>
-                    <label for="nganh">Chọn chuyên ngành:</label>
+                    <label for="nganh"> Chọn chuyên ngành:</label>
                     <select id="nganh">
                         <option value="none" selected>không có</option>
-                        <!--                        <option value="Kỹ thuật phần mềm">Kỹ thuật phần mềm</option>-->
-                        <!--                        <option value="Công nghệ thông tin">Công nghệ thông tin</option>-->
-                        <!--                        <option value="An ninh mạng">An ninh mạng</option>-->
-                        <!--                        <option value="Cơ sở dữ liệu">Cơ sở dữ liệu</option>-->
                     </select>
-                    <label for="hocvi">Chọn học vị:</label>
+                    <label for="hocvi"> Chọn học vị:</label>
                     <select id="hocvi">
                         <option value="none" selected>không có</option>
-                        <!--                        <option value="2020">2020</option>-->
-                        <!--                        <option value="2021">2021</option>-->
-                        <!--                        <option value="2022">2022</option>-->
-                        <!--                        <option value="2023">2023</option>-->
-                        <!--                        <option value="2102">2102</option>-->
-                        <!--                        <option value="2322">2322</option>-->
-                        <!--                        <option value="2323">2323</option>-->
                     </select>
                     <br>
                     <label for="search">Nhập tên giảng viên hoặc Email của giảng viên cần tìm: </label>
@@ -62,6 +94,7 @@
                         <th>Chuyên ngành</th>
                         <th>Tên khoa</th>
                         <th>Kinh nghiệm giảng dạy</th>
+                        <th></th>
                     </tr>
                 </table>
                 <footer>
@@ -70,5 +103,7 @@
             </section>
     </section>
     <script th:src="@{/assets/js/admin_js/laygiangvien.js}"></script>
+    <script th:src="@{/assets/js/admin_js/showToast.js}"></script>
+    <script th:src="@{/assets/js/admin_js/capNhatTTGiangVien.js}"></script>
 </body>
 </html>

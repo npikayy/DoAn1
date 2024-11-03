@@ -16,7 +16,7 @@ public class SinhVien {
         @Column(columnDefinition = "nvarchar(255)")
         String TenSV;
         @Column(columnDefinition = "Date")
-        @JsonFormat(pattern = "dd/MM/yyyy")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate ngaySinh;
         Integer SDT;
         @Column(columnDefinition = "nvarchar(255)")
@@ -30,4 +30,5 @@ public class SinhVien {
         @OneToOne(cascade = CascadeType.ALL)
         @JoinColumn(name = "ma_tai_khoan", referencedColumnName = "Ma_Tai_Khoan")
         Accounts thongTinTK;
+
 }

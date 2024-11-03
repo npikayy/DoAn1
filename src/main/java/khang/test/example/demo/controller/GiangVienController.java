@@ -1,5 +1,6 @@
 package khang.test.example.demo.controller;
 
+import jakarta.transaction.Transactional;
 import khang.test.example.demo.Service.GiangVienExcelUtility;
 import khang.test.example.demo.Service.GiangVienService;
 import khang.test.example.demo.entity.GiangVien;
@@ -22,6 +23,16 @@ import java.util.Map;
 public class GiangVienController {
     @Autowired
     GiangVienService gvService;
+    @PutMapping("giangvien/{magv}")
+    public void updateGiangVien(@PathVariable String magv, @RequestBody GiangVien newGiangVien)
+    {
+        gvService.capNhatGV(magv, newGiangVien);
+    }
+    @Transactional
+    @DeleteMapping("/giangvien/{magv}") public void xoaGiangVien(@PathVariable String magv)
+    {
+        gvService.xoaGiangVien(magv);
+    }
     @PostMapping("/giangvien/upload")
     public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
