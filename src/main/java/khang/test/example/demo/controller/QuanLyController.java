@@ -10,7 +10,6 @@ public class QuanLyController {
     public String quanly() {
         return "quanly_html/thongbao.html";
     }
-
     @GetMapping("/qldetai")
     public String qlDetai() {
         return "quanly_html/qldetai.html";
