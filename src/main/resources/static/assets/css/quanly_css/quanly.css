@@ -1,0 +1,158 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d7e4f1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+header {
+    background-color: #2876f5;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+header a {
+    color: rgb(255, 6, 6);
+    text-decoration: none;
+}
+
+header a:hover {
+    color: #a9c8ee;
+}
+
+
+.main_page {
+    display: flex;
+    flex: 1;
+}
+
+
+.pages {
+    width: 17rem;
+    background-color: rgb(140, 151, 255);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.user_info {
+    padding: 1rem;
+    text-align: center;
+}
+
+.user_info img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    margin: 0 auto 0.5rem auto;
+}
+
+.info p:first-child {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.info p:last-child {
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+
+.body {
+    padding: 1rem;
+}
+
+.function {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.function:hover {
+    background-color: #f1f5f996;
+}
+
+.function img {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+}
+
+.dashboard {
+    flex: 1;
+    padding: 2rem;
+}
+
+.dashboard h1 {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.upload-section {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.upload-section h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.drag-drop {
+    border: 2px dashed #0c75f5;
+    border-radius: 0.5rem;
+    padding: 3rem;
+    text-align: center;
+    color: #64748b;
+    background-color: #f8fafc;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.drag-drop:hover {
+    border-color: #94a3b8;
+}
+
+footer {
+    background-color: #2876f5;
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    font-size: 1 rem;
+    position: fixed; 
+    bottom: 0;
+    width: 100%; 
+    height: 10px; }
+
+
+@media (max-width: 768px) {
+    .main_page {
+        flex-direction: column;
+    }
+
+    .pages {
+        width: 100%;
+    }
+}
