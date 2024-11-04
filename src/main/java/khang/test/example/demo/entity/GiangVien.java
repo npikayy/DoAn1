@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class GiangVien {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     String maGV;
     @Column(columnDefinition = "nvarchar(255)")
     String TenGV;

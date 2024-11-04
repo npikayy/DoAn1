@@ -4,10 +4,10 @@ import khang.test.example.demo.entity.Khoa;
 import khang.test.example.demo.entity.chuyenNganh;
 import khang.test.example.demo.entity.hocVi;
 import khang.test.example.demo.entity.nienKhoa;
-import khang.test.example.demo.repository.HocViRepository;
-import khang.test.example.demo.repository.KhoaRepository;
-import khang.test.example.demo.repository.NganhRepository;
-import khang.test.example.demo.repository.NienKhoaRepository;
+import khang.test.example.demo.repository.admin_repository.HocViRepository;
+import khang.test.example.demo.repository.admin_repository.KhoaRepository;
+import khang.test.example.demo.repository.admin_repository.NganhRepository;
+import khang.test.example.demo.repository.admin_repository.NienKhoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

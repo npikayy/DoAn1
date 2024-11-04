@@ -3,10 +3,8 @@ import java.io.IOException;
 import java.util.List;
 
 import khang.test.example.demo.entity.SinhVien;
-import khang.test.example.demo.exeption.AppException;
-import khang.test.example.demo.exeption.ErrorCode;
 import khang.test.example.demo.mapper.Mapper;
-import khang.test.example.demo.repository.SinhVienRepository;
+import khang.test.example.demo.repository.admin_repository.SinhVienRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

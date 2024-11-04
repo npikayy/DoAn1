@@ -8,10 +8,10 @@ import java.util.List;
 
 import jakarta.annotation.PostConstruct;
 import khang.test.example.demo.entity.*;
-import khang.test.example.demo.repository.KhoaRepository;
-import khang.test.example.demo.repository.NganhRepository;
-import khang.test.example.demo.repository.NienKhoaRepository;
-import khang.test.example.demo.repository.SinhVienRepository;
+import khang.test.example.demo.repository.admin_repository.KhoaRepository;
+import khang.test.example.demo.repository.admin_repository.NganhRepository;
+import khang.test.example.demo.repository.admin_repository.NienKhoaRepository;
+import khang.test.example.demo.repository.admin_repository.SinhVienRepository;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;

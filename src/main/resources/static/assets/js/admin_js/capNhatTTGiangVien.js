@@ -11,11 +11,11 @@ function showUpdateInput(){
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
-function laydulieuGV(email) {
+function laydulieuGV(magv) {
     event.preventDefault();
     showUpdateInput()
 
-     fetch(`http://localhost:8080/quanly-giangvien/search?email=${email}`) .then(response => response.json())
+     fetch(`http://localhost:8080/quanly-giangvien/search?magv=${magv}`) .then(response => response.json())
          .then(data => {
              data.forEach(data => { addDatatoInput(data);
              })

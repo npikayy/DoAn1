@@ -1,7 +1,6 @@
-package khang.test.example.demo.repository;
+package khang.test.example.demo.repository.admin_repository;
 
 import khang.test.example.demo.entity.SinhVien;
-import org.apache.commons.math3.analysis.function.Sinh;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

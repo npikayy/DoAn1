@@ -1,4 +1,4 @@
-package khang.test.example.demo.entity.quanly;
+package khang.test.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
@@ -19,9 +19,9 @@ public class Detai {
     @Column(columnDefinition = "nvarchar(255)")
     String tendetai;
     @Column(columnDefinition = "nvarchar(255)")
-    String tenGiangvien;
+    String maGiangvien;
     @Column(columnDefinition = "nvarchar(255)")
-    String tenSinhvien;
+    String soLuongSinhvien;
     @Column(columnDefinition = "nvarchar(255)")
     String Khoa;
     @Column(columnDefinition = "nvarchar(255)")

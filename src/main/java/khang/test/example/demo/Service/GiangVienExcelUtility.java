@@ -2,10 +2,10 @@ package khang.test.example.demo.Service;
 
 import jakarta.annotation.PostConstruct;
 import khang.test.example.demo.entity.*;
-import khang.test.example.demo.repository.GiangVienRepository;
-import khang.test.example.demo.repository.HocViRepository;
-import khang.test.example.demo.repository.KhoaRepository;
-import khang.test.example.demo.repository.NganhRepository;
+import khang.test.example.demo.repository.admin_repository.GiangVienRepository;
+import khang.test.example.demo.repository.admin_repository.HocViRepository;
+import khang.test.example.demo.repository.admin_repository.KhoaRepository;
+import khang.test.example.demo.repository.admin_repository.NganhRepository;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -71,24 +71,27 @@ public class GiangVienExcelUtility {
                     Cell currentCell = cellsInRow.next();
                     switch (cellIdx) {
                         case 0:
-                            giangvien.setTenGV(currentCell.getStringCellValue());
+                            giangvien.setMaGV(currentCell.getStringCellValue());
                             break;
                         case 1:
-                            giangvien.setNgaySinh(currentCell.getLocalDateTimeCellValue().toLocalDate());
+                            giangvien.setTenGV(currentCell.getStringCellValue());
                             break;
                         case 2:
-                            giangvien.setEmail(currentCell.getStringCellValue());
+                            giangvien.setNgaySinh(currentCell.getLocalDateTimeCellValue().toLocalDate());
                             break;
                         case 3:
-                            giangvien.setHocvi(currentCell.getStringCellValue());
+                            giangvien.setEmail(currentCell.getStringCellValue());
                             break;
                         case 4:
-                            giangvien.setChuyenNganh(currentCell.getStringCellValue());
+                            giangvien.setHocvi(currentCell.getStringCellValue());
                             break;
                         case 5:
-                            giangvien.setTenKhoa(currentCell.getStringCellValue());
+                            giangvien.setChuyenNganh(currentCell.getStringCellValue());
                             break;
                         case 6:
+                            giangvien.setTenKhoa(currentCell.getStringCellValue());
+                            break;
+                        case 7:
                             giangvien.setKinhNghiemGD(currentCell.getStringCellValue());
                             break;
                         default:

@@ -1,11 +1,8 @@
 package khang.test.example.demo.Service;
 
 import khang.test.example.demo.entity.GiangVien;
-import khang.test.example.demo.entity.SinhVien;
-import khang.test.example.demo.exeption.AppException;
-import khang.test.example.demo.exeption.ErrorCode;
 import khang.test.example.demo.mapper.Mapper;
-import khang.test.example.demo.repository.GiangVienRepository;
+import khang.test.example.demo.repository.admin_repository.GiangVienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,8 +29,8 @@ public class GiangVienService {
         return gvRepo.findAll();
     }
 
-    public List<GiangVien> timGiangVien(String chuyenNganh, String tenKhoa, String hocVi, String tenGV, String email)
-    { return gvRepo.findByDieukien(chuyenNganh, tenKhoa, hocVi, tenGV, email); }
+    public List<GiangVien> timGiangVien(String chuyenNganh, String tenKhoa, String hocVi, String tenGV, String magv)
+    { return gvRepo.findByDieukien(chuyenNganh, tenKhoa, hocVi, tenGV, magv); }
 
     public void capNhatGV(String magv, GiangVien newGiangVien) {
         GiangVien giangVien = gvRepo.findByMaGV(magv);

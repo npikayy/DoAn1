@@ -4,11 +4,9 @@ import jakarta.transaction.Transactional;
 import khang.test.example.demo.Service.GiangVienExcelUtility;
 import khang.test.example.demo.Service.GiangVienService;
 import khang.test.example.demo.entity.GiangVien;
-import khang.test.example.demo.entity.SinhVien;
 import khang.test.example.demo.response.apiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -74,7 +72,7 @@ public class GiangVienController {
                                          @RequestParam(required = false) String tenKhoa,
                                          @RequestParam(required = false) String hocvi,
                                          @RequestParam(required = false) String tenGV,
-                                         @RequestParam(required = false) String email
+                                         @RequestParam(required = false) String magv
     )
-    { return gvService.timGiangVien(chuyenNganh, tenKhoa, hocvi, tenGV, email); }
+    { return gvService.timGiangVien(chuyenNganh, tenKhoa, hocvi, tenGV, magv); }
 }

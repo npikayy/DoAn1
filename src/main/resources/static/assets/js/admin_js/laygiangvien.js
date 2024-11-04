@@ -37,7 +37,7 @@ async function timGVBangDieuKien(event) {
     let nganh = document.getElementById('nganh').value
     let hocvi = document.getElementById('hocvi').value
     let search = document.getElementById('search').value
-    let tenOremail = document.getElementById('tenGVorEmail').value
+    let tenOrmaGV = document.getElementById('tenGVorMagv').value
 
     let url = 'http://localhost:8080/quanly-giangvien/search?';
 
@@ -48,10 +48,10 @@ async function timGVBangDieuKien(event) {
     if (hocvi !== 'none') { url += `hocvi=${hocvi}&`; }
 
     if (search !== '') {
-        if (tenOremail === 'tenGV') { url += `tenGV=${search}&`;
+        if (tenOrmaGV === 'tenGV') { url += `tenGV=${search}&`;
         }
         else {
-            url += `email=${search}&`; }
+            url += `magv=${search}&`; }
     }
     url = url.slice(0, -1);
 
@@ -103,7 +103,7 @@ function addDatatoTable(data){
         <td>${data.kinhNghiemGD}</td>
         <td>
             <div>
-                <button onclick="laydulieuGV('${email}')">sửa</button>
+                <button onclick="laydulieuGV('${magv}')">sửa</button>
                 <button onclick="xoaGV('${magv}')">xóa</button>
             </div>
         </td>
