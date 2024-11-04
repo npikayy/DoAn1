@@ -1,6 +1,7 @@
 package khang.test.example.demo.Service;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,10 +9,7 @@ import java.util.List;
 
 import jakarta.annotation.PostConstruct;
 import khang.test.example.demo.entity.*;
-import khang.test.example.demo.repository.admin_repository.KhoaRepository;
-import khang.test.example.demo.repository.admin_repository.NganhRepository;
-import khang.test.example.demo.repository.admin_repository.NienKhoaRepository;
-import khang.test.example.demo.repository.admin_repository.SinhVienRepository;
+import khang.test.example.demo.repository.admin_repository.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -27,6 +25,7 @@ public class SinhVienExcelUtility {
     private static NienKhoaRepository nienKhoaRepo;
     private static KhoaRepository khoaRepo;
     private static NganhRepository nganhRepo;
+    private static ThongBaoRepository tbaoRepo;
 
     @Autowired
     private SinhVienRepository svRepo1;
@@ -36,12 +35,15 @@ public class SinhVienExcelUtility {
     private KhoaRepository khoaRepo1;
     @Autowired
     private NganhRepository nganhRepo1;
+    @Autowired
+    private ThongBaoRepository tbaoRepo1;
     @PostConstruct
     private void initStaticRepo(){
         svRepo = this.svRepo1;
         nienKhoaRepo = this.nienKhoaRepo1;
         khoaRepo = this.khoaRepo1;
         nganhRepo = this.nganhRepo1;
+        tbaoRepo = this.tbaoRepo1;
     }
 
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -126,6 +128,12 @@ public class SinhVienExcelUtility {
                 }
             }
             workbook.close();
+            ThongBao thongBao = ThongBao.builder()
+                    .noiDungTbao("Người dùng đã upload thêm sinh viên mới")
+                    .ngayThucHien(LocalDate.now())
+                    .nguoiThucHien("Khang")
+                    .build();
+            tbaoRepo.save(thongBao);
             return stuList;
         } catch (IOException e) {
             throw new RuntimeException("fail to parse Excel file: " + e.getMessage());

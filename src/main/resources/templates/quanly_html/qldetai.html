@@ -4,38 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>quản lý</title>
-    <link rel="stylesheet" th:href="@{/assets/css/quanly_css/quanly.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/quanly_css/qldetai.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/quanly_css/admin.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/quanly_css/trang-qlydetai.css}">
 </head>
 <body>
-    <header>
-        <h2>CTUT</h2>
-        <a href="">Đăng xuất</a>
-    </header>
     <section class="main_page">
-            <div class="pages">
-                <section class="user_info">
-                    <img th:src="@{/assets/images/quanly_img/astronaut.png}" alt="" width="30%">
-                    <div class="info">
-                        <p>Nguyễn Văn A</p>
-                        <p>nguyenvana@gmail.com</p>
-                    </div>
-                </section>
-                <section class="body">
-                    <div id="thongbao" class="function" onclick="location.href='http://localhost:8080/quanly'">
-                        <img th:src="@{/assets/images/quanly_img/notification.png}" id="icon">
-                        <p>Quản lý thông báo</p>
-                    </div>
-                    <div id="qldetai" class="function" onclick="location.href='http://localhost:8080/qldetai'">
-                        <img th:src="@{/assets/images/quanly_img/student.png}" id="icon">
-                        <p>Quản Lý Đề Tài</p>
-                    </div>
-                    <div id="phanconggv" class="function" onclick="location.href='http://localhost:8080/phanconggv'">
-                        <img th:src="@{/assets/images/quanly_img/profile.png}" id="icon">
-                        <p>Phân Công Giang Viên</p>
-                    </div>
-                </section>
-            </div>
+        <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
         <section class="dashboard">
             <h1>Quản Lý Đề Tài</h1>
             <div class="excel-actions">
@@ -43,31 +17,35 @@
             </div>
             <div class="dieukienloc">
                 <br>
-                <label for="khoa">Chọn tên khoa:</label>
-                <select id="khoa">
-                    <option value="none" selected>không có</option>
-                    <option value="Công nghệ thông tin">Công nghệ thông tin</option>
-                    <option value="Kinh tế">Kinh tế</option>
-                    <option value="LUAT">LUAT</option>
-                </select>
-                <label for="tinhtrang">Chọn tình trạng:</label>
-                <select id="tinhtrang">
-                    <option value="none" selected>không có</option>
-                    <option value="dangthuchien">Đang thực hiện</option>
-                    <option value="dahoanthanh">Đã hoàn thành</option>
-                </select>
-                <br>
-                <label for="search">Nhập mã giảng viên hoặc mã đề tài: </label>
-                <select id="magvOrmadetai">
-                    <option value="magv" selected>Mã giảng viên</option>
-                    <option value="madetai">Mã đề tài</option>
-                </select>
-                <input type="text" id="search">
-                <button onclick="timdetaiBangDieuKien(event)">Tìm kiếm</button>
+                <section class="search-section">
+                    <label for="khoa">Chọn tên khoa:</label>
+                    <select id="khoa">
+                        <option value="none" selected>không có</option>
+                    </select>
+                    <label for="tinhtrang">Chọn tình trạng:</label>
+                    <select id="tinhtrang">
+                        <option value="none" selected>không có</option>
+                        <option value="dangthuchien">Đang thực hiện</option>
+                        <option value="dahoanthanh">Đã hoàn thành</option>
+                    </select>
+                    <br>
+                    <label for="search">Nhập mã giảng viên hoặc mã đề tài: </label>
+                    <select id="magvOrmadetai">
+                        <option value="magv" selected>Mã giảng viên</option>
+                        <option value="madetai">Mã đề tài</option>
+                    </select>
+                    <input type="text" id="search">
+                    <button onclick="timdetaiBangDieuKien(event)">Tìm kiếm</button>
+                </section>
+                <section class="themDeTai">
+                    <div id="themDetai" class="add" onclick="location.href=''">
+                        <img th:src="@{/assets/images/project.png}">
+                        <p>Thêm đề tài</p>
+                    </div>
+                </section>
             </div>
-            <table class="excel-table">
-                <thead>
-                <tr>
+            <table id="userList">
+                <tbody>
                     <th>STT</th>
                     <th>Mã Đề Tài</th>
                     <th>Tên Đề Tài</th>
@@ -79,30 +57,12 @@
                     <th>Tình Trạng</th>
                     <th>File Đồ Tài</th>
                     <th>Điểm</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>DT001</td>
-                    <td>Quản lý đề tài nghiên cứu khoa học</td>
-                    <td>GV001</td>
-                    <td>Nguyễn Văn B</td>
-                    <td>Trần Văn C, Lê Thị D</td>
-                    <td>Công Ngệ thông tin</td>
-                    <td>1/10/2024-30/12/2024</td>
-                    <td>Đang Thực Hiện</td>
-                    <td>    </td>
-                    <td>    </td>
-                </tr>
                 </tbody>
             </table>
             </div>
             </div>
         </section>
-        <footer>
-            <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
-        </footer>
+    </section>
         <script src="/js/qldetai.js"></script>
 </body>
 </html>

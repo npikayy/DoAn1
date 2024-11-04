@@ -2,10 +2,7 @@ package khang.test.example.demo.Service;
 
 import jakarta.annotation.PostConstruct;
 import khang.test.example.demo.entity.*;
-import khang.test.example.demo.repository.admin_repository.GiangVienRepository;
-import khang.test.example.demo.repository.admin_repository.HocViRepository;
-import khang.test.example.demo.repository.admin_repository.KhoaRepository;
-import khang.test.example.demo.repository.admin_repository.NganhRepository;
+import khang.test.example.demo.repository.admin_repository.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -17,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 @Component
@@ -26,6 +25,8 @@ public class GiangVienExcelUtility {
     private static KhoaRepository khoaRepo;
     private static NganhRepository nganhRepo;
     private static HocViRepository hocviRepo;
+    private static ThongBaoRepository tbaoRepo;
+
     @Autowired
     private GiangVienRepository gvRepo1;
     @Autowired
@@ -34,6 +35,8 @@ public class GiangVienExcelUtility {
     private NganhRepository nganhRepo1;
     @Autowired
     private HocViRepository hocviRepo1;
+    @Autowired
+    private ThongBaoRepository tbaoRepo1;
 
     @PostConstruct
     private void initStaticRepo(){
@@ -41,6 +44,7 @@ public class GiangVienExcelUtility {
         khoaRepo = this.khoaRepo1;
         nganhRepo = this.nganhRepo1;
         hocviRepo = this.hocviRepo1;
+        tbaoRepo = this.tbaoRepo1;
     }
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String SHEET = "teacher";
@@ -118,8 +122,15 @@ public class GiangVienExcelUtility {
                 {
                     gvList.add(giangvien);
                 }
+
             }
             workbook.close();
+            ThongBao thongBao = ThongBao.builder()
+                    .noiDungTbao("Người dùng đã upload thêm giảng viên mới")
+                    .ngayThucHien(LocalDate.now())
+                    .nguoiThucHien("Khang")
+                    .build();
+            tbaoRepo.save(thongBao);
             return gvList;
         } catch (IOException e) {
             throw new RuntimeException("fail to parse Excel file: " + e.getMessage());

@@ -1,0 +1,65 @@
+.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 215px;
+}
+div:nth-child(1):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 158px;
+}
+div:nth-child(3):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 271px;
+}
+/*table*/
+table {
+    margin-top: 10px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #c7dbe4;
+    text-align: left;
+    padding: 10px;
+}
+tr:nth-child(1) {
+    background-color: #3dbdf8;
+}
+/*search section*/
+input{
+    padding: 5px;
+    margin-top: 40px;
+    font-size: 16px ;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+select{
+    /*display: block;*/
+    padding: 5px;
+    font-size: 16px ;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.themDeTai{
+    margin-left: auto;
+    width: 15%;
+}
+.add{
+    cursor: pointer;
+    margin-top: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.add img{
+    width: 20%;
+}
+.dieukienloc {
+    display: flex;
+}
+.search-section{
+    margin-top: 20px;
+}

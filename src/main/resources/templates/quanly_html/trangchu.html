@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Admin</title>
+    <link rel="stylesheet" th:href="@{/assets/css/quanly_css/trang-thongbao.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/quanly_css/admin.css}">
+</head>
+<body onload="layThongbao()">
+    <section class="main_page">
+        <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
+            <section class="dashboard">
+                <h1>Thông Báo</h1>
+                <h2>Những thông báo mới nhất trên hệ thống sẽ được hiển thị ở đây</h2>
+                <table id="thongBaoList">
+                    <tbody>
+                    <th>Nội dung thông báo</th>
+                    <th>Ngày thực hiện</th>
+                    <th>Người thực hiện</th>
+                    </tbody>
+                </table>
+            </section>
+    </section>
+    <script th:src="@{/assets/js/quanly_js/laythongbao.js}"></script>
+</body>
+</html>

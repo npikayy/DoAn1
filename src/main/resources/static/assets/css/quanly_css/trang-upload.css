@@ -70,3 +70,20 @@ button[type="submit"] {
     flex-direction: column;
     align-items: center;
 }
+
+/*animation*!*/
+.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 271px;
+}
+div:nth-child(1):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 158px;
+}
+div:nth-child(2):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 215px;
+}

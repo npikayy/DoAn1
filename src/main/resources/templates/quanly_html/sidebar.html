@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="sidebar" th:fragment="sidebar">
+  <section class="user_info">
+    <img th:src="@{/assets/images/astronaut.png}" alt="" width="30%">
+    <div class="info">
+      <h4>Nguyễn Phúc Khang</h4>
+      <h4>khangnguyen@gmail.com</h4>
+    </div>
+  </section>
+  <section class="sidebar-body">
+    <div id="trangchu" class="function" onclick="location.href='http://localhost:8080/quanly'">
+      <img th:src="@{/assets/images/notification.png}" id="icon">
+      <p>Trang chủ</p>
+    </div>
+    <div id="quanlydetai" class="function" onclick="location.href='http://localhost:8080/quanly/quanly-detai'">
+      <img th:src="@{/assets/images/project.png}" id="icon">
+      <p>Quản lý đề tài</p>
+    </div>
+    <div class="dropdown">
+      <div id="user" class="function">
+        <img th:src="@{/assets/images/user.png}" id="icon">
+        <p>Quản Lý Người Dùng</p>
+      </div>
+      <div class="dropdown-content">
+        <a href='http://localhost:8080/quanly/quanly-sinhvien'> Sinh Viên </a>
+        <a href='http://localhost:8080/quanly/quanly-giangvien'>Giảng Viên</a>
+      </div>
+    </div>
+    <div class="animation start-noti"></div>
+  </section>
+</div>
+</body>
+</html>

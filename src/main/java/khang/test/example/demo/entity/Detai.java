@@ -24,8 +24,6 @@ public class Detai {
     String soLuongSinhvien;
     @Column(columnDefinition = "nvarchar(255)")
     String Khoa;
-    @Column(columnDefinition = "nvarchar(255)")
-    String Nganh;
     @JsonFormat(pattern = "dd/MM/yyyy")
     LocalDate ngayBatdau;
     @JsonFormat(pattern = "dd/MM/yyyy")

@@ -3,41 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Admin</title>
-    <link rel="stylesheet" th:href="@{/assets/css/admin_css/trang-quanly.css}">
+    <title>Trang quản lý</title>
+    <link rel="stylesheet" th:href="@{/assets/css/quanly_css/trang-quanly.css}">
     <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/admin_css/admin.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/quanly_css/admin.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body onload="timSVBangDieuKien(event)">
     <section class="main_page">
-        <div th:replace="~{admin_html/sidebar :: sidebar}"></div>
+        <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
             <section class="dashboard" id="dashboard">
                 <div class="hidden" id="form-container">
                     <button onclick="hideUpdateInput()">Quay về</button>
                     <br>
-                    <h2>Chỉnh Sửa Thông Tin Của Sinh Viên</h2>
+                    <br>
+                    <h1>Chỉnh Sửa Thông Tin Của Sinh Viên</h1>
                     <form id="updateSVForm" action="#" method="post">
                         <div class="form-group">
                             <label for="masosv">MSSV:</label>
                             <input type="text" id="masosv" name="masosv" disabled>
                         </div>
+                        <br>
                         <div class="form-group">
                             <label for="tenSV">Tên SV:</label>
                             <input type="text" id="tenSV" name="tenSV" required>
                         </div>
+                        <br>
                         <div class="form-group">
                             <label for="ngaySinh">Ngày Sinh:</label>
                             <input type="date" id="ngaySinh" name="ngaySinh" required>
                         </div>
+                        <br>
                         <div class="form-group">
                             <label for="sdt">Số Điện Thoại:</label>
                             <input type="text" id="sdt" name="sdt" required>
                         </div>
+                        <br>
                         <div class="form-group">
                             <label for="email">Email:</label>
                             <input type="email" id="email" name="email" required>
                         </div>
+                        <br>
                         <div class="form-group">
                             <label for="lop">Lớp:</label>
                             <input type="text" id="lop" name="lop" required>
@@ -58,35 +64,44 @@
                             <select id="khoaHoc"></select>
                         </div>
                         <br>
+                        <br>
                         <div class="form-group">
                             <button type="submit">Cập Nhật Thông Tin</button>
                         </div>
+                        <br>
+                        <br>
                     </form>
-                    <br>
                 </div>
                 <h1>Quản Lý Sinh Viên</h1>
                 <div class="dieukienloc">
-                    <br>
-                    <label for="khoa">Chọn khoa:</label>
-                    <select id="khoa">
-                        <option value="none" selected>không có</option>
-                    </select>
-                    <label for="nganh">Chọn ngành:</label>
-                    <select id="nganh">
-                        <option value="none" selected>không có</option>
-                    </select>
-                    <label for="nienKhoa">Chọn khóa:</label>
-                    <select id="nienKhoa">
-                        <option value="none" selected>không có</option>
-                    </select>
-                    <br>
-                    <label for="search">Nhập tên sinh viên hoặc mssv cần tìm: </label>
-                    <select id="tensvOrmssv">
-                        <option value="tenSV" selected>Tên sinh viên</option>
-                        <option value="mssv">Mã số sinh viên</option>
-                    </select>
-                    <input type="text" id="search">
-                    <button onclick="timSVBangDieuKien(event)">Tìm kiếm</button>
+                    <section class="search-section">
+                        <label for="khoa">Chọn khoa:</label>
+                        <select id="khoa" onselect="timSVBangDieuKien(event)">
+                            <option value="none" selected>không có</option>
+                        </select>
+                        <label for="nganh">Chọn ngành:</label>
+                        <select id="nganh" onselect="timSVBangDieuKien(event)">
+                            <option value="none" selected>không có</option>
+                        </select>
+                        <label for="nienKhoa">Chọn khóa:</label>
+                        <select id="nienKhoa" onselect="timSVBangDieuKien(event)">
+                            <option value="none" selected>không có</option>
+                        </select>
+                        <br>
+                        <label for="search">Nhập tên sinh viên hoặc mssv cần tìm: </label>
+                        <select id="tensvOrmssv">
+                            <option value="tenSV" selected>Tên sinh viên</option>
+                            <option value="mssv">Mã số sinh viên</option>
+                        </select>
+                        <input type="text" id="search">
+                        <button onclick="timSVBangDieuKien(event)">Tìm kiếm</button>
+                    </section>
+                    <section class="themSV">
+                        <div id="themSinhvien" class="add" onclick="location.href='http://localhost:8080/quanly/upload/sinhvien'">
+                            <img th:src="@{/assets/images/student.png}">
+                            <p>Thêm Sinh Viên</p>
+                        </div>
+                    </section>
                 </div>
                 <table id="userList">
                     <tr>
@@ -107,8 +122,8 @@
                 </footer>
             </section>
     </section>
-    <script th:src="@{/assets/js/admin_js/laysinhvien.js}"></script>
-    <script th:src="@{/assets/js/admin_js/showToast.js}"></script>
-    <script th:src="@{/assets/js/admin_js/capNhatTTSinhVien.js}"></script>
+    <script th:src="@{/assets/js/quanly_js/laysinhvien.js}"></script>
+    <script th:src="@{/assets/js/quanly_js/showToast.js}"></script>
+    <script th:src="@{/assets/js/quanly_js/capNhatTTSinhVien.js}"></script>
 </body>
 </html>

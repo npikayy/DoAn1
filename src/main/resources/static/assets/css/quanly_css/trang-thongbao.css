@@ -13,8 +13,18 @@ div:nth-child(3):hover~.animation{
     background: var(--button-color);
     top: 271px;
 }
-div:nth-child(4):hover~.animation {
+/*table*/
+table {
+    margin-top: 10px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
     width: 100%;
-    background: var(--button-color);
-    top: 327px;
+}
+td, th {
+    border: 1px solid #c7dbe4;
+    text-align: left;
+    padding: 10px;
+}
+tr:nth-child(1) {
+    background-color: #3dbdf8;
 }

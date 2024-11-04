@@ -1,7 +1,7 @@
 /*///sidebar///*/
 .animation{
     width: 100%;
-    top: 327px;
+    top: 271px;
 }
 div:nth-child(2):hover~.animation{
     width: 100%;
@@ -10,10 +10,6 @@ div:nth-child(2):hover~.animation{
 div:nth-child(1):hover~.animation{
     width: 100%;
     top: 158px;
-}
-div:nth-child(3):hover~.animation {
-    width: 100%;
-    top: 271px;
 }
 
 .form-container{
@@ -27,11 +23,12 @@ footer{
     margin-top: 200px;
 }
 /*///search-bar//*/
-/*input {*/
-
-/*    border: 1px solid #ccc;*/
-/*    border-radius: 4px;*/
-/*}*/
+.dieukienloc {
+    display: flex;
+}
+.search-section{
+    margin-top: 20px;
+}
 button{
     background-color: #3dbdf8;
     border: none;
@@ -39,6 +36,28 @@ button{
     border-radius: 2px;
     color: hsl(0, 0%, 100%);
     cursor: pointer;
+}
+.themSV{
+    margin-left: auto;
+    width: 15%;
+}
+.themGV{
+    margin-left: auto;
+    width: 15%;
+}
+.themDeTai{
+    margin-left: auto;
+    width: 15%;
+}
+.add{
+    cursor: pointer;
+    margin-top: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.add img{
+    width: 20%;
 }
 
 /*table*/
