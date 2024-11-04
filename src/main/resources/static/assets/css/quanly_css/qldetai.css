@@ -16,16 +16,6 @@
     cursor: pointer;
   }
   
-  .btn-primary {
-    background-color: #0e7ef5;
-    color: #fff;
-  }
-  
-  .btn-warning {
-    background-color: #ffc107;
-    color: white;
-  }
-  
   .btn-info {
     background-color: #17a2b8;
     color: white;
@@ -46,3 +36,21 @@
     text-align: left;
     background-color: #d1d8fd;
   }
+  .drag-drop {
+    display: cent;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}

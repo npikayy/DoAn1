@@ -36,49 +36,73 @@
                     </div>
                 </section>
             </div>
-            <section class="dashboard">
-                <h1>Quản Lý Đề Tài</h1>
-                <div class="upload-section">
-                    <h2>Upload tệp dịnh dạng excel</h2>
-                    <div class="drag-drop">
-                        <p>Thả Tệp Của Bạn Vào Đây</p>
-                        <button class="btn-primary">Chọn Tệp</button>
-                    </div>
-                    <div class="excel-actions">
-                        <input type="text" placeholder="Tìm kiếm..." />
-                        <input type="text" placeholder="Lộc theo..." />
-                        <button class="btn-warning">Xuất Excel</button>
-                        <button class="btn-info">In Danh Sách</button>
-                    </div>
-                    <table class="excel-table">
-                        <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Mã Đề Tài</th>
-                            <th>Tên Đề Tài</th>
-                            <th>Giảng Viên</th>
-                            <th>Sinh Viên</th>
-                            <th>Tình Trạng</th>
-                            <th>Thao Tác</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>DT001</td>
-                            <td>Quản lý đề tài nghiên cứu khoa học</td>
-                            <td>Nguyễn Văn B</td>
-                            <td>Trần Văn C, Lê Thị D</td>
-                            <td>Đang Thực Hiện</td>
-                            <td>Xem | Sửa</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    </div>
-                </div>
-    </section>
-    <footer>
-        <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
-    </footer>
+        <section class="dashboard">
+            <h1>Quản Lý Đề Tài</h1>
+            <div class="excel-actions">
+                <button id="print-button" class="btn">In Danh Sách</button>
+            </div>
+            <div class="dieukienloc">
+                <br>
+                <label for="khoa">Chọn tên khoa:</label>
+                <select id="khoa">
+                    <option value="none" selected>không có</option>
+                    <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+                    <option value="Kinh tế">Kinh tế</option>
+                    <option value="LUAT">LUAT</option>
+                </select>
+                <label for="tinhtrang">Chọn tình trạng:</label>
+                <select id="tinhtrang">
+                    <option value="none" selected>không có</option>
+                    <option value="dangthuchien">Đang thực hiện</option>
+                    <option value="dahoanthanh">Đã hoàn thành</option>
+                </select>
+                <br>
+                <label for="search">Nhập mã giảng viên hoặc mã đề tài: </label>
+                <select id="magvOrmadetai">
+                    <option value="magv" selected>Mã giảng viên</option>
+                    <option value="madetai">Mã đề tài</option>
+                </select>
+                <input type="text" id="search">
+                <button onclick="timdetaiBangDieuKien(event)">Tìm kiếm</button>
+            </div>
+            <table class="excel-table">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã Đề Tài</th>
+                    <th>Tên Đề Tài</th>
+                    <th>Mã Giảng Viên</th>
+                    <th>Giảng Viên</th>
+                    <th>Sinh Viên</th>
+                    <th>Khoa</th>
+                    <th>Thời gian</th>
+                    <th>Tình Trạng</th>
+                    <th>File Đồ Tài</th>
+                    <th>Điểm</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>DT001</td>
+                    <td>Quản lý đề tài nghiên cứu khoa học</td>
+                    <td>GV001</td>
+                    <td>Nguyễn Văn B</td>
+                    <td>Trần Văn C, Lê Thị D</td>
+                    <td>Công Ngệ thông tin</td>
+                    <td>1/10/2024-30/12/2024</td>
+                    <td>Đang Thực Hiện</td>
+                    <td>    </td>
+                    <td>    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            </div>
+        </section>
+        <footer>
+            <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
+        </footer>
+        <script src="/js/qldetai.js"></script>
 </body>
 </html>
