@@ -27,8 +27,5 @@ public class SinhVien {
         String chuyenNganh;
         @Column(columnDefinition = "nvarchar(255)")
         String TenKhoa;
-        @OneToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name = "ma_tai_khoan", referencedColumnName = "Ma_Tai_Khoan")
-        Accounts thongTinTK;
 
 }

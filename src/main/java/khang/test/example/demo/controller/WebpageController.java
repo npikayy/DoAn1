@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class WebpageController {
     @GetMapping("/admin")
     public String admin(){
         return "admin_html/admin_page";

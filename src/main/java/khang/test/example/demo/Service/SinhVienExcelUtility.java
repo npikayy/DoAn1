@@ -122,11 +122,6 @@ public class SinhVienExcelUtility {
                 }
                 if (!svRepo.existsByMSSV(sinhvien.getMSSV()))
                 {
-                    Accounts account = new Accounts();
-                    account.setUsername(String.valueOf(sinhvien.getMSSV()));
-                    account.setPassword("1");
-                    account.setLoaiTK("student");
-                    sinhvien.setThongTinTK(account);
                     stuList.add(sinhvien);
                 }
             }

@@ -114,14 +114,8 @@ public class GiangVienExcelUtility {
                     hocvi.setHocVi(giangvien.getHocvi());
                     hocviRepo.save(hocvi);
                 }
-                boolean teacherExisted = gvRepo.existsByEmail(giangvien.getEmail());
-                if (!teacherExisted)
+                if (!gvRepo.existsByEmail(giangvien.getEmail()))
                 {
-                    Accounts account = new Accounts();
-                    account.setUsername(String.valueOf(giangvien.getEmail()));
-                    account.setPassword("1");
-                    account.setLoaiTK("giangvien");
-                    giangvien.setThongTinTK(account);
                     gvList.add(giangvien);
                 }
             }
