@@ -17,6 +17,10 @@ public class WebpageController {
     public String ThemGV(){
         return "quanly_html/giangvien-uploader";
     }
+    @GetMapping("/quanly/upload/detai")
+    public String ThemDT(){
+        return "quanly_html/detai-uploader";
+    }
     @GetMapping("/quanly/quanly-sinhvien")
     public String QuanlySV(){
         return "quanly_html/quanly-sinhvien";

@@ -24,11 +24,11 @@ public class AppInitConfig {
     ApplicationRunner applicationRunner(AccountRepository accountRepo){
 
         return args -> {
-            if (!accountRepo.existsByUsername("admin")){
+            if (!accountRepo.existsByUsername("admin1")){
                Accounts user = Accounts.builder()
-                        .username("admin")
-                        .password("admin")
-                        .TenNguoiDung("khang")
+                        .username("admin1")
+                        .password("admin1")
+                        .TenNguoiDung("Nguyễn Phúc Khang")
                         .LoaiTK("Quản lý")
                         .build();
                 accountRepo.save(user);

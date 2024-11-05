@@ -8,6 +8,8 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
+import javax.swing.*;
+import java.io.File;
 import java.time.LocalDate;
 
 @Data
@@ -20,18 +22,18 @@ public class Detai {
     String tendetai;
     @Column(columnDefinition = "nvarchar(255)")
     String maGiangvien;
+    Integer soLuongThanhVien;
     @Column(columnDefinition = "nvarchar(255)")
-    String soLuongSinhvien;
-    @Column(columnDefinition = "nvarchar(255)")
-    String Khoa;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    String tenKhoa;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    LocalDate ngayTaoDetai;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDate ngayBatdau;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDate ngayKetthuc;
     @Column(columnDefinition = "nvarchar(255)")
     String Tinhtrang;
     @Column(columnDefinition = "nvarchar(255)")
-    String Filedetai;
-    @Column(columnDefinition = "nvarchar(255)")
-    Double Diem;
+    File FileDeCuong;
+
 }

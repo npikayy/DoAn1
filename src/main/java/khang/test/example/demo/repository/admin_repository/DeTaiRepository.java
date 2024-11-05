@@ -4,4 +4,5 @@ import khang.test.example.demo.entity.Detai;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DeTaiRepository extends JpaRepository<Detai, String> {
+    boolean existsByMadetai(String madetai);
 }

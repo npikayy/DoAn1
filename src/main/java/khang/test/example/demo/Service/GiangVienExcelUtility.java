@@ -126,7 +126,7 @@ public class GiangVienExcelUtility {
             }
             workbook.close();
             ThongBao thongBao = ThongBao.builder()
-                    .noiDungTbao("Người dùng đã upload thêm giảng viên mới")
+                    .noiDungTbao("Người dùng đã thêm giảng viên mới bằng file excel ")
                     .ngayThucHien(LocalDate.now())
                     .nguoiThucHien("Khang")
                     .build();

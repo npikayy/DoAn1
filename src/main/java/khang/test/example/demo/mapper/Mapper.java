@@ -6,8 +6,8 @@ import org.mapstruct.MappingTarget;
 
 @org.mapstruct.Mapper(componentModel="spring")
 public interface Mapper {
-    @Mapping(target = "thongTinTK", ignore = true)
+
     void capNhatSV(@MappingTarget SinhVien sinhVien, SinhVien newSinhVien);
-    @Mapping(target = "thongTinTK", ignore = true)
+
     void capNhatGV(@MappingTarget GiangVien giangVien, GiangVien newGiangVien);
 }

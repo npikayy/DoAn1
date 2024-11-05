@@ -13,12 +13,12 @@ import java.util.List;
 public class DetaiService {
     @Autowired
     DeTaiRepository detaiRepo;
-//    public void save(MultipartFile file) {
-//        try {
-//            List<Detai> teaList = GiangVienExcelUtility.excelToTeacherList(file.getInputStream());
-//            detaiRepo.saveAll(teaList);
-//        } catch (IOException ex) {
-//            throw new RuntimeException("Excel data is failed to store: " + ex.getMessage());
-//        }
-//    }
+    public void save(MultipartFile file) {
+        try {
+            List<Detai> danhSachDetai = DetaiExcelUtility.excelToDetaiList(file.getInputStream());
+            detaiRepo.saveAll(danhSachDetai);
+        } catch (IOException ex) {
+            throw new RuntimeException("Excel data is failed to store: " + ex.getMessage());
+        }
+    }
 }
