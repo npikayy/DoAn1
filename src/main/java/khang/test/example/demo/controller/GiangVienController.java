@@ -3,7 +3,9 @@ package khang.test.example.demo.controller;
 import jakarta.transaction.Transactional;
 import khang.test.example.demo.Service.GiangVienExcelUtility;
 import khang.test.example.demo.Service.GiangVienService;
+import khang.test.example.demo.Service.SinhVienExcelUtility;
 import khang.test.example.demo.entity.GiangVien;
+import khang.test.example.demo.entity.SinhVien;
 import khang.test.example.demo.response.apiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,23 +35,15 @@ public class GiangVienController {
         gvService.xoaGiangVien(magv);
     }
     @PostMapping("/giangvien/upload")
-    public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        String message = "";
-        int code=1000;
+    public apiResponse<List<GiangVien>> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        List<GiangVien> gvList = null;
         if (GiangVienExcelUtility.hasExcelFormat(file)) {
-            try {
-                gvService.save(file);
-                code=0;
-                message = "Tệp " + file.getOriginalFilename() + " đã được upload lên hệ thống thành công.";
-            } catch (Exception exp) {
-                log.warn(String.valueOf(exp));
-                code=1000;
-                message = "Tệp " + file.getOriginalFilename() + " upload không thành công! Vui lòng kiểm tra lại";
-            }
+            gvList = gvService.save(file);
         }
-        return apiResponse.<String>builder()
-                .Code(code)
-                .result(message)
+
+        return apiResponse.<List<GiangVien>>builder()
+                .result(gvList)
+                .message("Đã upload giảng viên mới lên hệ thống thành công")
                 .build();
     }
     @GetMapping("/giangVien-list")
@@ -65,6 +60,13 @@ public class GiangVienController {
             respTea.put("message", "Data is not found");
             return new ResponseEntity<>(respTea, HttpStatus.NOT_FOUND);
         }
+    }
+    @PostMapping("/taoGVMoi")
+    public apiResponse<GiangVien> taoSVmoi(@RequestBody GiangVien giangVien){
+        return apiResponse.<GiangVien>builder()
+                .Code(1000)
+                .result(gvService.TaoGVmoi(giangVien))
+                .build();
     }
 
     @GetMapping("/quanly-giangvien/search")

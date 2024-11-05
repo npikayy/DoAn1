@@ -1,11 +1,12 @@
-input {
+/*upload section*/
+#upload-section input {
     font-size: 18px ;
     width: 100%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-footer{
+#upload-section footer{
     margin-top: 245px;
 }
 #uploadForm{
@@ -24,7 +25,7 @@ footer{
 input[type="file"] {
     display: none;
 }
-label {
+#upload-section label {
     display: block;
     position: relative;
     background-color: var(--button-color);
@@ -38,7 +39,7 @@ label {
     cursor: pointer;
 }
 
-button[type="submit"] {
+#upload-section button[type="submit"], #create-section button[type="submit"] {
     min-width: 25%;
     padding: 25px;
     margin: auto;
@@ -47,6 +48,14 @@ button[type="submit"] {
     color: #ffffff;
     border: 3px solid white;
     border-radius: 10px;
+    cursor: pointer;
+}
+#upload-section button, #create-section button{
+    background-color: #3dbdf8;
+    border: none;
+    padding: 10px;
+    border-radius: 2px;
+    color: hsl(0, 0%, 100%);
     cursor: pointer;
 }
 #file-display {
@@ -70,7 +79,6 @@ button[type="submit"] {
     flex-direction: column;
     align-items: center;
 }
-
 /*animation*!*/
 .animation{
     width: 100%;
@@ -86,4 +94,37 @@ div:nth-child(2):hover~.animation{
     width: 100%;
     background: var(--button-color);
     top: 215px;
+}
+/*create section*/
+#create-section input{
+    padding: 5px;
+    width: 500px;
+    margin-top: 40px;
+    font-size: 16px ;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#create-section select{
+    /*display: block;*/
+    padding: 5px;
+    font-size: 16px ;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+/*#create-section button{*/
+/*    background-color: #3dbdf8;*/
+/*    border: none;*/
+/*    padding: 10px;*/
+/*    border-radius: 2px;*/
+/*    color: hsl(0, 0%, 100%);*/
+/*    cursor: pointer;*/
+/*}*/
+#create-section{
+    margin-left: 50px;
+}
+.hidden{
+    display: none;
+}
+#create-section footer{
+    margin-top: auto;
 }

@@ -9,6 +9,8 @@ import java.util.List;
 
 import jakarta.annotation.PostConstruct;
 import khang.test.example.demo.entity.*;
+import khang.test.example.demo.exeption.AppException;
+import khang.test.example.demo.exeption.ErrorCode;
 import khang.test.example.demo.repository.admin_repository.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -57,6 +59,7 @@ public class SinhVienExcelUtility {
     public static List<SinhVien> excelToStuList(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);
+            String duoiEmail = "@student.edu.vn";
             Sheet sheet = workbook.getSheet(SHEET);
             Iterator<Row> rows = sheet.iterator();
             List<SinhVien> stuList = new ArrayList<>();
@@ -122,10 +125,15 @@ public class SinhVienExcelUtility {
                     chuyenNganh.setChuyenNganh(sinhvien.getChuyenNganh());
                     nganhRepo.save(chuyenNganh);
                 }
-                if (!svRepo.existsByMSSV(sinhvien.getMSSV()))
-                {
+
+                if (!sinhvien.getEmail().endsWith(duoiEmail))
+                    throw new AppException(ErrorCode.INVALID_Student_Email);
+                if (svRepo.existsByEmail(sinhvien.getEmail()))
+                    throw new AppException(ErrorCode.DUPLICATED_Email);
+                if (svRepo.existsByMSSV(sinhvien.getMSSV()))
+                    throw new AppException(ErrorCode.MSSV_EXISTED);
+
                     stuList.add(sinhvien);
-                }
             }
             workbook.close();
             ThongBao thongBao = ThongBao.builder()

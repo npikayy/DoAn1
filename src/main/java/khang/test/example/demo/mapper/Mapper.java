@@ -6,7 +6,9 @@ import org.mapstruct.MappingTarget;
 
 @org.mapstruct.Mapper(componentModel="spring")
 public interface Mapper {
+    SinhVien TaoSVmoi(SinhVien sinhVien);
 
+    GiangVien TaoGVmoi(GiangVien giangVien);
     void capNhatSV(@MappingTarget SinhVien sinhVien, SinhVien newSinhVien);
 
     void capNhatGV(@MappingTarget GiangVien giangVien, GiangVien newGiangVien);

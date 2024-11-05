@@ -2,6 +2,8 @@ package khang.test.example.demo.Service;
 
 import jakarta.annotation.PostConstruct;
 import khang.test.example.demo.entity.*;
+import khang.test.example.demo.exeption.AppException;
+import khang.test.example.demo.exeption.ErrorCode;
 import khang.test.example.demo.repository.admin_repository.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -57,6 +59,7 @@ public class GiangVienExcelUtility {
     public static List<GiangVien> excelToTeacherList(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);
+            String duoiEmail = "@teacher.edu.vn";
             Sheet sheet = workbook.getSheet(SHEET);
             Iterator<Row> rows = sheet.iterator();
             List<GiangVien> gvList = new ArrayList<>();
@@ -118,10 +121,15 @@ public class GiangVienExcelUtility {
                     hocvi.setHocVi(giangvien.getHocvi());
                     hocviRepo.save(hocvi);
                 }
-                if (!gvRepo.existsByEmail(giangvien.getEmail()))
-                {
+
+                if (!giangvien.getEmail().endsWith(duoiEmail))
+                    throw new AppException(ErrorCode.INVALID_Teacher_Email);
+                if (gvRepo.existsByEmail(giangvien.getEmail()))
+                    throw new AppException(ErrorCode.DUPLICATED_Email);
+                if (gvRepo.existsByMaGV(giangvien.getMaGV()))
+                    throw new AppException(ErrorCode.MSSV_EXISTED);
+
                     gvList.add(giangvien);
-                }
 
             }
             workbook.close();

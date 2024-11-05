@@ -1,4 +1,5 @@
 package khang.test.example.demo.controller;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,23 +32,15 @@ public class SinhVienController {
         svService.xoaSinhVien(mssv);
     }
     @PostMapping("/student/upload")
-    public apiResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        String message ="";
-        int code=1000;
+    public apiResponse<List<SinhVien>> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        List<SinhVien> svList = null;
         if (SinhVienExcelUtility.hasExcelFormat(file)) {
-            try {
-                svService.save(file);
-                code=0;
-                message = "Upload tệp " + file.getOriginalFilename() + " lên hệ thống thành công.";
-            } catch (Exception exp) {
-                log.warn(String.valueOf(exp));
-                code=1000;
-                message = "Upload tệp " + file.getOriginalFilename() + " không thành công! Vui lòng kiểm tra lại";
-            }
+            svList = svService.save(file);
         }
-        return apiResponse.<String>builder()
-                .Code(code)
-                .result(message)
+
+        return apiResponse.<List<SinhVien>>builder()
+                .result(svList)
+                .message("Đã upload sinh viên mới lên hệ thống thành công")
                 .build();
     }
     @GetMapping("/sinhvien-list")
@@ -66,6 +59,13 @@ public class SinhVienController {
         }
     }
 
+    @PostMapping("/taoSVMoi")
+    public apiResponse<SinhVien> taoSVmoi(@RequestBody SinhVien sinhVien){
+        return apiResponse.<SinhVien>builder()
+                .Code(1000)
+                .result(svService.TaoSVmoi(sinhVien))
+                .build();
+    }
     @GetMapping("/quanly-sinhvien/search")
     public List<SinhVien> searchStudents(@RequestParam(required = false) String chuyenNganh,
                                          @RequestParam(required = false) String tenKhoa,

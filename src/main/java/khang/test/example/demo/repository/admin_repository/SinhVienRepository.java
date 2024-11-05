@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface SinhVienRepository extends JpaRepository<SinhVien, String> {
     boolean existsByMSSV(String mssv);
+    boolean existsByEmail(String email);
 
     void deleteByMSSV(String mssv);
 

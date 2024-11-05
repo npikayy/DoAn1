@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface GiangVienRepository extends JpaRepository<GiangVien, String> {
     boolean existsByEmail(String email);
+    boolean existsByMaGV(String email);
 
     GiangVien findByMaGV(String masv);
 
