@@ -2,21 +2,27 @@ package khang.test.example.demo.Service;
 
 import khang.test.example.demo.entity.GiangVien;
 import khang.test.example.demo.entity.SinhVien;
+import khang.test.example.demo.entity.ThongBao;
 import khang.test.example.demo.exeption.AppException;
 import khang.test.example.demo.exeption.ErrorCode;
 import khang.test.example.demo.mapper.Mapper;
 import khang.test.example.demo.repository.admin_repository.GiangVienRepository;
+import khang.test.example.demo.repository.admin_repository.ThongBaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class GiangVienService {
     @Autowired
     GiangVienRepository gvRepo;
+    @Autowired
+    ThongBaoRepository tbaoRepo;
 
     @Autowired
     Mapper gvMapper;
@@ -34,18 +40,38 @@ public class GiangVienService {
     public GiangVien TaoGVmoi(GiangVien giangVien){
         String duoiEmail = "@teacher.edu.vn";
         if (gvRepo.existsByMaGV(giangVien.getMaGV()))
-            throw new AppException(ErrorCode.MSSV_EXISTED);
+            throw new AppException(ErrorCode.MSGV_EXISTED);
         if (!giangVien.getEmail().endsWith(duoiEmail))
             throw new AppException(ErrorCode.INVALID_Teacher_Email);
         if (gvRepo.existsByEmail(giangVien.getEmail()))
-            throw new AppException(ErrorCode.Email_EXISTED);
+            throw new AppException(ErrorCode.Teacher_Email_EXISTED);
         GiangVien gvMoi = gvMapper.TaoGVmoi(giangVien);
+
+        ThongBao thongBao = ThongBao.builder()
+                .noiDungTbao("Người dùng đã thêm 1 giảng viên mới bằng form")
+                .ngayThucHien(LocalDateTime.now())
+                .nguoiThucHien("Khang")
+                .build();
+        tbaoRepo.save(thongBao);
+
         return gvRepo.save(gvMoi);
     }
-    public void capNhatGV(String magv, GiangVien newGiangVien) {
+    public GiangVien capNhatGV(String magv, GiangVien newGiangVien) {
+        String duoiEmail = "@teacher.edu.vn";
         GiangVien giangVien = gvRepo.findByMaGV(magv);
+        if (!newGiangVien.getEmail().endsWith(duoiEmail))
+            throw new AppException(ErrorCode.INVALID_Teacher_Email);
+        boolean giongEmailGV = giangVien.getEmail().equals(newGiangVien.getEmail());
+        if (gvRepo.existsByEmail(newGiangVien.getEmail())&&!giongEmailGV)
+            throw new AppException(ErrorCode.Teacher_Email_EXISTED);
         gvMapper.capNhatGV(giangVien, newGiangVien);
-        gvRepo.save(giangVien);
+        ThongBao thongBao = ThongBao.builder()
+                .noiDungTbao("Người dùng đã cập nhật thông tin của giảng viên có mã giáo viên là "+ magv )
+                .ngayThucHien(LocalDateTime.now())
+                .nguoiThucHien("Khang")
+                .build();
+        tbaoRepo.save(thongBao);
+        return gvRepo.save(giangVien);
     }
 
     public void xoaGiangVien(String magv) {

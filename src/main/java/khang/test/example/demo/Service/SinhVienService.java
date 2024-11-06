@@ -1,12 +1,15 @@
 package khang.test.example.demo.Service;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import khang.test.example.demo.entity.SinhVien;
+import khang.test.example.demo.entity.ThongBao;
 import khang.test.example.demo.exeption.AppException;
 import khang.test.example.demo.exeption.ErrorCode;
 import khang.test.example.demo.mapper.Mapper;
 import khang.test.example.demo.repository.admin_repository.SinhVienRepository;
+import khang.test.example.demo.repository.admin_repository.ThongBaoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class SinhVienService {
     @Autowired
     SinhVienRepository svRepo;
+
+    @Autowired
+    ThongBaoRepository tbaoRepo;
 
     @Autowired
     Mapper svMapper;
@@ -39,13 +45,33 @@ public class SinhVienService {
             if (svRepo.existsByEmail(sinhVien.getEmail()))
                 throw new AppException(ErrorCode.Email_EXISTED);
             SinhVien svMoi = svMapper.TaoSVmoi(sinhVien);
+            ThongBao thongBao = ThongBao.builder()
+                .noiDungTbao("Người dùng đã thêm 1 sinh viên mới bằng form")
+                .ngayThucHien(LocalDateTime.now())
+                .nguoiThucHien("Khang")
+                .build();
+        tbaoRepo.save(thongBao);
+
             return svRepo.save(svMoi);
+
     }
 
-    public void capNhatSV(String mssv, SinhVien newSinhVien) {
+    public SinhVien capNhatSV(String mssv, SinhVien newSinhVien) {
         SinhVien sinhVien = svRepo.findByMSSV(mssv);
+        String duoiEmail = "@student.edu.vn";
+        if (!newSinhVien.getEmail().endsWith(duoiEmail))
+            throw new AppException(ErrorCode.INVALID_Student_Email);
+        boolean giongEmailSV = sinhVien.getEmail().equals(newSinhVien.getEmail());
+        if (svRepo.existsByEmail(newSinhVien.getEmail())&&!giongEmailSV)
+            throw new AppException(ErrorCode.Email_EXISTED);
         svMapper.capNhatSV(sinhVien, newSinhVien);
-        svRepo.save(sinhVien);
+        ThongBao thongBao = ThongBao.builder()
+                .noiDungTbao("Người dùng đã cập nhật thông tin của sinh viên có mã số sinh viên là "+ mssv )
+                .ngayThucHien(LocalDateTime.now())
+                .nguoiThucHien("Khang")
+                .build();
+        tbaoRepo.save(thongBao);
+        return svRepo.save(sinhVien);
     }
 
     public void xoaSinhVien(String mssv) {

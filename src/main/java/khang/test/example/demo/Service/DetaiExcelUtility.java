@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -106,7 +108,7 @@ public class DetaiExcelUtility {
             workbook.close();
             ThongBao thongBao = ThongBao.builder()
                     .noiDungTbao("Người dùng đã upload thêm đề tài ")
-                    .ngayThucHien(LocalDate.now())
+                    .ngayThucHien(LocalDateTime.now())
                     .nguoiThucHien("Khang")
                     .build();
             tbaoRepo.save(thongBao);

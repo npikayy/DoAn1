@@ -1,14 +1,13 @@
 package khang.test.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -18,11 +17,13 @@ import java.time.LocalDate;
 @Builder
 public class ThongBao {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer idTbao;
     @Column(columnDefinition = "nvarchar(255)")
     String noiDungTbao;
-    @Column(columnDefinition = "Date")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    LocalDate ngayThucHien;
+    @Column(columnDefinition = "DateTime")
+    @JsonFormat(pattern = "dd/MM/yyyy hh:m")
+    LocalDateTime ngayThucHien;
     @Column(columnDefinition = "nvarchar(255)")
     String nguoiThucHien;
 }

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -49,7 +50,6 @@ public class GiangVienExcelUtility {
         tbaoRepo = this.tbaoRepo1;
     }
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    static String SHEET = "teacher";
     public static boolean hasExcelFormat(MultipartFile file) {
         if (!TYPE.equals(file.getContentType())) {
             return false;
@@ -60,10 +60,11 @@ public class GiangVienExcelUtility {
         try {
             Workbook workbook = new XSSFWorkbook(is);
             String duoiEmail = "@teacher.edu.vn";
-            Sheet sheet = workbook.getSheet(SHEET);
+            Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rows = sheet.iterator();
             List<GiangVien> gvList = new ArrayList<>();
             int rowNumber = 0;
+            int SluongGV = 0;
             while (rows.hasNext()) {
                 Row currentRow = rows.next();
                 // skip header
@@ -121,21 +122,20 @@ public class GiangVienExcelUtility {
                     hocvi.setHocVi(giangvien.getHocvi());
                     hocviRepo.save(hocvi);
                 }
+                if (!gvRepo.existsByMaGV(giangvien.getMaGV())) {
+                    if (!giangvien.getEmail().endsWith(duoiEmail))
+                        throw new AppException(ErrorCode.INVALID_Teacher_Email);
+                    if (gvRepo.existsByEmail(giangvien.getEmail()))
+                        throw new AppException(ErrorCode.DUPLICATED_Email);
 
-                if (!giangvien.getEmail().endsWith(duoiEmail))
-                    throw new AppException(ErrorCode.INVALID_Teacher_Email);
-                if (gvRepo.existsByEmail(giangvien.getEmail()))
-                    throw new AppException(ErrorCode.DUPLICATED_Email);
-                if (gvRepo.existsByMaGV(giangvien.getMaGV()))
-                    throw new AppException(ErrorCode.MSSV_EXISTED);
-
+                    SluongGV++;
                     gvList.add(giangvien);
-
+                }
             }
             workbook.close();
             ThongBao thongBao = ThongBao.builder()
-                    .noiDungTbao("Người dùng đã thêm giảng viên mới bằng file excel ")
-                    .ngayThucHien(LocalDate.now())
+                    .noiDungTbao("Người dùng đã thêm " + SluongGV +" giảng viên mới bằng file excel ")
+                    .ngayThucHien(LocalDateTime.now())
                     .nguoiThucHien("Khang")
                     .build();
             tbaoRepo.save(thongBao);

@@ -98,13 +98,13 @@ function taoGVmoi(event) {
     })
         .then(response => response.json())
         .then(data => {
-            showToast('Có lỗi xảy ra khi cập nhật thông tin giảng viên', 'error')
-        })
-        .catch(error => {
-            showToast('Thông tin giảng viên đã được cập nhật thành công', 'success')
-            hideUpdateInput();
-            timGVBangDieuKien(event);
-        });
-};
+            if (data.code===1000){
+                showToast('Tạo giảng viên thành công', 'success')
+            }
+            else{
+                showToast(data.message, 'error')
+            }
+    })
+}
 document.getElementById('createGVForm').addEventListener('submit', taoGVmoi)
 

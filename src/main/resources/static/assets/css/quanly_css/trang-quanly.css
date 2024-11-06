@@ -89,3 +89,9 @@ select{
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+#capNhatBtn{
+    background-color: #4f4fba;
+}
+#xoaBtn{
+    background-color: #ff0000;
+}

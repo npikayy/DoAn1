@@ -25,9 +25,12 @@ public class GiangVienController {
     @Autowired
     GiangVienService gvService;
     @PutMapping("giangvien/{magv}")
-    public void updateGiangVien(@PathVariable String magv, @RequestBody GiangVien newGiangVien)
+    public apiResponse<GiangVien> updateGiangVien(@PathVariable String magv, @RequestBody GiangVien newGiangVien)
     {
-        gvService.capNhatGV(magv, newGiangVien);
+        return apiResponse.<GiangVien>builder()
+            .Code(1000)
+            .result(gvService.capNhatGV(magv, newGiangVien))
+            .build();
     }
     @Transactional
     @DeleteMapping("/giangvien/{magv}") public void xoaGiangVien(@PathVariable String magv)
@@ -62,7 +65,7 @@ public class GiangVienController {
         }
     }
     @PostMapping("/taoGVMoi")
-    public apiResponse<GiangVien> taoSVmoi(@RequestBody GiangVien giangVien){
+    public apiResponse<GiangVien> taoGVmoi(@RequestBody GiangVien giangVien){
         return apiResponse.<GiangVien>builder()
                 .Code(1000)
                 .result(gvService.TaoGVmoi(giangVien))

@@ -22,9 +22,12 @@ public class SinhVienController {
     SinhVienService svService;
 
     @PutMapping("sinhvien/{mssv}")
-    public void updateStudent(@PathVariable String mssv, @RequestBody SinhVien newSinhVien) 
+    public apiResponse<SinhVien> updateStudent(@PathVariable String mssv, @RequestBody SinhVien newSinhVien)
     {
-        svService.capNhatSV(mssv, newSinhVien);
+        return apiResponse.<SinhVien>builder()
+                .Code(1000)
+                .result(svService.capNhatSV(mssv, newSinhVien))
+                .build();
     }
     @Transactional
     @DeleteMapping("/sinhvien/{mssv}") public void xoaSinhVien(@PathVariable String mssv)

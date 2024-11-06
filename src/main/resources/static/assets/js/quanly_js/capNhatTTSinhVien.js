@@ -78,45 +78,46 @@ function addDatatoInput(data){
 
 
     function updateSV(event) {
-    event.preventDefault();
-    const masosv = document.getElementById('masosv').value;
-    const tenSV = document.getElementById('tenSV').value;
-    const ngaySinh = document.getElementById('ngaySinh').value;
-    const sdt = document.getElementById('sdt').value;
-    const email = document.getElementById('email').value;
-    const lop = document.getElementById('lop').value;
-    const nienKhoa = document.getElementById('khoaHoc').value;
-    const chuyenNganh = document.getElementById('chuyenNganh').value;
-    const tenKhoa = document.getElementById('tenKhoa').value;
+        event.preventDefault();
+        const masosv = document.getElementById('masosv').value;
+        const tenSV = document.getElementById('tenSV').value;
+        const ngaySinh = document.getElementById('ngaySinh').value;
+        const sdt = document.getElementById('sdt').value;
+        const email = document.getElementById('email').value;
+        const lop = document.getElementById('lop').value;
+        const nienKhoa = document.getElementById('khoaHoc').value;
+        const chuyenNganh = document.getElementById('chuyenNganh').value;
+        const tenKhoa = document.getElementById('tenKhoa').value;
 
-    const studentData =
-        {
-            "ngaySinh": ngaySinh,
-            "email": email,
-            "nienKhoa": nienKhoa,
-            "chuyenNganh": chuyenNganh,
-            "tenSV": tenSV,
-            "mssv": masosv,
-            "lop": lop,
-            "sdt": sdt,
-            "tenKhoa": tenKhoa
-        }
+        const studentData =
+            {
+                "ngaySinh": ngaySinh,
+                "email": email,
+                "nienKhoa": nienKhoa,
+                "chuyenNganh": chuyenNganh,
+                "tenSV": tenSV,
+                "mssv": masosv,
+                "lop": lop,
+                "sdt": sdt,
+                "tenKhoa": tenKhoa
+            }
 
-    fetch(`http://localhost:8080/sinhvien/${masosv}`, {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: 'PUT',
-        body: JSON.stringify(studentData)
-    })
-        .then(response => response.json())
-        .then(data => {
-            showToast('Có lỗi xảy ra khi cập nhật thông tin sinh viên', 'error')
+        fetch(`http://localhost:8080/sinhvien/${masosv}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify(studentData)
         })
-        .catch(error => {
-            showToast('Thông tin sinh viên đã được cập nhật thành công', 'success')
-            hideUpdateInput();
-            timSVBangDieuKien(event);
-        });
-};
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === 1000) {
+                    showToast('Thông tin sinh viên đã được cập nhật thành công', 'success')
+                    hideUpdateInput();
+                    timSVBangDieuKien(event);
+                } else {
+                    showToast(data.message, 'error')
+                }
+            })
+    }
 document.getElementById('updateSVForm').addEventListener('submit', updateSV)

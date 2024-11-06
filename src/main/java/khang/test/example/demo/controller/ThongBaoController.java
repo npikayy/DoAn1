@@ -1,12 +1,15 @@
 package khang.test.example.demo.controller;
 
+import jakarta.transaction.Transactional;
 import khang.test.example.demo.Service.ThongBaoService;
 import khang.test.example.demo.entity.SinhVien;
 import khang.test.example.demo.entity.ThongBao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.LinkedHashMap;
@@ -32,5 +35,12 @@ public class ThongBaoController {
             respStu.put("message", "Data is not found");
             return new ResponseEntity<>(respStu, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Transactional
+    @DeleteMapping("/thongbao/{idTbao}")
+    public void xoaThbao(@PathVariable Integer idTbao)
+    {
+        thongBaoService.xoaTbao(idTbao);
     }
 }

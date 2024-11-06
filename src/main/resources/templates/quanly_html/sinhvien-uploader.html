@@ -13,6 +13,9 @@
     <section class="main_page">
         <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
             <section class="dashboard">
+                <button id="backbtn" onclick="location.href='http://localhost:8080/quanly/quanly-sinhvien'">Quay về</button>
+                <br>
+                <br>
                 <div class="hidden" id="create-section">
                     <button onclick="hideCreateSection()">Upload sinh viên mới</button>
                     <h1>Thêm sinh viên mới bằng form</h1>
@@ -70,7 +73,10 @@
                         <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
                     </footer>
                 </div>
-                <div th:replace="~{quanly_html/upload-section :: upload-section}"></div>
+                <section id="upload-section">
+                    <button onclick="unhideCreateSection()">Thêm sinh viên mới bằng form</button>
+                    <div th:replace="~{quanly_html/upload-section :: upload-section}"></div>
+                </section>
             </section>
     </section>
 

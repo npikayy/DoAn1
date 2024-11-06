@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -33,7 +34,5 @@ public class Detai {
     LocalDate ngayKetthuc;
     @Column(columnDefinition = "nvarchar(255)")
     String Tinhtrang;
-    @Column(columnDefinition = "nvarchar(255)")
-    File FileDeCuong;
 
 }

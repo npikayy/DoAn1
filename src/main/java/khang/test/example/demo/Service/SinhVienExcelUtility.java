@@ -2,6 +2,7 @@ package khang.test.example.demo.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -60,10 +61,12 @@ public class SinhVienExcelUtility {
         try {
             Workbook workbook = new XSSFWorkbook(is);
             String duoiEmail = "@student.edu.vn";
-            Sheet sheet = workbook.getSheet(SHEET);
+            Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rows = sheet.iterator();
             List<SinhVien> stuList = new ArrayList<>();
             int rowNumber = 0;
+            int cellIdx = 0;
+            int SluongSV = 0;
             while (rows.hasNext()) {
                 Row currentRow = rows.next();
                 // skip header
@@ -73,7 +76,7 @@ public class SinhVienExcelUtility {
                 }
                 Iterator<Cell> cellsInRow = currentRow.iterator();
                 SinhVien sinhvien = new SinhVien();
-                int cellIdx = 0;
+                cellIdx = 0;
                 while (cellsInRow.hasNext()) {
                     Cell currentCell = cellsInRow.next();
                     switch (cellIdx) {
@@ -110,35 +113,35 @@ public class SinhVienExcelUtility {
                     }
                     cellIdx++;
                 }
-                if (!nienKhoaRepo.existsByNienKhoa(sinhvien.getNienKhoa())){
+                if (!nienKhoaRepo.existsByNienKhoa(sinhvien.getNienKhoa())) {
                     nienKhoa nienKhoa = new nienKhoa();
                     nienKhoa.setNienKhoa(sinhvien.getNienKhoa());
                     nienKhoaRepo.save(nienKhoa);
                 }
-                if (!khoaRepo.existsByTenKhoa(sinhvien.getTenKhoa())){
+                if (!khoaRepo.existsByTenKhoa(sinhvien.getTenKhoa())) {
                     Khoa khoa = new Khoa();
                     khoa.setTenKhoa(sinhvien.getTenKhoa());
                     khoaRepo.save(khoa);
                 }
-                if (!nganhRepo.existsByChuyenNganh(sinhvien.getChuyenNganh())){
+                if (!nganhRepo.existsByChuyenNganh(sinhvien.getChuyenNganh())) {
                     chuyenNganh chuyenNganh = new chuyenNganh();
                     chuyenNganh.setChuyenNganh(sinhvien.getChuyenNganh());
                     nganhRepo.save(chuyenNganh);
                 }
+                if (!svRepo.existsByMSSV(sinhvien.getMSSV())){
+                    if (!sinhvien.getEmail().endsWith(duoiEmail))
+                        throw new AppException(ErrorCode.INVALID_Student_Email);
+                    if (svRepo.existsByEmail(sinhvien.getEmail()))
+                        throw new AppException(ErrorCode.DUPLICATED_Email);
 
-                if (!sinhvien.getEmail().endsWith(duoiEmail))
-                    throw new AppException(ErrorCode.INVALID_Student_Email);
-                if (svRepo.existsByEmail(sinhvien.getEmail()))
-                    throw new AppException(ErrorCode.DUPLICATED_Email);
-                if (svRepo.existsByMSSV(sinhvien.getMSSV()))
-                    throw new AppException(ErrorCode.MSSV_EXISTED);
-
+                    SluongSV++;
                     stuList.add(sinhvien);
+                }
             }
             workbook.close();
             ThongBao thongBao = ThongBao.builder()
-                    .noiDungTbao("Người dùng đã thêm sinh viên mới bằng file excel")
-                    .ngayThucHien(LocalDate.now())
+                    .noiDungTbao("Người dùng đã thêm " + SluongSV + " sinh viên mới bằng file excel")
+                    .ngayThucHien(LocalDateTime.now())
                     .nguoiThucHien("Khang")
                     .build();
             tbaoRepo.save(thongBao);

@@ -1,3 +1,4 @@
+
 /*upload section*/
 #upload-section input {
     font-size: 18px ;
@@ -50,7 +51,7 @@ input[type="file"] {
     border-radius: 10px;
     cursor: pointer;
 }
-#upload-section button, #create-section button{
+#upload-section button, #create-section button, #backbtn{
     background-color: #3dbdf8;
     border: none;
     padding: 10px;

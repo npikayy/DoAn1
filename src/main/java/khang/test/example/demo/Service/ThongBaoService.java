@@ -16,4 +16,8 @@ public class ThongBaoService {
         return thongBaoRepo.findAll();
     }
 
+    public void xoaTbao(Integer idTbao){
+        thongBaoRepo.deleteByIdTbao(idTbao);
+    }
+
 }

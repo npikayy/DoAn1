@@ -103,8 +103,8 @@ function addDatatoTable(data){
         <td>${data.kinhNghiemGD}</td>
         <td>
             <div>
-                <button onclick="laydulieuGV('${magv}')">sửa</button>
-                <button onclick="xoaGV('${magv}')">xóa</button>
+                <button id="capNhatBtn" onclick="laydulieuGV('${magv}')">sửa</button>
+                <button id="xoaBtn" onclick="xoaGV('${magv}')">xóa</button>
             </div>
         </td>
         `

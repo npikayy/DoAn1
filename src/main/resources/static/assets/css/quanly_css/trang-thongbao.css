@@ -28,3 +28,11 @@ td, th {
 tr:nth-child(1) {
     background-color: #3dbdf8;
 }
+#xoaBtn{
+    background-color: #ff0000;
+    border: none;
+    padding: 10px;
+    border-radius: 2px;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+}
