@@ -29,6 +29,9 @@ footer{
 .search-section{
     margin-top: 20px;
 }
+/*.search-section #search{*/
+/*    width:  ;*/
+/*}*/
 button{
     background-color: #3dbdf8;
     border: none;
@@ -38,25 +41,38 @@ button{
     cursor: pointer;
 }
 .themSV{
+    display: flex;
     margin-left: auto;
-    font-size: 10px;
     width: 10%;
+    gap: 50px;
 }
-.themGV{
-    margin-left: auto;
-    font-size: 10px;
-    width: 10%;
+.themSV p{
+    font-size: 13px;
+}
+.themSV img{
+    width: 100%;
 }
 
+.themGV{
+    display: flex;
+    margin-left: auto;
+    font-size: 10px;
+    width: 10%;
+    gap: 50px;
+}
+.themGV img{
+    width: 100%;
+}
+.themGV p{
+    font-size: 13px;
+}
 .add{
     cursor: pointer;
     margin-top: 100px;
     display: flex;
     align-items: center;
     justify-content: end;
-}
-.add img{
-    width: 20%;
+    font-size: 12px;
 }
 
 /*table*/
@@ -76,7 +92,7 @@ tr:nth-child(1) {
 }
 input{
     padding: 5px;
-    width: 500px;
+    width: 400px;
     margin-top: 40px;
     font-size: 16px ;
     border: 1px solid #ccc;

@@ -1,22 +1,22 @@
 package khang.test.example.demo.Service;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-
+import java.io.FileOutputStream;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import jakarta.annotation.PostConstruct;
 import khang.test.example.demo.entity.*;
 import khang.test.example.demo.exeption.AppException;
 import khang.test.example.demo.exeption.ErrorCode;
 import khang.test.example.demo.repository.admin_repository.*;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,6 +40,115 @@ public class SinhVienExcelUtility {
     private NganhRepository nganhRepo1;
     @Autowired
     private ThongBaoRepository tbaoRepo1;
+
+    public static File xuatFileExcel(){
+        File file = null;
+        try{
+            List<SinhVien> sinhVienList = svRepo.findAll();
+
+
+            XSSFWorkbook workbook = new XSSFWorkbook();
+
+            XSSFSheet sheet = workbook.createSheet("sinhvien");
+
+            CellStyle dateCellStyle = workbook.createCellStyle();
+            short dateFormat = workbook.createDataFormat().getFormat("yyyy-MM-dd");
+            dateCellStyle.setDataFormat(dateFormat);
+
+            Row row = sheet.createRow(0);
+
+            Cell mssv = row.createCell(0);
+            mssv.setCellValue("mssv");
+
+            Cell tensv = row.createCell(1);
+            tensv.setCellValue("tensv");
+
+            Cell ngaySinh = row.createCell(2);
+            ngaySinh.setCellValue("ngay sinh");
+
+            Cell sdt = row.createCell(3);
+            sdt.setCellValue("sdt");
+
+            Cell email = row.createCell(4);
+            email.setCellValue("email");
+
+            Cell lop = row.createCell(5);
+            lop.setCellValue("lop");
+
+            Cell nienKhoa = row.createCell(6);
+            nienKhoa.setCellValue("nien khoa");
+
+            Cell chuyenNganh = row.createCell(7);
+            chuyenNganh.setCellValue("chuyen nganh");
+
+            Cell tenKhoa = row.createCell(8);
+            tenKhoa.setCellValue("ten khoa");
+
+            int rowNumber = row.getRowNum();
+
+            for(SinhVien sinhVien : sinhVienList){
+                row = sheet.createRow(rowNumber++);
+
+                Cell stdMssv = row.createCell(0);
+                stdMssv.setCellValue(sinhVien.getMSSV());
+
+                Cell stdTensv = row.createCell(1);
+                stdTensv.setCellValue(sinhVien.getTenSV());
+
+                Cell stdNgaySinh = row.createCell(2);
+                stdNgaySinh.setCellValue(sinhVien.getNgaySinh());
+                stdNgaySinh.setCellStyle(dateCellStyle);
+
+                Cell stdSdt = row.createCell(3);
+                stdSdt.setCellValue(sinhVien.getSDT());
+
+                Cell stdEmail = row.createCell(4);
+                stdEmail.setCellValue(sinhVien.getEmail());
+
+                Cell stdLop = row.createCell(5);
+                stdLop.setCellValue(sinhVien.getLop());
+
+                Cell stdNienKhoa = row.createCell(6);
+                stdNienKhoa.setCellValue(sinhVien.getNienKhoa());
+
+                Cell stdChuyennganh = row.createCell(7);
+                stdChuyennganh.setCellValue(sinhVien.getChuyenNganh());
+
+                Cell stdTenKhoa = row.createCell(8);
+                stdTenKhoa.setCellValue(sinhVien.getTenKhoa());
+            }
+
+            sheet.autoSizeColumn(0);
+            sheet.autoSizeColumn(1);
+            sheet.autoSizeColumn(2);
+            sheet.autoSizeColumn(3);
+            sheet.autoSizeColumn(4);
+            sheet.autoSizeColumn(5);
+            sheet.autoSizeColumn(6);
+            sheet.autoSizeColumn(7);
+            sheet.autoSizeColumn(8);
+
+
+            final String fileName = "SinhVien";
+
+
+            file = new File(fileName + ".xlsx");
+
+            FileOutputStream outputStream = new FileOutputStream(file);
+
+            workbook.write(outputStream);
+            outputStream.close();
+            workbook.close();
+
+
+        }catch (Exception e){
+
+        }
+        return file;
+    }
+    public SinhVienExcelUtility(){
+    }
+
     @PostConstruct
     private void initStaticRepo(){
         svRepo = this.svRepo1;
@@ -151,3 +260,4 @@ public class SinhVienExcelUtility {
         }
     }
 }
+

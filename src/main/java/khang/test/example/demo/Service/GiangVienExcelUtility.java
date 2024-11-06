@@ -5,15 +5,15 @@ import khang.test.example.demo.entity.*;
 import khang.test.example.demo.exeption.AppException;
 import khang.test.example.demo.exeption.ErrorCode;
 import khang.test.example.demo.repository.admin_repository.*;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
@@ -55,6 +55,106 @@ public class GiangVienExcelUtility {
             return false;
         }
         return true;
+    }
+
+    public static File xuatFileExcel(){
+        File file = null;
+        try{
+            List<GiangVien> giangVienList = gvRepo.findAll();
+
+
+            XSSFWorkbook workbook = new XSSFWorkbook();
+
+            XSSFSheet sheet = workbook.createSheet("giangvien");
+
+            CellStyle dateCellStyle = workbook.createCellStyle();
+            short dateFormat = workbook.createDataFormat().getFormat("yyyy-MM-dd");
+            dateCellStyle.setDataFormat(dateFormat);
+
+            Row row = sheet.createRow(0);
+
+            Cell magv = row.createCell(0);
+            magv.setCellValue("ma gv");
+
+            Cell tengv = row.createCell(1);
+            tengv.setCellValue("tengv");
+
+            Cell ngaySinh = row.createCell(2);
+            ngaySinh.setCellValue("ngay sinh");
+            
+            Cell email = row.createCell(3);
+            email.setCellValue("email");
+
+            Cell hocvi = row.createCell(4);
+            hocvi.setCellValue("hocvi");
+
+            Cell chuyenNganh = row.createCell(5);
+            chuyenNganh.setCellValue("chuyen nganh");
+
+            Cell tenKhoa = row.createCell(6);
+            tenKhoa.setCellValue("ten khoa");
+
+            Cell kinhNghiem = row.createCell(7);
+            kinhNghiem.setCellValue("kinh nghiem gd");
+
+            int rowNumber = row.getRowNum();
+
+            for(GiangVien giangVien : giangVienList){
+                row = sheet.createRow(rowNumber++);
+
+                Cell stdmagv = row.createCell(0);
+                stdmagv.setCellValue(giangVien.getMaGV());
+
+                Cell stdtengv = row.createCell(1);
+                stdtengv.setCellValue(giangVien.getTenGV());
+
+                Cell stdngaySinh = row.createCell(2);
+                stdngaySinh.setCellValue(giangVien.getNgaySinh());
+                stdngaySinh.setCellStyle(dateCellStyle);
+
+                Cell stdemail = row.createCell(3);
+                stdemail.setCellValue(giangVien.getEmail());
+
+                Cell stdhocvi = row.createCell(4);
+                stdhocvi.setCellValue(giangVien.getHocvi());
+
+                Cell stdchuyenNganh = row.createCell(5);
+                stdchuyenNganh.setCellValue(giangVien.getChuyenNganh());
+
+                Cell stdtenKhoa = row.createCell(6);
+                stdtenKhoa.setCellValue(giangVien.getTenKhoa());
+
+                Cell stdkinhNghiem = row.createCell(7);
+                stdkinhNghiem.setCellValue(giangVien.getKinhNghiemGD());
+            }
+
+            sheet.autoSizeColumn(0);
+            sheet.autoSizeColumn(1);
+            sheet.autoSizeColumn(2);
+            sheet.autoSizeColumn(3);
+            sheet.autoSizeColumn(4);
+            sheet.autoSizeColumn(5);
+            sheet.autoSizeColumn(6);
+            sheet.autoSizeColumn(7);
+            sheet.autoSizeColumn(8);
+
+
+            final String fileName = "GiangVien";
+
+
+            file = new File(fileName + ".xlsx");
+
+            FileOutputStream outputStream = new FileOutputStream(file);
+
+            workbook.write(outputStream);
+            outputStream.close();
+            workbook.close();
+
+
+        }catch (Exception e){
+
+        }
+        return file;
     }
     public static List<GiangVien> excelToTeacherList(InputStream is) {
         try {

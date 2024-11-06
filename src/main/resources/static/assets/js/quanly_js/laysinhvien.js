@@ -110,8 +110,8 @@ function addDatatoTable(data){
         <td>${data.tenKhoa}</td>
         <td>
             <div>
-                <button id="capNhatBtn" onclick="laydulieuSV('${mssv}')">sửa</button>
-                <button id="xoaBtn" onclick="xoaSV('${mssv}')">xóa</button>
+                <button id="capNhatBtn" onclick="laydulieuSV('${mssv}')">Sửa</button>
+                <button id="xoaBtn" onclick="xoaSV('${mssv}')">Xóa</button>
             </div>
         </td>
        `;

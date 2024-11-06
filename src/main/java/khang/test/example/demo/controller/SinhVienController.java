@@ -1,9 +1,13 @@
 package khang.test.example.demo.controller;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import khang.test.example.demo.Service.SinhVienExcelUtility;
 import khang.test.example.demo.Service.SinhVienService;
@@ -13,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 @RestController
@@ -45,6 +50,19 @@ public class SinhVienController {
                 .result(svList)
                 .message("Đã upload sinh viên mới lên hệ thống thành công")
                 .build();
+    }
+
+    @GetMapping("/export/sinhvien")
+    public void xuatFileExcel(HttpServletResponse response) throws IOException {
+        File file = SinhVienExcelUtility.xuatFileExcel();
+
+        if(file != null){
+            response.setContentType("application/octet-stream");
+            response.setContentLength((int) file.length());
+            response.addHeader("Content-Disposition","attachment; filename=" + file.getName());
+
+            FileCopyUtils.copy(new FileInputStream(file), response.getOutputStream());
+        }
     }
     @GetMapping("/sinhvien-list")
     public ResponseEntity<?> getStudents() {

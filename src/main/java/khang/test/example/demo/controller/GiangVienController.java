@@ -1,5 +1,6 @@
 package khang.test.example.demo.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import khang.test.example.demo.Service.GiangVienExcelUtility;
 import khang.test.example.demo.Service.GiangVienService;
@@ -11,9 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -48,6 +52,19 @@ public class GiangVienController {
                 .result(gvList)
                 .message("Đã upload giảng viên mới lên hệ thống thành công")
                 .build();
+    }
+
+    @GetMapping("/export/giangvien")
+    public void xuatFileExcel(HttpServletResponse response) throws IOException {
+        File file = GiangVienExcelUtility.xuatFileExcel();
+
+        if(file != null){
+            response.setContentType("application/octet-stream");
+            response.setContentLength((int) file.length());
+            response.addHeader("Content-Disposition","attachment; filename=" + file.getName());
+
+            FileCopyUtils.copy(new FileInputStream(file), response.getOutputStream());
+        }
     }
     @GetMapping("/giangVien-list")
     public ResponseEntity<?> laygiangVien() {
