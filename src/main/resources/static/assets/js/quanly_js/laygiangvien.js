@@ -120,3 +120,55 @@ function xoaGV(magv){
         }
         })
 }
+
+///print//
+
+document.getElementById('print-button').addEventListener('click', () => {
+    // Create a new window for printing
+    const printWindow = window.open('', '_blank');
+
+    // Get the table content
+    const table = document.querySelector('table').cloneNode(true);
+
+    // Remove the last column from the table
+    const rows = table.rows;
+    for (let i = 0; i < rows.length; i++) { rows[i].deleteCell(-1); }
+
+    // Create print-friendly styles
+    const printStyles = `
+        <style>
+            body { font-family: Arial, sans-serif; }
+            table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            @media print {
+                @page { margin: 1cm; }
+                .no-print { display: none; }
+            }
+        </style>
+    `;
+
+    // Set up the print window content
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Danh Sách Giảng Viên</title>
+            ${printStyles}
+        </head>
+        <body>
+            <h1>Danh Sách Giảng Viên</h1>
+            ${table.outerHTML}
+        </body>
+        </html>
+    `);
+
+    // Wait for content to load then print
+    printWindow.document.close();
+    printWindow.onload = function() {
+        printWindow.print();
+        printWindow.onafterprint = function() {
+            printWindow.close();
+        };
+    };
+});

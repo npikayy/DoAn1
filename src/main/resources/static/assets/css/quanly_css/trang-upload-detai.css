@@ -70,20 +70,32 @@ button[type="submit"] {
     flex-direction: column;
     align-items: center;
 }
-
+#backbtn{
+    background-color: #3dbdf8;
+    border: none;
+    padding: 10px;
+    border-radius: 2px;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+}
 /*animation*!*/
 .animation{
     width: 100%;
     background: var(--button-color);
-    top: 215px;
+    top: 239px;
 }
 div:nth-child(1):hover~.animation{
     width: 100%;
     background: var(--button-color);
-    top: 158px;
+    top: 183px;
 }
 div:nth-child(3):hover~.animation{
     width: 100%;
     background: var(--button-color);
-    top: 271px;
+    top: 295px;
+}
+div:nth-child(4):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 352px;
 }

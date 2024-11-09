@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface KhoaRepository extends JpaRepository<Khoa, String> {
     boolean existsByTenKhoa(String tenKhoa);
+
+    void deleteByTenKhoa(String tenKhoa);
 }

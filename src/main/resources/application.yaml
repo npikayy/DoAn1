@@ -12,6 +12,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+#  security:
+#    user:
+#      name: khang
+#      password: pass
 jwt:
   key-abc: "ADQbLUG7grHERg3yaK/Vho+512TQ1/IJ6axLXuYzOxG/bE5Jue1qEhpwkIZIE/Bz"
 

@@ -57,7 +57,10 @@ p{
     margin: 10px;
     display: flex;
 }
-
+#logout{
+    margin-left: 270px;
+    cursor: pointer;
+}
 .info{
     width: 50%;
     margin: 20px;
@@ -98,7 +101,7 @@ footer {
     background-color: #f9f9f9;
     min-width: 50%;
     left: 100%;
-    top: 250px;
+    top: 325px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }

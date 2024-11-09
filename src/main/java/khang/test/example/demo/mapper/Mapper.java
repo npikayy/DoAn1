@@ -1,4 +1,5 @@
 package khang.test.example.demo.mapper;
+import khang.test.example.demo.entity.Detai;
 import khang.test.example.demo.entity.GiangVien;
 import khang.test.example.demo.entity.SinhVien;
 import org.mapstruct.Mapping;
@@ -12,4 +13,6 @@ public interface Mapper {
     void capNhatSV(@MappingTarget SinhVien sinhVien, SinhVien newSinhVien);
 
     void capNhatGV(@MappingTarget GiangVien giangVien, GiangVien newGiangVien);
+
+    void capNhatDT(@MappingTarget Detai detai, Detai newDetai);
 }

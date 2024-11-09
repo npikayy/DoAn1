@@ -23,7 +23,6 @@ public class GiangVienService {
     GiangVienRepository gvRepo;
     @Autowired
     ThongBaoRepository tbaoRepo;
-
     @Autowired
     Mapper gvMapper;
     public List<GiangVien> save(MultipartFile file) throws IOException {

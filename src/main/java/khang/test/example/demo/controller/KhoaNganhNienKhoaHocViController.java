@@ -1,15 +1,13 @@
 package khang.test.example.demo.controller;
 
+import jakarta.transaction.Transactional;
 import khang.test.example.demo.Service.KhoaNganhNienKhoaHocViService;
-import khang.test.example.demo.entity.Khoa;
-import khang.test.example.demo.entity.chuyenNganh;
-import khang.test.example.demo.entity.hocVi;
-import khang.test.example.demo.entity.nienKhoa;
+import khang.test.example.demo.entity.*;
+import khang.test.example.demo.response.apiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -62,4 +60,56 @@ public class KhoaNganhNienKhoaHocViController {
         }
         return new ResponseEntity<>(HocVi, HttpStatus.OK);
     }
+    @PostMapping("/taoNKMoi")
+    public apiResponse<nienKhoa> taoNKmoi(@RequestBody nienKhoa nienKhoa){
+        return apiResponse.<nienKhoa>builder()
+                .Code(1000)
+                .result(service.TaoNienKhoamoi(nienKhoa))
+                .build();
+    }
+    @PostMapping("/taoNganhMoi")
+    public apiResponse<chuyenNganh> taoNganhmoi(@RequestBody chuyenNganh chuyenNganh){
+        return apiResponse.<chuyenNganh>builder()
+                .Code(1000)
+                .result(service.TaoNganhmoi(chuyenNganh))
+                .build();
+    }
+    @PostMapping("/taoKhoaMoi")
+    public apiResponse<Khoa> taoKhoamoi(@RequestBody Khoa khoa){
+        return apiResponse.<Khoa>builder()
+                .Code(1000)
+                .result(service.TaoKhoamoi(khoa))
+                .build();
+    }
+
+    @PostMapping("/taoHocViMoi")
+    public apiResponse<hocVi> taoHocVimoi(@RequestBody hocVi HocVi){
+        return apiResponse.<hocVi>builder()
+                .Code(1000)
+                .result(service.TaoHocVimoi(HocVi))
+                .build();
+    }
+
+    @Transactional
+    @DeleteMapping("/khoa/{tenKhoa}") public void xoaKhoa(@PathVariable String tenKhoa)
+    {
+        service.XoaKhoa(tenKhoa);
+    }
+    @Transactional
+    @DeleteMapping("/nganh/{chuyenNganh}") public void xoaNganh(@PathVariable String chuyenNganh)
+    {
+        service.XoaNganh(chuyenNganh);
+    }
+    @Transactional
+    @DeleteMapping("/nienkhoa/{nienKhoa}") public void xoaNienKhoa(@PathVariable Integer nienKhoa)
+    {
+        service.XoaNienKhoa(nienKhoa);
+    }
+    @Transactional
+    @DeleteMapping("/hocvi/{hocvi}") public void xoaHocvi(@PathVariable String hocvi)
+    {
+        service.XoaHocVi(hocvi);
+    }
+
+
 }

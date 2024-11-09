@@ -1,17 +1,22 @@
 .animation{
     width: 100%;
     background: var(--button-color);
-    top: 158px;
+    top: 183px;
 }
 div:nth-child(2):hover~.animation{
     width: 100%;
     background: var(--button-color);
-    top: 215px;
+    top: 239px;
 }
 div:nth-child(3):hover~.animation{
     width: 100%;
     background: var(--button-color);
-    top: 271px;
+    top: 295px;
+}
+div:nth-child(4):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 352px;
 }
 /*table*/
 table {

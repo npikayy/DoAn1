@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
 
@@ -29,7 +29,7 @@ public class AppInitConfig {
                         .username("admin1")
                         .password("admin1")
                         .TenNguoiDung("Nguyễn Phúc Khang")
-                        .LoaiTK("Quản lý")
+                        .Roles("ADMIN")
                         .build();
                 accountRepo.save(user);
                 log.warn("admin user has been created with default password: admin");

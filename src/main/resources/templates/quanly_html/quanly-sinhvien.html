@@ -97,10 +97,13 @@
                         <button onclick="timSVBangDieuKien(event)">Tìm kiếm</button>
                     </section>
                     <section class="themSV">
+                        <div id="print-button" class="add">
+                            <p>In bảng</p>
+                            <img th:src="@{/assets/images/printer.png}">
+                        </div>
                         <div id="themSinhvien" class="add" onclick="location.href='http://localhost:8080/quanly/upload/sinhvien'">
                             <p>Thêm Sinh Viên</p>
                             <img th:src="@{/assets/images/sinhvien.png}">
-
                         </div>
                         <div id="xuatFile" class="add" onclick="location.href='http://localhost:8080/export/sinhvien'">
                             <p>Xuất file excel</p>

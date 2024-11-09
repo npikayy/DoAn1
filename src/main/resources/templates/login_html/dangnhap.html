@@ -5,28 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
     <link rel="stylesheet" th:href="@{/assets/css/login_css/dangnhap.css}">
-    <link rel="icon" href="logo.png" type="image/x-icon">
 </head>
-<body>    
-    <div class="main-page">
-        <div class="img">
-<!--            <img src="logo.png" alt="logo_nho">     -->
-        </div>
-        <div class="log_in_page">
-            <label for="tendangnhap">Tên Đăng Nhập: </label>
-            <input type="text" class="input" id="tendangnhap">
-            <label for="matkhau">Mật Khẩu: </label>
-            <input type="password" class="input"id="matkhau">
-            <input type="checkbox" name="luulaitoi" id="luulaitoi">
-            <label for="luulaitoi">Lưu lại tôi?</label>    
-        </div>
-<!--        <div class="captcha-container">-->
-<!--            <input type="text" id="captcha" name="captcha" required>-->
-<!--            <img id="captcha-img" src="" alt="CAPTCHA" onclick="refreshCaptcha()">-->
-<!--        </div>-->
-        <button>Đăng nhập</button>
-        <a class="quen_mat_khau" href="quenmk.html">Quên mật khẩu?</a>     
-    </div> 
+<body>
+<div class="main-page">
+    <h2>Đăng Nhập</h2>
+    <br>
+    <form action="/login" method="post" class="log_in_page">
+        <label for="username">Tên người dùng:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Mật khẩu:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <div id="message"></div>
+        <br>
+        <button type="submit">Đăng Nhập</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() { const params = new URLSearchParams(window.location.search);
+            const messageDiv = document.getElementById("message");
+            if (params.has("logout")) { messageDiv.innerHTML = "Bạn đã đăng xuất thành công!"; }
+            if (params.has("error")) { messageDiv.innerHTML = "Tên người dùng hoặc mật khẩu không đúng!"; } });
+    </script>
+</div>
 </body>
-<script th:src="@{/assets/js/login.js}"></script>
+<!--<script th:src="@{/assets/js/login.js}"></script>-->
 </html>

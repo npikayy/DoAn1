@@ -20,5 +20,5 @@ public class Accounts<T> {
     String username;
     String password;
     @Column(columnDefinition = "nvarchar(255)")
-    String LoaiTK;
+    String Roles;
 }

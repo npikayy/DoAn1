@@ -1,17 +1,19 @@
 .animation{
     width: 100%;
     background: var(--button-color);
+    top: 295px;
+
+}
+div:nth-child(2):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
     top: 239px;
 }
 div:nth-child(1):hover~.animation{
     width: 100%;
     background: var(--button-color);
     top: 183px;
-}
-div:nth-child(3):hover~.animation{
-    width: 100%;
-    background: var(--button-color);
-    top: 295px;
+
 }
 div:nth-child(4):hover~.animation{
     width: 100%;
@@ -33,41 +35,21 @@ td, th {
 tr:nth-child(1) {
     background-color: #3dbdf8;
 }
-/*search section*/
+#xoaBtn{
+    background-color: #ff0000;
+    border: none;
+    padding: 10px;
+    border-radius: 2px;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+}
 input{
     padding: 5px;
+    width: 400px;
     margin-top: 40px;
     font-size: 16px ;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
-select{
-    /*display: block;*/
-    padding: 5px;
-    font-size: 16px ;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-.themDeTai{
-    display: flex;
-    margin-left: auto;
-    font-size: 10px;
-    width: 250px;
-    gap: 50px;
-}
-.themDeTai img{
-    width: 100%;
-}
-.themDeTai p{
-    font-size: 13px;
-}
-.add{
-    cursor: pointer;
-    margin-top: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    font-size: 12px;
 }
 button{
     background-color: #3dbdf8;
@@ -77,18 +59,6 @@ button{
     color: hsl(0, 0%, 100%);
     cursor: pointer;
 }
-.dieukienloc {
+.table-section{
     display: flex;
-}
-.search-section{
-    margin-top: 20px;
-}
-#capNhatBtn{
-    background-color: #4f4fba;
-}
-#xoaBtn{
-    background-color: #ff0000;
-}
-.hidden{
-    display: none;
 }

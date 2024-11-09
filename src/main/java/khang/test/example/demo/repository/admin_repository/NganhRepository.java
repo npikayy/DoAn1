@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NganhRepository extends JpaRepository<chuyenNganh, String> {
     boolean existsByChuyenNganh(String chuyenNganh);
+
+    void deleteByChuyenNganh(String chuyenNganh);
 }

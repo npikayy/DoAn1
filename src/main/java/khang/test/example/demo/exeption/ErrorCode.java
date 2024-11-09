@@ -9,15 +9,22 @@ public enum ErrorCode {
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_FIlE(1001, "Lỗi, vui lòng kiểm tra lại", HttpStatus.INTERNAL_SERVER_ERROR),
     Email_EXISTED(1002, "Email sinh viên đã tồn tại", HttpStatus.BAD_REQUEST),
+    nienKhoa_EXISTED(1002, "Niên khá đã tồn tại", HttpStatus.BAD_REQUEST),
+    Nganh_EXISTED(1002, "Chuyên ngành đã tồn tại", HttpStatus.BAD_REQUEST),
+    TenKhoa_EXISTED(1002, "Tên khoa đã tồn tại", HttpStatus.BAD_REQUEST),
+    Hocvi_EXISTED(1002, "Học vị đã tồn tại", HttpStatus.BAD_REQUEST),
     MSSV_EXISTED(1003, "Mã số sinh viên đã tồn tại", HttpStatus.BAD_REQUEST),
     Teacher_Email_EXISTED(1002, "Email giảng viên đã tồn tại", HttpStatus.BAD_REQUEST),
     MSGV_EXISTED(1003, "Mã số giảng viên đã tồn tại", HttpStatus.BAD_REQUEST),
     INVALID_Student_Email(1004, "Email phải có đuôi @student.edu.vn", HttpStatus.BAD_REQUEST),
     INVALID_Teacher_Email(1004, "Email phải có đuôi @teacher.edu.vn", HttpStatus.BAD_REQUEST),
     DUPLICATED_Email(1005, "Email bị trùng lặp", HttpStatus.BAD_REQUEST),
-    UNAUTHENTICATED(1006, "Unauthenticated", HttpStatus.UNAUTHORIZED),
-    UNAUTHORIZED(1007, "You do not have permission", HttpStatus.FORBIDDEN),
-    ;
+    Invalid_CreateDay(1006, "Ngày tạo đề tài không hợp lệ!", HttpStatus.BAD_REQUEST),
+    InvalidDay(1006, "Ngày bắt đầu/kết thúc đề tài không hợp lệ!", HttpStatus.BAD_REQUEST),
+    Invalid_EndDay(1007, "Ngày kết thúc đề tài không hợp lệ!", HttpStatus.BAD_REQUEST),
+    Invalid_Number(1007, "Số lượng sinh viên không được dưới 0!", HttpStatus.BAD_REQUEST),
+    UNAUTHENTICATED(1008, "Unauthenticated", HttpStatus.UNAUTHORIZED),
+    UNAUTHORIZED(1009, "You do not have permission", HttpStatus.FORBIDDEN);
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
         this.code = code;

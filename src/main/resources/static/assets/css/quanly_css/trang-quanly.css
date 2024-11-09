@@ -1,17 +1,22 @@
 /*///sidebar///*/
 .animation{
     width: 100%;
-    top: 271px;
+    top: 351px;
+
 }
 div:nth-child(2):hover~.animation{
     width: 100%;
-    top: 215px;
+    top: 239px;
 }
 div:nth-child(1):hover~.animation{
     width: 100%;
-    top: 158px;
+    top: 183px;
 }
-
+div:nth-child(3):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 295px;
+}
 .form-container{
     margin-left: 50px;
 }
@@ -43,7 +48,7 @@ button{
 .themSV{
     display: flex;
     margin-left: auto;
-    width: 10%;
+    width: 250px;
     gap: 50px;
 }
 .themSV p{
@@ -57,7 +62,7 @@ button{
     display: flex;
     margin-left: auto;
     font-size: 10px;
-    width: 10%;
+    width: 250px;
     gap: 50px;
 }
 .themGV img{

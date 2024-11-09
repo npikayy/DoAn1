@@ -5,16 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>quản lý</title>
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/admin.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/trang-qlydetai.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body onload="timDTBangDieuKien(event)">
     <section class="main_page">
         <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
         <section class="dashboard">
-            <h1>Quản Lý Đề Tài</h1>
-            <div class="excel-actions">
-                <button id="print-button" class="btn">In Danh Sách</button>
+            <div class="hidden" id="form-container">
+                <button onclick="hideUpdateInput()">Quay về</button>
+                <br>
+                <br>
+                <h2>Chỉnh Sửa Thông Tin Của Giảng Viên</h2>
+                <form id="updateDTForm" action="#" method="post">
+                    <div class="form-group">
+                        <label for="madetai">Mã đề tài:</label>
+                        <input type="text" id="madetai" name="madetai" disabled>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="tenDT">Tên đề tài:</label>
+                        <input type="text" id="tenDT" name="tenDT" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="maGV">Mã giảng viên:</label>
+                        <input type="text" id="maGV" name="maGV" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="SLuong">Số lượng sinh viên:</label>
+                        <input type="text" id="SLuong" name="SLuong" required>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="tenKhoa">Chọn khoa:</label>
+                        <select id="tenKhoa"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ngayTaoDT">Ngày tạo đề tài:</label>
+                        <input type="date" id="ngayTaoDT" name="ngayTaoDT" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ngayBatDau">Ngày bắt đầu đề tài:</label>
+                        <input type="date" id="ngayBatDau" name="ngayBatDau" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ngayKetThuc">Ngày kết thúc đề tài:</label>
+                        <input type="date" id="ngayKetThuc" name="ngayKetThuc" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="trangThai">Tình trang:</label>
+                        <select id="trangThai">
+                            <option value="Chưa hoàn thành" selected>Chưa hoàn thành</option>
+                            <option value="Đã hoàn thành">Đã hoàn thành</option>
+                        </select>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <button type="submit">Cập Nhật Thông Tin</button>
+                    </div>
+                </form>
+                <br>
+                <br>
+                <br>
+                <br>
             </div>
+            <h1>Quản Lý Đề Tài</h1>
             <div class="dieukienloc">
                 <br>
                 <section class="search-section">
@@ -25,28 +87,35 @@
                     <label for="tinhtrang">Chọn tình trạng:</label>
                     <select id="tinhtrang">
                         <option value="none" selected>không có</option>
-                        <option value="dangthuchien">Đang thực hiện</option>
-                        <option value="dahoanthanh">Đã hoàn thành</option>
+                        <option value="Chưa hoàn thành">Chưa hoàn thành</option>
+                        <option value="Đã hoàn thành">Đã hoàn thành</option>
                     </select>
                     <br>
                     <label for="search">Nhập mã giảng viên hoặc mã đề tài: </label>
                     <select id="magvOrmadetai">
-                        <option value="magv" selected>Mã giảng viên</option>
+                        <option value="maGV" selected>Mã giảng viên</option>
                         <option value="madetai">Mã đề tài</option>
                     </select>
                     <input type="text" id="search">
-                    <button onclick="timdetaiBangDieuKien(event)">Tìm kiếm</button>
+                    <button onclick="timDTBangDieuKien(event)">Tìm kiếm</button>
                 </section>
                 <section class="themDeTai">
+                    <div id="print-button" class="add">
+                        <p>In bảng</p>
+                        <img th:src="@{/assets/images/printer.png}">
+                    </div>
                     <div id="themDetai" class="add" onclick="location.href='http://localhost:8080/quanly/upload/detai'">
-                        <img th:src="@{/assets/images/folder-management.png}">
                         <p>Thêm đề tài</p>
+                        <img th:src="@{/assets/images/folder-management.png}">
+                    </div>
+                    <div id="xuatFile" class="add" onclick="location.href='http://localhost:8080/export/detai'">
+                        <p>Xuất file excel</p>
+                        <img th:src="@{/assets/images/xlsx.png}">
                     </div>
                 </section>
             </div>
             <table id="userList">
                 <tbody>
-                    <th>STT</th>
                     <th>Mã đề tài</th>
                     <th>Tên đề tài</th>
                     <th>Mã giảng viên</th>
@@ -54,15 +123,15 @@
                     <th>Tên khoa</th>
                     <th>Ngày tạo đề tài</th>
                     <th>Ngày bắt đầu đề tài</th>
-                    <th>Ngày bắt đầu đề tài</th>
+                    <th>Ngày kết thúc đề tài</th>
                     <th>Tình trạng</th>
-                    <th>File Đề Cương</th>
                 </tbody>
             </table>
             </div>
             </div>
         </section>
     </section>
-        <script src="/js/qldetai.js"></script>
+    <script th:src="@{/assets/js/quanly_js/laydetai.js}"></script>
+    <script th:src="@{/assets/js/quanly_js/showToast.js}"></script>
 </body>
 </html>

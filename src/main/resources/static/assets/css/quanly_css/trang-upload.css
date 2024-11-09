@@ -84,17 +84,23 @@ input[type="file"] {
 .animation{
     width: 100%;
     background: var(--button-color);
-    top: 271px;
+    top: 351px;
+
 }
 div:nth-child(1):hover~.animation{
     width: 100%;
     background: var(--button-color);
-    top: 158px;
+    top: 183px;
 }
 div:nth-child(2):hover~.animation{
     width: 100%;
     background: var(--button-color);
-    top: 215px;
+    top: 239px;
+}
+div:nth-child(3):hover~.animation{
+    width: 100%;
+    background: var(--button-color);
+    top: 295px;
 }
 /*create section*/
 #create-section input{
@@ -112,14 +118,7 @@ div:nth-child(2):hover~.animation{
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-/*#create-section button{*/
-/*    background-color: #3dbdf8;*/
-/*    border: none;*/
-/*    padding: 10px;*/
-/*    border-radius: 2px;*/
-/*    color: hsl(0, 0%, 100%);*/
-/*    cursor: pointer;*/
-/*}*/
+
 #create-section{
     margin-left: 50px;
 }
