@@ -223,19 +223,13 @@ public class SinhVienExcelUtility {
                     cellIdx++;
                 }
                 if (!nienKhoaRepo.existsByNienKhoa(sinhvien.getNienKhoa())) {
-                    nienKhoa nienKhoa = new nienKhoa();
-                    nienKhoa.setNienKhoa(sinhvien.getNienKhoa());
-                    nienKhoaRepo.save(nienKhoa);
+                    sinhvien.setNienKhoa(Integer.valueOf(""));
                 }
                 if (!khoaRepo.existsByTenKhoa(sinhvien.getTenKhoa())) {
-                    Khoa khoa = new Khoa();
-                    khoa.setTenKhoa(sinhvien.getTenKhoa());
-                    khoaRepo.save(khoa);
+                    sinhvien.setTenKhoa("");
                 }
                 if (!nganhRepo.existsByChuyenNganh(sinhvien.getChuyenNganh())) {
-                    chuyenNganh chuyenNganh = new chuyenNganh();
-                    chuyenNganh.setChuyenNganh(sinhvien.getChuyenNganh());
-                    nganhRepo.save(chuyenNganh);
+                    sinhvien.setChuyenNganh("");
                 }
                 if (!svRepo.existsByMSSV(sinhvien.getMSSV())){
                     if (!sinhvien.getEmail().endsWith(duoiEmail))

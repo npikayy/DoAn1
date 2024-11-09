@@ -41,3 +41,15 @@ tr:nth-child(1) {
     color: hsl(0, 0%, 100%);
     cursor: pointer;
 }
+.hidden{
+    display: none;
+}
+
+button{
+    background-color: #3dbdf8;
+    border: none;
+    padding: 10px;
+    border-radius: 2px;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+}

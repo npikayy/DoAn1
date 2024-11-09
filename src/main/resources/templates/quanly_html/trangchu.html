@@ -12,11 +12,22 @@
     <section class="main_page">
         <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
             <section class="dashboard">
-                <h1>Thông Báo</h1>
-                <h2>Những thông báo mới nhất trên hệ thống sẽ được hiển thị ở đây</h2>
-                <table id="thongBaoList"></table>
+                <button onclick="HienThongBao()" id="hientbaoBtn">Xem thông báo</button>
+                <section class="hidden" id="thongbao-section">
+                    <button onclick="AnThongBao()">Xem biểu đồ</button>
+                    <h1>Thông Báo</h1>
+                    <h2>Những thông báo mới nhất trên hệ thống sẽ được hiển thị ở đây</h2>
+                    <table id="thongBaoList"></table>
+                </section>
+                <section id="bieudo-section" >
+                    <h2>Biểu đồ thể hiện số đề tài hoàn thành và chưa hoàn thành của từng khoa</h2>
+                    <canvas id="myChart" width="400" height="200"></canvas>
+                    <canvas id="myChart2" width="400" height="200"></canvas>
+                    <canvas id="myChart3" width="400" height="200"></canvas>
+                </section>
             </section>
     </section>
     <script th:src="@{/assets/js/quanly_js/laythongbao.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>

@@ -208,19 +208,13 @@ public class GiangVienExcelUtility {
                     cellIdx++;
                 }
                 if (!khoaRepo.existsByTenKhoa(giangvien.getTenKhoa())){
-                    Khoa khoa = new Khoa();
-                    khoa.setTenKhoa(giangvien.getTenKhoa());
-                    khoaRepo.save(khoa);
+                    giangvien.setTenKhoa("");
                 }
                 if (!nganhRepo.existsByChuyenNganh(giangvien.getChuyenNganh())){
-                    chuyenNganh chuyenNganh = new chuyenNganh();
-                    chuyenNganh.setChuyenNganh(giangvien.getChuyenNganh());
-                    nganhRepo.save(chuyenNganh);
+                    giangvien.setChuyenNganh("");
                 }
                 if (!hocviRepo.existsByHocVi(giangvien.getHocvi())){
-                    hocVi hocvi = new hocVi();
-                    hocvi.setHocVi(giangvien.getHocvi());
-                    hocviRepo.save(hocvi);
+                    giangvien.setHocvi("");
                 }
                 if (!gvRepo.existsByMaGV(giangvien.getMaGV())) {
                     if (!giangvien.getEmail().endsWith(duoiEmail))

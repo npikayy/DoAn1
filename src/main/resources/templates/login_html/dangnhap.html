@@ -6,29 +6,35 @@
     <title>Đăng nhập</title>
     <link rel="stylesheet" th:href="@{/assets/css/login_css/dangnhap.css}">
 </head>
-<body>
-<div class="main-page">
-    <h2>Đăng Nhập</h2>
+<body >
+<form action="/login" method="post" class="main-page" >
+    <p>ĐĂNG NHẬP</p>
+    <h3>Trang Quản Lý</h3>
     <br>
-    <form action="/login" method="post" class="log_in_page">
+    <div class="form-group">
         <label for="username">Tên người dùng:</label>
         <input type="text" id="username" name="username" required>
-        <br>
+    </div>
+    <br>
+    <div class="form-group">
         <label for="password">Mật khẩu:</label>
         <input type="password" id="password" name="password" required>
-        <br>
-        <div id="message"></div>
-        <br>
-        <button type="submit">Đăng Nhập</button>
-    </form>
-
+    </div>
+    <br>
+    <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY" data-callback="enableLoginButton"></div>
+    <br>
+    <div id="message"></div>
+    <br>
+    <button type="submit">Đăng Nhập</button>
+<!--    <img th:src="@{/assets/images/blue.jpg}" alt="">-->
+</form>
+<img th:src="@{/assets/images/blue.jpg}" alt="" id="body-img">
     <script>
         document.addEventListener("DOMContentLoaded", function() { const params = new URLSearchParams(window.location.search);
             const messageDiv = document.getElementById("message");
             if (params.has("logout")) { messageDiv.innerHTML = "Bạn đã đăng xuất thành công!"; }
             if (params.has("error")) { messageDiv.innerHTML = "Tên người dùng hoặc mật khẩu không đúng!"; } });
     </script>
-</div>
+
 </body>
-<!--<script th:src="@{/assets/js/login.js}"></script>-->
 </html>
