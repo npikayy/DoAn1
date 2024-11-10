@@ -91,7 +91,9 @@ function addTabletitle(){
        <th>Ngày bắt đầu đề tài</th>
        <th>Ngày kết thúc đề tài</th>
        <th>Tình trạng</th>
-       <th></th>
+       <th>
+       <button id="xoaBtn" onclick="xoaAllDT()">Xóa tất cả</button>
+        </th>
    `
 
 }
@@ -150,7 +152,15 @@ function xoaDT(madetai){
         }
         })
 }
-
+function xoaAllDT(){
+    fetch(`http://localhost:8080/xoadetai/`,{method: 'DELETE'})
+        .then(response => { if (response.ok)
+        {
+            showToast('Xóa tất cả đề tài thành công', 'success');
+            timDTBangDieuKien(new Event('fetch'));
+        }
+        })
+}
 
 
 function updateDT(event) {

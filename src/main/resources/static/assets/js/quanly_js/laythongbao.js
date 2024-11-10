@@ -6,7 +6,7 @@ async function layThongbao(){
     <th>Nội dung thông báo</th>
     <th>Ngày thực hiện</th>
     <th>Người thực hiện</th>
-    <th></th>
+    <th><button id="xoaBtn" onclick="xoaALLTBao()">Xóa tất cả</button></th>
         `
     const responseAPI = await fetch('http://localhost:8080/thongbao-list');
     const { data } = await responseAPI.json();
@@ -32,7 +32,14 @@ function xoaTBao(idTBao) {
             }
         })
 }
-
+function xoaALLTBao(){
+    fetch(`http://localhost:8080/xoathongbao/`,{method: 'DELETE'})
+        .then(response => { if (response.ok)
+        {
+            layThongbao();
+        }
+        })
+}
 function AnThongBao(){
     let form = document.getElementById('thongbao-section')
     let btn = document.getElementById('hientbaoBtn')
@@ -69,16 +76,11 @@ async function FetchAndcreateChart() {
             counts[d.tenKhoa].chuahoanthanh += 1;
         }
     });
-    const labels = Object.keys(counts);
-    // const values = Object.values(counts);
-    const hoanthanhValues = labels.map(label => counts[label].hoanthanh);
-    console.log(hoanthanhValues)
-    const chuahoanthanhValues = labels.map(label => counts[label].chuahoanthanh);
-    console.log(chuahoanthanhValues)
-    const ctx = document.getElementById('myChart').getContext('2d');
 
-    // console.log(labels)
-    // console.log(values)
+    const labels = Object.keys(counts);
+    const hoanthanhValues = labels.map(label => counts[label].hoanthanh);
+    const chuahoanthanhValues = labels.map(label => counts[label].chuahoanthanh);
+    const ctx = document.getElementById('myChart').getContext('2d');
 
     const myChart = new Chart(ctx, { type: 'bar',
         data: {

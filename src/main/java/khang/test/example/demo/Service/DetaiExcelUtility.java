@@ -1,13 +1,13 @@
 package khang.test.example.demo.Service;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.persistence.Column;
 import khang.test.example.demo.entity.Detai;
-import khang.test.example.demo.entity.GiangVien;
+import khang.test.example.demo.entity.Khoa;
 import khang.test.example.demo.entity.ThongBao;
 import khang.test.example.demo.exeption.AppException;
 import khang.test.example.demo.exeption.ErrorCode;
 import khang.test.example.demo.repository.admin_repository.DeTaiRepository;
+import khang.test.example.demo.repository.admin_repository.KhoaRepository;
 import khang.test.example.demo.repository.admin_repository.ThongBaoRepository;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -20,39 +20,46 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 @Component
 public class DetaiExcelUtility {
 
     private static DeTaiRepository dtRepo;
     private static ThongBaoRepository tbaoRepo;
 
+    private static KhoaRepository khoaRepo;
+
     @Autowired
     private DeTaiRepository dtRepo1;
     @Autowired
     private ThongBaoRepository tbaoRepo1;
+    @Autowired
+    private KhoaRepository khoaRepo1;
 
     @PostConstruct
-    private void initStaticRepo(){
+    private void initStaticRepo() {
         dtRepo = this.dtRepo1;
         tbaoRepo = this.tbaoRepo1;
+        khoaRepo = this.khoaRepo1;
     }
 
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-//    static String SHEET = "detai";
+
+    //    static String SHEET = "detai";
     public static boolean hasExcelFormat(MultipartFile file) {
         if (!TYPE.equals(file.getContentType())) {
             return false;
         }
         return true;
     }
-    public static File xuatFileExcel(){
+
+    public static File xuatFileExcel() {
         File file = null;
-        try{
+        try {
             List<Detai> DetaiList = dtRepo.findAll();
 
 
@@ -94,7 +101,7 @@ public class DetaiExcelUtility {
             header9.setCellValue("tinh trang");
             int rowNumber = row.getRowNum();
 
-            for(Detai detai : DetaiList){
+            for (Detai detai : DetaiList) {
                 row = sheet.createRow(rowNumber++);
 
                 Cell std1 = row.createCell(0);
@@ -151,11 +158,12 @@ public class DetaiExcelUtility {
             workbook.close();
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return file;
     }
+
     public static List<Detai> excelToDetaiList(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);
@@ -209,15 +217,22 @@ public class DetaiExcelUtility {
                     }
                     cellIdx++;
                 }
-                if (!dtRepo.existsByMadetai(detai.getMadetai()))
-                {
-                    if (detai.getNgayTaoDetai().isAfter(detai.getNgayBatdau())||detai.getNgayTaoDetai().isAfter(detai.getNgayKetthuc())){
+                if (!dtRepo.existsByMadetai(detai.getMadetai())) {
+                    if (!dtRepo.existsByTenKhoa(detai.getTenKhoa())) {
+                        Khoa khoa = new Khoa();
+                        khoa.setTenKhoa(detai.getTenKhoa());
+                        khoaRepo.save(khoa);
+                    }
+                    if (detai.getNgayTaoDetai().isAfter(detai.getNgayBatdau()) || detai.getNgayTaoDetai().isAfter(detai.getNgayKetthuc())) {
                         throw new AppException(ErrorCode.Invalid_CreateDay);
                     }
-                    if (detai.getNgayBatdau().isAfter(detai.getNgayKetthuc())){
+                    if (detai.getNgayBatdau().isAfter(detai.getNgayKetthuc())) {
                         throw new AppException(ErrorCode.InvalidDay);
                     }
-                    if (detai.getSoLuongThanhVien()<=0){
+                    if ("Chưa hoàn thành".equals(detai.getTinhtrang())) {
+                        detai.setNgayKetthuc(null);
+                    }
+                    if (detai.getSoLuongThanhVien() <= 0) {
                         throw new AppException(ErrorCode.Invalid_Number);
                     }
                     SluongDT++;
@@ -226,9 +241,9 @@ public class DetaiExcelUtility {
             }
             workbook.close();
             ThongBao thongBao = ThongBao.builder()
-                    .noiDungTbao("Người dùng đã upload thêm "+SluongDT+" đề tài ")
+                    .noiDungTbao("Người dùng đã upload thêm " + SluongDT + " đề tài ")
                     .ngayThucHien(LocalDateTime.now())
-                    .nguoiThucHien("Khang")
+                    .nguoiThucHien("ADMIN")
                     .build();
             tbaoRepo.save(thongBao);
             workbook.close();

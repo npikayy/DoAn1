@@ -83,7 +83,9 @@ function addTabletitle(){
        <th>Chuyên ngành</th>
        <th>Khoa</th>
        <th>Kinh nghiệm giảng dạy</th>
-       <th></th>
+       <th>
+       <button id="xoaBtn" onclick="xoaALLGV()">Xóa tất cả</button>
+        </th>
         `
 }
 function addDatatoTable(data){
@@ -120,7 +122,15 @@ function xoaGV(magv){
         }
         })
 }
-
+function xoaALLGV(){
+    fetch(`http://localhost:8080/xoagiangvien/`,{method: 'DELETE'})
+        .then(response => { if (response.ok)
+        {
+            showToast('Xóa tất cả giảng viên thành công', 'success');
+            timGVBangDieuKien(new Event('fetch'));
+        }
+        })
+}
 ///print//
 
 document.getElementById('print-button').addEventListener('click', () => {

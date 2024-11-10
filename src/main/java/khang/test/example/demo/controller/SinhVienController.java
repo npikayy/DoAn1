@@ -1,11 +1,4 @@
 package khang.test.example.demo.controller;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
@@ -20,6 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @Slf4j
 public class SinhVienController {
@@ -27,18 +28,25 @@ public class SinhVienController {
     SinhVienService svService;
 
     @PutMapping("sinhvien/{mssv}")
-    public apiResponse<SinhVien> updateStudent(@PathVariable String mssv, @RequestBody SinhVien newSinhVien)
-    {
+    public apiResponse<SinhVien> updateStudent(@PathVariable String mssv, @RequestBody SinhVien newSinhVien) {
         return apiResponse.<SinhVien>builder()
                 .Code(1000)
                 .result(svService.capNhatSV(mssv, newSinhVien))
                 .build();
     }
+
     @Transactional
-    @DeleteMapping("/sinhvien/{mssv}") public void xoaSinhVien(@PathVariable String mssv)
-    {
+    @DeleteMapping("/sinhvien/{mssv}")
+    public void xoaSinhVien(@PathVariable String mssv) {
         svService.xoaSinhVien(mssv);
     }
+
+    @Transactional
+    @DeleteMapping("/xoasinhvien/")
+    public void xoaAllSinhVien() {
+        svService.xoaAllSinhVien();
+    }
+
     @PostMapping("/student/upload")
     public apiResponse<List<SinhVien>> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         List<SinhVien> svList = null;
@@ -56,14 +64,15 @@ public class SinhVienController {
     public void xuatFileExcel(HttpServletResponse response) throws IOException {
         File file = SinhVienExcelUtility.xuatFileExcel();
 
-        if(file != null){
+        if (file != null) {
             response.setContentType("application/octet-stream");
             response.setContentLength((int) file.length());
-            response.addHeader("Content-Disposition","attachment; filename=" + file.getName());
+            response.addHeader("Content-Disposition", "attachment; filename=" + file.getName());
 
             FileCopyUtils.copy(new FileInputStream(file), response.getOutputStream());
         }
     }
+
     @GetMapping("/sinhvien-list")
     public ResponseEntity<?> getStudents() {
         Map<String, Object> respStu = new LinkedHashMap<String, Object>();
@@ -81,19 +90,21 @@ public class SinhVienController {
     }
 
     @PostMapping("/taoSVMoi")
-    public apiResponse<SinhVien> taoSVmoi(@RequestBody SinhVien sinhVien){
+    public apiResponse<SinhVien> taoSVmoi(@RequestBody SinhVien sinhVien) {
         return apiResponse.<SinhVien>builder()
                 .Code(1000)
                 .result(svService.TaoSVmoi(sinhVien))
                 .build();
     }
+
     @GetMapping("/quanly-sinhvien/search")
     public List<SinhVien> searchStudents(@RequestParam(required = false) String chuyenNganh,
                                          @RequestParam(required = false) String tenKhoa,
                                          @RequestParam(required = false) Integer nienKhoa,
                                          @RequestParam(required = false) String tenSV,
                                          @RequestParam(required = false) String mssv
-                                         )
-    { return svService.timSinhVien(chuyenNganh, tenKhoa, nienKhoa, tenSV, mssv); }
+    ) {
+        return svService.timSinhVien(chuyenNganh, tenKhoa, nienKhoa, tenSV, mssv);
+    }
 
 }

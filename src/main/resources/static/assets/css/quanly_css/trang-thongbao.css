@@ -1,22 +1,25 @@
 .animation{
-    width: 100%;
+    width: 90%;
     background: var(--button-color);
-    top: 183px;
+    top: 8px;
 }
 div:nth-child(2):hover~.animation{
-    width: 100%;
+    width: 90%;
     background: var(--button-color);
-    top: 239px;
+    top: 67px;
+    /*top: 239px;*/
 }
 div:nth-child(3):hover~.animation{
-    width: 100%;
+    width: 90%;
     background: var(--button-color);
-    top: 295px;
+    top: 128px;
+    /*top: 295px;*/
 }
 div:nth-child(4):hover~.animation{
-    width: 100%;
+    width: 90%;
     background: var(--button-color);
-    top: 352px;
+    top: 189px;
+    /*top: 352px;*/
 }
 /*table*/
 table {

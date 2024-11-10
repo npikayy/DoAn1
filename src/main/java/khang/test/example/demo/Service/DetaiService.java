@@ -1,7 +1,6 @@
 package khang.test.example.demo.Service;
 
 import khang.test.example.demo.entity.Detai;
-import khang.test.example.demo.entity.GiangVien;
 import khang.test.example.demo.entity.ThongBao;
 import khang.test.example.demo.exeption.AppException;
 import khang.test.example.demo.exeption.ErrorCode;
@@ -29,8 +28,10 @@ public class DetaiService {
         return detaiRepo.findAll();
     }
 
-    public List<Detai> timDeTai(String tenKhoa, String tinhTrang, String maGV, String madetai)
-    { return detaiRepo.findByDieukien(tenKhoa, tinhTrang, maGV, madetai);}
+    public List<Detai> timDeTai(String tenKhoa, String tinhTrang, String maGV, String madetai) {
+        return detaiRepo.findByDieukien(tenKhoa, tinhTrang, maGV, madetai);
+    }
+
     public void save(MultipartFile file) {
         try {
             List<Detai> danhSachDetai = DetaiExcelUtility.excelToDetaiList(file.getInputStream());
@@ -42,25 +43,52 @@ public class DetaiService {
 
     public Detai capNhatDT(String madetai, Detai newDetai) {
         Detai detai = detaiRepo.findByMadetai(madetai);
-        if (newDetai.getNgayTaoDetai().isAfter(newDetai.getNgayBatdau())||newDetai.getNgayTaoDetai().isAfter(newDetai.getNgayKetthuc())){
-            throw new AppException(ErrorCode.Invalid_CreateDay);
+        if (newDetai.getNgayKetthuc() == null) {
+            if (newDetai.getNgayTaoDetai().isAfter(newDetai.getNgayBatdau())) {
+                throw new AppException(ErrorCode.Invalid_CreateDay);
+            }
+            if (newDetai.getSoLuongThanhVien() <= 0) {
+                throw new AppException(ErrorCode.Invalid_Number);
+            }
+            dtMapper.capNhatDT2(detai, newDetai);
+        } else {
+            if (newDetai.getNgayTaoDetai().isAfter(newDetai.getNgayBatdau()) || newDetai.getNgayTaoDetai().isAfter(newDetai.getNgayKetthuc())) {
+                throw new AppException(ErrorCode.Invalid_CreateDay);
+            }
+            if (newDetai.getNgayBatdau().isAfter(newDetai.getNgayKetthuc())) {
+                throw new AppException(ErrorCode.InvalidDay);
+            }
+            if (newDetai.getSoLuongThanhVien() <= 0) {
+                throw new AppException(ErrorCode.Invalid_Number);
+            }
+            dtMapper.capNhatDT(detai, newDetai);
         }
-        if (newDetai.getNgayBatdau().isAfter(newDetai.getNgayKetthuc())){
-            throw new AppException(ErrorCode.InvalidDay);
-        }
-        if (newDetai.getSoLuongThanhVien()<=0){
-            throw new AppException(ErrorCode.Invalid_Number);
-        }
-        dtMapper.capNhatDT(detai, newDetai);
         ThongBao thongBao = ThongBao.builder()
-                .noiDungTbao("Người dùng đã cập nhật thông tin của đề tài có mã đề tài là "+ madetai )
+                .noiDungTbao("Người dùng đã cập nhật thông tin của đề tài có mã là " + madetai)
                 .ngayThucHien(LocalDateTime.now())
-                .nguoiThucHien("Khang")
+                .nguoiThucHien("ADMIN")
                 .build();
         tbaoRepo.save(thongBao);
         return detaiRepo.save(detai);
     }
+
     public void xoaDeTai(String madetai) {
+        ThongBao thongBao = ThongBao.builder()
+                .noiDungTbao("Người dùng đã xóa đề tài có mã là "+ madetai)
+                .ngayThucHien(LocalDateTime.now())
+                .nguoiThucHien("ADMIN")
+                .build();
+        tbaoRepo.save(thongBao);
         detaiRepo.deleteByMadetai(madetai);
+    }
+
+    public void XoaTatcaDetai() {
+        ThongBao thongBao = ThongBao.builder()
+                .noiDungTbao("Người dùng đã xóa tất cả đề tài")
+                .ngayThucHien(LocalDateTime.now())
+                .nguoiThucHien("ADMIN")
+                .build();
+        tbaoRepo.save(thongBao);
+        detaiRepo.deleteAll();
     }
 }

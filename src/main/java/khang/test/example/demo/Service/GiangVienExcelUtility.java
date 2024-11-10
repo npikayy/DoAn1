@@ -16,12 +16,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 @Component
 public class GiangVienExcelUtility {
     private static GiangVienRepository gvRepo;
@@ -42,14 +41,16 @@ public class GiangVienExcelUtility {
     private ThongBaoRepository tbaoRepo1;
 
     @PostConstruct
-    private void initStaticRepo(){
+    private void initStaticRepo() {
         gvRepo = this.gvRepo1;
         khoaRepo = this.khoaRepo1;
         nganhRepo = this.nganhRepo1;
         hocviRepo = this.hocviRepo1;
         tbaoRepo = this.tbaoRepo1;
     }
+
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
     public static boolean hasExcelFormat(MultipartFile file) {
         if (!TYPE.equals(file.getContentType())) {
             return false;
@@ -57,9 +58,9 @@ public class GiangVienExcelUtility {
         return true;
     }
 
-    public static File xuatFileExcel(){
+    public static File xuatFileExcel() {
         File file = null;
-        try{
+        try {
             List<GiangVien> giangVienList = gvRepo.findAll();
 
 
@@ -81,7 +82,7 @@ public class GiangVienExcelUtility {
 
             Cell ngaySinh = row.createCell(2);
             ngaySinh.setCellValue("ngay sinh");
-            
+
             Cell email = row.createCell(3);
             email.setCellValue("email");
 
@@ -99,7 +100,7 @@ public class GiangVienExcelUtility {
 
             int rowNumber = row.getRowNum();
 
-            for(GiangVien giangVien : giangVienList){
+            for (GiangVien giangVien : giangVienList) {
                 row = sheet.createRow(rowNumber++);
 
                 Cell stdmagv = row.createCell(0);
@@ -151,11 +152,12 @@ public class GiangVienExcelUtility {
             workbook.close();
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return file;
     }
+
     public static List<GiangVien> excelToTeacherList(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);
@@ -207,14 +209,20 @@ public class GiangVienExcelUtility {
                     }
                     cellIdx++;
                 }
-                if (!khoaRepo.existsByTenKhoa(giangvien.getTenKhoa())){
-                    giangvien.setTenKhoa("");
+                if (!khoaRepo.existsByTenKhoa(giangvien.getTenKhoa())) {
+                    Khoa khoa = new Khoa();
+                    khoa.setTenKhoa(giangvien.getTenKhoa());
+                    khoaRepo.save(khoa);
                 }
-                if (!nganhRepo.existsByChuyenNganh(giangvien.getChuyenNganh())){
-                    giangvien.setChuyenNganh("");
+                if (!nganhRepo.existsByChuyenNganh(giangvien.getChuyenNganh())) {
+                    chuyenNganh nganh = new chuyenNganh();
+                    nganh.setChuyenNganh(giangvien.getChuyenNganh());
+                    nganhRepo.save(nganh);
                 }
-                if (!hocviRepo.existsByHocVi(giangvien.getHocvi())){
-                    giangvien.setHocvi("");
+                if (!hocviRepo.existsByHocVi(giangvien.getHocvi())) {
+                    hocVi hocvi = new hocVi();
+                    hocvi.setHocVi(giangvien.getHocvi());
+                    hocviRepo.save(hocvi);
                 }
                 if (!gvRepo.existsByMaGV(giangvien.getMaGV())) {
                     if (!giangvien.getEmail().endsWith(duoiEmail))
@@ -228,9 +236,9 @@ public class GiangVienExcelUtility {
             }
             workbook.close();
             ThongBao thongBao = ThongBao.builder()
-                    .noiDungTbao("Người dùng đã thêm " + SluongGV +" giảng viên mới bằng file excel ")
+                    .noiDungTbao("Người dùng đã thêm " + SluongGV + " giảng viên mới bằng file excel ")
                     .ngayThucHien(LocalDateTime.now())
-                    .nguoiThucHien("Khang")
+                    .nguoiThucHien("ADMIN")
                     .build();
             tbaoRepo.save(thongBao);
             return gvList;

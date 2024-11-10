@@ -80,22 +80,22 @@ button[type="submit"] {
 }
 /*animation*!*/
 .animation{
-    width: 100%;
+    width: 90%;
     background: var(--button-color);
-    top: 239px;
+    top: 67px;
 }
 div:nth-child(1):hover~.animation{
-    width: 100%;
+    width: 90%;
     background: var(--button-color);
-    top: 183px;
+    top: 7px;
 }
 div:nth-child(3):hover~.animation{
-    width: 100%;
+    width: 90%;
     background: var(--button-color);
-    top: 295px;
+    top: 128px;
 }
 div:nth-child(4):hover~.animation{
-    width: 100%;
+    width: 90%;
     background: var(--button-color);
-    top: 352px;
+    top: 189px;
 }

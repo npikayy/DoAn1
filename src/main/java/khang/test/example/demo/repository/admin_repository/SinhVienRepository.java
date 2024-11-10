@@ -10,11 +10,13 @@ import java.util.List;
 @Repository
 public interface SinhVienRepository extends JpaRepository<SinhVien, String> {
     boolean existsByMSSV(String mssv);
+
     boolean existsByEmail(String email);
 
     void deleteByMSSV(String mssv);
 
     SinhVien findByMSSV(String mssv);
+
     @Query("SELECT s FROM SinhVien s " +
             "WHERE (:chuyenNganh IS NULL OR s.chuyenNganh = :chuyenNganh) " +
             "AND (:tenKhoa IS NULL OR s.TenKhoa = :tenKhoa) " +

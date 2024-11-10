@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Admin</title>
+    <title>Trang quản lý</title>
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/trang-thongbao.css}">
     <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/admin.css}">
@@ -15,15 +15,18 @@
                 <button onclick="HienThongBao()" id="hientbaoBtn">Xem thông báo</button>
                 <section class="hidden" id="thongbao-section">
                     <button onclick="AnThongBao()">Xem biểu đồ</button>
-                    <h1>Thông Báo</h1>
-                    <h2>Những thông báo mới nhất trên hệ thống sẽ được hiển thị ở đây</h2>
+                    <br>
+                    <br>
+                    <h2>Những thông báo mới nhất trên hệ thống sẽ được hiển thị ở đây <img th:src="@{/assets/images/notification.png}" width="30px"></h2>
+                    <br>
                     <table id="thongBaoList"></table>
                 </section>
                 <section id="bieudo-section" >
+                    <br>
                     <h2>Biểu đồ thể hiện số đề tài hoàn thành và chưa hoàn thành của từng khoa</h2>
+                    <br>
+                    <br>
                     <canvas id="myChart" width="400" height="200"></canvas>
-                    <canvas id="myChart2" width="400" height="200"></canvas>
-                    <canvas id="myChart3" width="400" height="200"></canvas>
                 </section>
             </section>
     </section>

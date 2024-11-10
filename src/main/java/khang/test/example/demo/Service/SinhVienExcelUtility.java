@@ -1,15 +1,5 @@
 package khang.test.example.demo.Service;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.io.FileOutputStream;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+
 import jakarta.annotation.PostConstruct;
 import khang.test.example.demo.entity.*;
 import khang.test.example.demo.exeption.AppException;
@@ -21,6 +11,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @Component
 public class SinhVienExcelUtility {
@@ -41,9 +40,9 @@ public class SinhVienExcelUtility {
     @Autowired
     private ThongBaoRepository tbaoRepo1;
 
-    public static File xuatFileExcel(){
+    public static File xuatFileExcel() {
         File file = null;
-        try{
+        try {
             List<SinhVien> sinhVienList = svRepo.findAll();
 
 
@@ -86,7 +85,7 @@ public class SinhVienExcelUtility {
 
             int rowNumber = row.getRowNum();
 
-            for(SinhVien sinhVien : sinhVienList){
+            for (SinhVien sinhVien : sinhVienList) {
                 row = sheet.createRow(rowNumber++);
 
                 Cell stdMssv = row.createCell(0);
@@ -141,16 +140,17 @@ public class SinhVienExcelUtility {
             workbook.close();
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return file;
     }
-    public SinhVienExcelUtility(){
+
+    public SinhVienExcelUtility() {
     }
 
     @PostConstruct
-    private void initStaticRepo(){
+    private void initStaticRepo() {
         svRepo = this.svRepo1;
         nienKhoaRepo = this.nienKhoaRepo1;
         khoaRepo = this.khoaRepo1;
@@ -160,12 +160,14 @@ public class SinhVienExcelUtility {
 
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String SHEET = "student";
+
     public static boolean hasExcelFormat(MultipartFile file) {
         if (!TYPE.equals(file.getContentType())) {
             return false;
         }
         return true;
     }
+
     public static List<SinhVien> excelToStuList(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);
@@ -223,15 +225,21 @@ public class SinhVienExcelUtility {
                     cellIdx++;
                 }
                 if (!nienKhoaRepo.existsByNienKhoa(sinhvien.getNienKhoa())) {
-                    sinhvien.setNienKhoa(Integer.valueOf(""));
+                    nienKhoa nienkhoa = new nienKhoa();
+                    nienkhoa.setNienKhoa(sinhvien.getNienKhoa());
+                    nienKhoaRepo.save(nienkhoa);
                 }
                 if (!khoaRepo.existsByTenKhoa(sinhvien.getTenKhoa())) {
-                    sinhvien.setTenKhoa("");
+                    Khoa khoa = new Khoa();
+                    khoa.setTenKhoa(sinhvien.getTenKhoa());
+                    khoaRepo.save(khoa);
                 }
                 if (!nganhRepo.existsByChuyenNganh(sinhvien.getChuyenNganh())) {
-                    sinhvien.setChuyenNganh("");
+                    chuyenNganh nganh = new chuyenNganh();
+                    nganh.setChuyenNganh(sinhvien.getChuyenNganh());
+                    nganhRepo.save(nganh);
                 }
-                if (!svRepo.existsByMSSV(sinhvien.getMSSV())){
+                if (!svRepo.existsByMSSV(sinhvien.getMSSV())) {
                     if (!sinhvien.getEmail().endsWith(duoiEmail))
                         throw new AppException(ErrorCode.INVALID_Student_Email);
                     if (svRepo.existsByEmail(sinhvien.getEmail()))
@@ -245,7 +253,7 @@ public class SinhVienExcelUtility {
             ThongBao thongBao = ThongBao.builder()
                     .noiDungTbao("Người dùng đã thêm " + SluongSV + " sinh viên mới bằng file excel")
                     .ngayThucHien(LocalDateTime.now())
-                    .nguoiThucHien("Khang")
+                    .nguoiThucHien("ADMIN")
                     .build();
             tbaoRepo.save(thongBao);
             return stuList;

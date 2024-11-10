@@ -12,12 +12,15 @@ public class ThongBaoService {
     @Autowired
     ThongBaoRepository thongBaoRepo;
 
-    public List<ThongBao> findAll(){
+    public List<ThongBao> findAll() {
         return thongBaoRepo.findAll();
     }
 
-    public void xoaTbao(Integer idTbao){
+    public void xoaTbao(Integer idTbao) {
         thongBaoRepo.deleteByIdTbao(idTbao);
     }
 
+    public void xoaAllTbao() {
+        thongBaoRepo.deleteAll();
+    }
 }

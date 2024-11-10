@@ -2,7 +2,6 @@ package khang.test.example.demo.controller;
 
 import jakarta.transaction.Transactional;
 import khang.test.example.demo.Service.ThongBaoService;
-import khang.test.example.demo.entity.SinhVien;
 import khang.test.example.demo.entity.ThongBao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,8 +38,13 @@ public class ThongBaoController {
 
     @Transactional
     @DeleteMapping("/thongbao/{idTbao}")
-    public void xoaThbao(@PathVariable Integer idTbao)
-    {
+    public void xoaThbao(@PathVariable Integer idTbao) {
         thongBaoService.xoaTbao(idTbao);
+    }
+
+    @Transactional
+    @DeleteMapping("/xoathongbao/")
+    public void xoaAllThbao() {
+        thongBaoService.xoaAllTbao();
     }
 }

@@ -4,9 +4,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import khang.test.example.demo.Service.GiangVienExcelUtility;
 import khang.test.example.demo.Service.GiangVienService;
-import khang.test.example.demo.Service.SinhVienExcelUtility;
 import khang.test.example.demo.entity.GiangVien;
-import khang.test.example.demo.entity.SinhVien;
 import khang.test.example.demo.response.apiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,19 +26,27 @@ import java.util.Map;
 public class GiangVienController {
     @Autowired
     GiangVienService gvService;
+
     @PutMapping("giangvien/{magv}")
-    public apiResponse<GiangVien> updateGiangVien(@PathVariable String magv, @RequestBody GiangVien newGiangVien)
-    {
+    public apiResponse<GiangVien> updateGiangVien(@PathVariable String magv, @RequestBody GiangVien newGiangVien) {
         return apiResponse.<GiangVien>builder()
-            .Code(1000)
-            .result(gvService.capNhatGV(magv, newGiangVien))
-            .build();
+                .Code(1000)
+                .result(gvService.capNhatGV(magv, newGiangVien))
+                .build();
     }
+
     @Transactional
-    @DeleteMapping("/giangvien/{magv}") public void xoaGiangVien(@PathVariable String magv)
-    {
+    @DeleteMapping("/giangvien/{magv}")
+    public void xoaGiangVien(@PathVariable String magv) {
         gvService.xoaGiangVien(magv);
     }
+
+    @Transactional
+    @DeleteMapping("/xoagiangvien/")
+    public void xoaAllGiangVien() {
+        gvService.xoaAllGiangVien();
+    }
+
     @PostMapping("/giangvien/upload")
     public apiResponse<List<GiangVien>> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         List<GiangVien> gvList = null;
@@ -58,14 +64,15 @@ public class GiangVienController {
     public void xuatFileExcel(HttpServletResponse response) throws IOException {
         File file = GiangVienExcelUtility.xuatFileExcel();
 
-        if(file != null){
+        if (file != null) {
             response.setContentType("application/octet-stream");
             response.setContentLength((int) file.length());
-            response.addHeader("Content-Disposition","attachment; filename=" + file.getName());
+            response.addHeader("Content-Disposition", "attachment; filename=" + file.getName());
 
             FileCopyUtils.copy(new FileInputStream(file), response.getOutputStream());
         }
     }
+
     @GetMapping("/giangVien-list")
     public ResponseEntity<?> laygiangVien() {
         Map<String, Object> respTea = new LinkedHashMap<>();
@@ -81,8 +88,9 @@ public class GiangVienController {
             return new ResponseEntity<>(respTea, HttpStatus.NOT_FOUND);
         }
     }
+
     @PostMapping("/taoGVMoi")
-    public apiResponse<GiangVien> taoGVmoi(@RequestBody GiangVien giangVien){
+    public apiResponse<GiangVien> taoGVmoi(@RequestBody GiangVien giangVien) {
         return apiResponse.<GiangVien>builder()
                 .Code(1000)
                 .result(gvService.TaoGVmoi(giangVien))
@@ -91,10 +99,11 @@ public class GiangVienController {
 
     @GetMapping("/quanly-giangvien/search")
     public List<GiangVien> searchStudents(@RequestParam(required = false) String chuyenNganh,
-                                         @RequestParam(required = false) String tenKhoa,
-                                         @RequestParam(required = false) String hocvi,
-                                         @RequestParam(required = false) String tenGV,
-                                         @RequestParam(required = false) String magv
-    )
-    { return gvService.timGiangVien(chuyenNganh, tenKhoa, hocvi, tenGV, magv); }
+                                          @RequestParam(required = false) String tenKhoa,
+                                          @RequestParam(required = false) String hocvi,
+                                          @RequestParam(required = false) String tenGV,
+                                          @RequestParam(required = false) String magv
+    ) {
+        return gvService.timGiangVien(chuyenNganh, tenKhoa, hocvi, tenGV, magv);
+    }
 }

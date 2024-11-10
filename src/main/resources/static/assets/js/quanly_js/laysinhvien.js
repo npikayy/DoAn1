@@ -88,7 +88,9 @@ function addTabletitle(){
        <th>Niên khóa</th>
        <th>Ngành</th>
        <th>Khoa</th>
-       <th></th>
+       <th>
+       <button id="xoaBtn" onclick="xoaALLSV()">Xóa tất cả</button>
+        </th>
    `
 
 }
@@ -127,7 +129,15 @@ function xoaSV(mssv){
         }
     })
 }
-
+function xoaALLSV(){
+    fetch(`http://localhost:8080/xoasinhvien/`,{method: 'DELETE'})
+        .then(response => { if (response.ok)
+        {
+            showToast('Xóa tất cả sinh viên thành công', 'success');
+            timSVBangDieuKien(new Event('fetch'));
+        }
+        })
+}
 ///print//
 
 document.getElementById('print-button').addEventListener('click', () => {

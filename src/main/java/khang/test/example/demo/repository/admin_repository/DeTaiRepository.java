@@ -1,7 +1,6 @@
 package khang.test.example.demo.repository.admin_repository;
 
 import khang.test.example.demo.entity.Detai;
-import khang.test.example.demo.entity.SinhVien;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,6 +12,9 @@ public interface DeTaiRepository extends JpaRepository<Detai, String> {
     Detai findByMadetai(String madetai);
 
     void deleteByMadetai(String madetai);
+
+    boolean existsByTenKhoa(String tenKhoa);
+
 
     @Query("SELECT d FROM Detai d " +
             "WHERE (:tenKhoa IS NULL OR d.tenKhoa = :tenKhoa) " +
