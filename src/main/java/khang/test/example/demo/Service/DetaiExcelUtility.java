@@ -207,11 +207,15 @@ public class DetaiExcelUtility {
                             detai.setNgayBatdau(currentCell.getLocalDateTimeCellValue().toLocalDate());
                             break;
                         case 7:
-                            detai.setNgayKetthuc(currentCell.getLocalDateTimeCellValue().toLocalDate());
+                            if (currentCell.getCellType() == CellType.NUMERIC) {
+                                if (currentCell.getLocalDateTimeCellValue() != null) {
+                                    detai.setNgayKetthuc(currentCell.getLocalDateTimeCellValue().toLocalDate());
+                                }
+                            }
                             break;
-                        case 8:
-                            detai.setTinhtrang(currentCell.getStringCellValue());
-                            break;
+//                        case 8:
+//                            detai.setTinhtrang(currentCell.getStringCellValue());
+//                            break;
                         default:
                             break;
                     }
@@ -223,11 +227,20 @@ public class DetaiExcelUtility {
                         khoa.setTenKhoa(detai.getTenKhoa());
                         khoaRepo.save(khoa);
                     }
-                    if (detai.getNgayTaoDetai().isAfter(detai.getNgayBatdau()) || detai.getNgayTaoDetai().isAfter(detai.getNgayKetthuc())) {
-                        throw new AppException(ErrorCode.Invalid_CreateDay);
+                    if (detai.getNgayKetthuc() != null) {
+                        if (detai.getNgayTaoDetai().isAfter(detai.getNgayBatdau()) || detai.getNgayTaoDetai().isAfter(detai.getNgayKetthuc())) {
+                            throw new AppException(ErrorCode.Invalid_CreateDay);
+                        }
+                        if (detai.getNgayBatdau().isAfter(detai.getNgayKetthuc())) {
+                            throw new AppException(ErrorCode.InvalidDay);
+                        }
+                        detai.setTinhtrang("Đã hoàn thành");
                     }
-                    if (detai.getNgayBatdau().isAfter(detai.getNgayKetthuc())) {
-                        throw new AppException(ErrorCode.InvalidDay);
+                    else {
+                        if (detai.getNgayTaoDetai().isAfter(detai.getNgayBatdau())) {
+                            throw new AppException(ErrorCode.Invalid_CreateDay);
+                        }
+                        detai.setTinhtrang("Chưa hoàn thành");
                     }
                     if ("Chưa hoàn thành".equals(detai.getTinhtrang())) {
                         detai.setNgayKetthuc(null);

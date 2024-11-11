@@ -33,6 +33,9 @@ td, th {
 tr:nth-child(1) {
     background-color: #3dbdf8;
 }
+footer{
+    margin-top: 200px;
+}
 /*search section*/
 input{
     padding: 5px;

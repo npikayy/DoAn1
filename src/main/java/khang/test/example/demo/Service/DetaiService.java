@@ -44,8 +44,12 @@ public class DetaiService {
     public Detai capNhatDT(String madetai, Detai newDetai) {
         Detai detai = detaiRepo.findByMadetai(madetai);
         if (newDetai.getNgayKetthuc() == null) {
+
             if (newDetai.getNgayTaoDetai().isAfter(newDetai.getNgayBatdau())) {
                 throw new AppException(ErrorCode.Invalid_CreateDay);
+            }
+            if ("Đã hoàn thành".equals(newDetai.getTinhtrang())){
+                throw new AppException(ErrorCode.Unnull_EndDay);
             }
             if (newDetai.getSoLuongThanhVien() <= 0) {
                 throw new AppException(ErrorCode.Invalid_Number);
@@ -61,6 +65,7 @@ public class DetaiService {
             if (newDetai.getSoLuongThanhVien() <= 0) {
                 throw new AppException(ErrorCode.Invalid_Number);
             }
+
             dtMapper.capNhatDT(detai, newDetai);
         }
         ThongBao thongBao = ThongBao.builder()

@@ -22,6 +22,7 @@ public enum ErrorCode {
     Invalid_CreateDay(1006, "Ngày tạo đề tài không hợp lệ!", HttpStatus.BAD_REQUEST),
     InvalidDay(1006, "Ngày bắt đầu/kết thúc đề tài không hợp lệ!", HttpStatus.BAD_REQUEST),
     Invalid_EndDay(1007, "Ngày kết thúc đề tài không hợp lệ!", HttpStatus.BAD_REQUEST),
+    Unnull_EndDay(1007, "Nếu đề tài đã hoàn thành vui lòng nhập vào ngày kết thúc đề tài !", HttpStatus.BAD_REQUEST),
     Invalid_Number(1007, "Số lượng sinh viên không được dưới 0!", HttpStatus.BAD_REQUEST),
     UNAUTHENTICATED(1008, "Unauthenticated", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED(1009, "You do not have permission", HttpStatus.FORBIDDEN);
