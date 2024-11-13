@@ -33,8 +33,17 @@ td, th {
     text-align: left;
     padding: 10px;
 }
-tr:nth-child(1) {
+.table-header {
     background-color: #3dbdf8;
+}
+.table-header th:nth-child(1) {
+    width: 62%;
+}
+.table-header th:nth-child(2) {
+    width: 20%;
+}
+.table-header th:nth-child(3) {
+    width: 9.5%;
 }
 #xoaBtn{
     background-color: #ff0000;

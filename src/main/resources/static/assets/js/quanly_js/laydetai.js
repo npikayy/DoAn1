@@ -1,52 +1,61 @@
 async function layKhoa() {
     const selectKhoa = document.getElementById('khoa')
     const responseAPI1 = await fetch('http://localhost:8080/khoa-list');
-    const { data1 } = await responseAPI1.json();
+    const {data1} = await responseAPI1.json();
     data1.forEach(data1 => {
         const optionItem = document.createElement('option')
-        optionItem.value=`${data1.tenKhoa}`
-        optionItem.innerText=`${data1.tenKhoa}`
+        optionItem.value = `${data1.tenKhoa}`
+        optionItem.innerText = `${data1.tenKhoa}`
         selectKhoa.appendChild(optionItem)
 
     })
 }
+
 layKhoa();
+
 async function themKhoa() {
     const selectKhoa = document.getElementById('tenKhoa')
     const responseAPI1 = await fetch('http://localhost:8080/khoa-list');
-    const { data1 } = await responseAPI1.json();
+    const {data1} = await responseAPI1.json();
     data1.forEach(data1 => {
         const optionItem = document.createElement('option')
-        optionItem.value=`${data1.tenKhoa}`
-        optionItem.innerText=`${data1.tenKhoa}`
+        optionItem.value = `${data1.tenKhoa}`
+        optionItem.innerText = `${data1.tenKhoa}`
         selectKhoa.appendChild(optionItem)
 
     })
 }
+
 themKhoa()
-function hideUpdateInput(){
+
+function hideUpdateInput() {
     let form = document.getElementById('form-container')
     form.classList.add("hidden");
 
 }
+
 hideUpdateInput()
-function showUpdateInput(){
+
+function showUpdateInput() {
     let form = document.getElementById('form-container')
     form.classList.remove("hidden");
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
 function laydulieuDT(madetai) {
     event.preventDefault();
     showUpdateInput()
 
-    fetch(`http://localhost:8080/quanly-detai/search?madetai=${madetai}`) .then(response => response.json())
+    fetch(`http://localhost:8080/quanly-detai/search?madetai=${madetai}`).then(response => response.json())
         .then(data => {
-            data.forEach(data => { addDatatoInput(data);
+            data.forEach(data => {
+                addDatatoInput(data);
             })
         })
 
 }
+
 async function timDTBangDieuKien(event) {
     event.preventDefault()
     let khoa = document.getElementById('khoa').value
@@ -56,29 +65,44 @@ async function timDTBangDieuKien(event) {
 
     let url = 'http://localhost:8080/quanly-detai/search?';
 
-    if (khoa !== 'none') { url += `tenKhoa=${khoa}&`; }
+    if (khoa !== 'none') {
+        url += `tenKhoa=${khoa}&`;
+    }
 
 
-    if (tinhtrang !== 'none') { url += `tinhTrang=${tinhtrang}&`; }
+    if (tinhtrang !== 'none') {
+        url += `tinhTrang=${tinhtrang}&`;
+    }
 
     if (search !== '') {
-        if (magvOrmadetai === 'maGV') { url += `maGV=${search}&`;
+        if (magvOrmadetai === 'maGV') {
+            url += `maGV=${search}&`;
+        } else {
+            url += `madetai=${search}&`;
         }
-        else {
-            url += `madetai=${search}&`; }
     }
     url = url.slice(0, -1);
 
-    if (url === 'http://localhost:8080/quanly-detai/search')
-    { const responseAPI = await fetch('http://localhost:8080/detai-list');
-        const { data } = await responseAPI.json(); addTabletitle();
-        data.forEach(data => { addDatatoTable(data); }); }
-    else { fetch(url) .then(response => response.json())
-        .then(data => { addTabletitle(); data.forEach(data => { addDatatoTable(data); }); })
-        .catch(error => console.error('Error:', error));
+    if (url === 'http://localhost:8080/quanly-detai/search') {
+        const responseAPI = await fetch('http://localhost:8080/detai-list');
+        const {data} = await responseAPI.json();
+        addTabletitle();
+        data.forEach(data => {
+            addDatatoTable(data);
+        });
+    } else {
+        fetch(url).then(response => response.json())
+            .then(data => {
+                addTabletitle();
+                data.forEach(data => {
+                    addDatatoTable(data);
+                });
+            })
+            .catch(error => console.error('Error:', error));
     }
 }
-function addTabletitle(){
+
+function addTabletitle() {
     const list = document.getElementById('userList')
     list.innerHTML =
         `
@@ -97,7 +121,8 @@ function addTabletitle(){
    `
 
 }
-function addDatatoInput(data){
+
+function addDatatoInput(data) {
     const madetai = document.getElementById('madetai');
     const tenDT = document.getElementById('tenDT');
     const maGV = document.getElementById('maGV');
@@ -118,7 +143,8 @@ function addDatatoInput(data){
     ngayKT.value = `${data.ngayKetthuc}`;
     tinhtrang.value = `${data.tinhtrang}`
 }
-function addDatatoTable(data){
+
+function addDatatoTable(data) {
     const list = document.getElementById('userList')
     const divItem2 = document.createElement('tr')
     let madetai = data.madetai;
@@ -142,23 +168,62 @@ function addDatatoTable(data){
     list.appendChild(divItem2)
 }
 
-
-function xoaDT(madetai){
-    fetch(`http://localhost:8080/detai/${madetai}`,{method: 'DELETE'})
-        .then(response => { if (response.ok)
-        {
-            showToast('Xóa đề tài thành công', 'success');
-            timDTBangDieuKien(new Event('fetch'));
-        }
+function xoaDT(madetai) {
+    const dashboard = document.getElementById('dashboard')
+    const xoaPopup = document.createElement('div');
+    let detai = madetai
+    xoaPopup.id='xoaPopup';
+    xoaPopup.innerHTML = `
+     <div class="deleteOverlay" id="overlay"></div>
+     <div class="deletePopup" id="deletePopup">
+         <h2>Bạn có chắc chắn muốn xóa đề tài này?</h2>
+         <br>
+             <div class="delete-popup-buttons">
+                 <button class="delete-popup-button cancel" onclick="ClosePopup()">Quay lại</button>
+                 <button class="delete-popup-button logout" onclick="DongYxoaDT('${detai}')">Xóa</button>
+             </div>
+    </div>
+    `
+    dashboard.appendChild(xoaPopup)
+}
+function ClosePopup(){
+    xoaPopup.remove();
+}
+function DongYxoaDT(madetai) {
+    fetch(`http://localhost:8080/detai/${madetai}`, {method: 'DELETE'})
+        .then(response => {
+            if (response.ok) {
+                showToast('Xóa đề tài thành công', 'success');
+                timDTBangDieuKien(new Event('fetch'));
+                ClosePopup();
+            }
         })
 }
-function xoaAllDT(){
-    fetch(`http://localhost:8080/xoadetai/`,{method: 'DELETE'})
-        .then(response => { if (response.ok)
-        {
-            showToast('Xóa tất cả đề tài thành công', 'success');
-            timDTBangDieuKien(new Event('fetch'));
-        }
+function xoaAllDT() {
+    const dashboard = document.getElementById('dashboard')
+    const xoaPopup = document.createElement('div');
+    xoaPopup.id='xoaPopup';
+    xoaPopup.innerHTML = `
+     <div class="deleteOverlay" id="overlay"></div>
+     <div class="deletePopup" id="deletePopup">
+         <h2>Bạn có chắc chắn muốn xóa tất cả đề tài?</h2>
+         <br>
+             <div class="delete-popup-buttons">
+                 <button class="delete-popup-button cancel" onclick="ClosePopup()">Quay lại</button>
+                 <button class="delete-popup-button logout" onclick="DongYxoaAllDT()">Xóa</button>
+             </div>
+    </div>
+    `
+    dashboard.appendChild(xoaPopup)
+}
+function DongYxoaAllDT() {
+    fetch(`http://localhost:8080/xoadetai/`, {method: 'DELETE'})
+        .then(response => {
+            if (response.ok) {
+                showToast('Xóa tất cả đề tài thành công', 'success');
+                timDTBangDieuKien(new Event('fetch'));
+                ClosePopup();
+            }
         })
 }
 
@@ -197,12 +262,11 @@ function updateDT(event) {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.code===1000){
+            if (data.code === 1000) {
                 showToast('Thông tin đề tài đã được cập nhật thành công', 'success')
                 hideUpdateInput();
                 timDTBangDieuKien(event);
-            }
-            else{
+            } else {
                 showToast(data.message, 'error')
             }
         })
@@ -213,13 +277,15 @@ document.getElementById('updateDTForm').addEventListener('submit', updateDT)
 document.getElementById('print-button').addEventListener('click', () => {
     // Create a new window for printing
     const printWindow = window.open('', '_blank');
-    
+
     // Get the table content
     const table = document.querySelector('table').cloneNode(true);
 
     const rows = table.rows;
-    for (let i = 0; i < rows.length; i++) { rows[i].deleteCell(-1); }
-    
+    for (let i = 0; i < rows.length; i++) {
+        rows[i].deleteCell(-1);
+    }
+
     // Create print-friendly styles
     const printStyles = `
         <style>
@@ -233,7 +299,7 @@ document.getElementById('print-button').addEventListener('click', () => {
             }
         </style>
     `;
-    
+
     // Set up the print window content
     printWindow.document.write(`
         <!DOCTYPE html>
@@ -248,12 +314,12 @@ document.getElementById('print-button').addEventListener('click', () => {
         </body>
         </html>
     `);
-    
+
     // Wait for content to load then print
     printWindow.document.close();
-    printWindow.onload = function() {
+    printWindow.onload = function () {
         printWindow.print();
-        printWindow.onafterprint = function() {
+        printWindow.onafterprint = function () {
             printWindow.close();
         };
     };

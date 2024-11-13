@@ -89,7 +89,7 @@ function addTabletitle(){
        <th>Ngành</th>
        <th>Khoa</th>
        <th>
-       <button id="xoaBtn" onclick="xoaALLSV()">Xóa tất cả</button>
+       <button id="xoaBtn" onclick="xoaAllSV()">Xóa tất cả</button>
         </th>
    `
 
@@ -119,22 +119,61 @@ function addDatatoTable(data){
        `;
     list.appendChild(divItem2)
 }
-
-function xoaSV(mssv){
+function xoaSV(mssv) {
+    const dashboard = document.getElementById('dashboard')
+    const xoaPopup = document.createElement('div');
+    let masosv = mssv;
+    xoaPopup.id='xoaPopup';
+    xoaPopup.innerHTML = `
+     <div class="deleteOverlay" id="overlay"></div>
+     <div class="deletePopup" id="deletePopup">
+         <h2>Bạn có chắc chắn muốn xóa sinh viên này?</h2>
+         <br>
+             <div class="delete-popup-buttons">
+                 <button class="delete-popup-button cancel" onclick="ClosePopup()">Quay lại</button>
+                 <button class="delete-popup-button logout" onclick="DongYxoaSV('${masosv}')">Xóa</button>
+             </div>
+    </div>
+    `
+    dashboard.appendChild(xoaPopup)
+}
+function ClosePopup(){
+    xoaPopup.remove();
+}
+function DongYxoaSV(mssv){
     fetch(`http://localhost:8080/sinhvien/${mssv}`,{method: 'DELETE'})
         .then(response => { if (response.ok)
         {
             showToast('Xóa sinh viên thành công', 'success');
             timSVBangDieuKien(new Event('fetch'));
+            ClosePopup();
         }
     })
 }
-function xoaALLSV(){
+function xoaAllSV() {
+    const dashboard = document.getElementById('dashboard')
+    const xoaPopup = document.createElement('div');
+    xoaPopup.id='xoaPopup';
+    xoaPopup.innerHTML = `
+     <div class="deleteOverlay" id="overlay"></div>
+     <div class="deletePopup" id="deletePopup">
+         <h2>Bạn có chắc chắn muốn xóa tất cả sinh viên?</h2>
+         <br>
+             <div class="delete-popup-buttons">
+                 <button class="delete-popup-button cancel" onclick="ClosePopup()">Quay lại</button>
+                 <button class="delete-popup-button logout" onclick="DongYxoaALLSV()">Xóa</button>
+             </div>
+    </div>
+    `
+    dashboard.appendChild(xoaPopup)
+}
+function DongYxoaALLSV(){
     fetch(`http://localhost:8080/xoasinhvien/`,{method: 'DELETE'})
         .then(response => { if (response.ok)
         {
             showToast('Xóa tất cả sinh viên thành công', 'success');
             timSVBangDieuKien(new Event('fetch'));
+            ClosePopup();
         }
         })
 }

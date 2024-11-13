@@ -71,12 +71,15 @@ function taoSVMoi(event) {
     const masosv = document.getElementById('masosv').value;
     const tenSV = document.getElementById('tenSV').value;
     const ngaySinh = document.getElementById('ngaySinh').value;
-    const sdt = document.getElementById('sdt').value;
+    let sdt = document.getElementById('sdt').value;
     const email = document.getElementById('email').value;
     const lop = document.getElementById('lop').value;
     const nienKhoa = document.getElementById('khoaHoc').value;
     const chuyenNganh = document.getElementById('chuyenNganh').value;
     const tenKhoa = document.getElementById('tenKhoa').value;
+
+    const value = sdt;
+    sdt = value.replace(/[^0-9]/g, '');
 
     const studentData =
         {   "mssv" : masosv,

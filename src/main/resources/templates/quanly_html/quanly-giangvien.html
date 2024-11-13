@@ -12,7 +12,7 @@
 <body onload="timGVBangDieuKien(event)">
     <section class="main_page">
         <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
-            <section class="dashboard">
+            <section class="dashboard" id="dashboard">
                 <div class="hidden" id="form-container">
                     <button onclick="hideUpdateInput()">Quay về</button>
                     <br>
@@ -131,6 +131,7 @@
             </section>
     </section>
     <script th:src="@{/assets/js/quanly_js/laygiangvien.js}"></script>
+    <script th:src="@{/assets/js/quanly_js/sidebar.js}"></script>
     <script th:src="@{/assets/js/quanly_js/showToast.js}"></script>
     <script th:src="@{/assets/js/quanly_js/capNhatTTGiangVien.js}"></script>
 </body>

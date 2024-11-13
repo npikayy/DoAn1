@@ -84,7 +84,7 @@ function addTabletitle(){
        <th>Khoa</th>
        <th>Kinh nghiệm giảng dạy</th>
        <th>
-       <button id="xoaBtn" onclick="xoaALLGV()">Xóa tất cả</button>
+       <button id="xoaBtn" onclick="xoaAllGV()">Xóa tất cả</button>
         </th>
         `
 }
@@ -92,7 +92,6 @@ function addDatatoTable(data){
     const list = document.getElementById('userList')
     const divItem2 = document.createElement('tr')
     const { day, month, year } = extractDateComponentsFromNgaySinh(data.ngaySinh);
-    let email = data.email;
     let magv = data.maGV
     divItem2.innerHTML=`
         <td>${data.maGV}</td>
@@ -112,22 +111,61 @@ function addDatatoTable(data){
         `
     list.appendChild(divItem2)
 }
-
-function xoaGV(magv){
+function xoaGV(magv) {
+    const dashboard = document.getElementById('dashboard')
+    const xoaPopup = document.createElement('div');
+    let masogv = magv;
+    xoaPopup.id='xoaPopup';
+    xoaPopup.innerHTML = `
+     <div class="deleteOverlay" id="overlay"></div>
+     <div class="deletePopup" id="deletePopup">
+         <h2>Bạn có chắc chắn muốn xóa giảng viên này?</h2>
+         <br>
+             <div class="delete-popup-buttons">
+                 <button class="delete-popup-button cancel" onclick="ClosePopup()">Quay lại</button>
+                 <button class="delete-popup-button logout" onclick="DongYxoaGV('${masogv}')">Xóa</button>
+             </div>
+    </div>
+    `
+    dashboard.appendChild(xoaPopup)
+}
+function ClosePopup(){
+    xoaPopup.remove();
+}
+function DongYxoaGV(magv){
     fetch(`http://localhost:8080/giangvien/${magv}`,{method: 'DELETE'})
         .then(response => { if (response.ok)
         {
             showToast('Xóa giảng viên thành công', 'success');
             timGVBangDieuKien(new Event('fetch'));
+            ClosePopup()
         }
         })
 }
-function xoaALLGV(){
+function xoaAllGV() {
+    const dashboard = document.getElementById('dashboard')
+    const xoaPopup = document.createElement('div');
+    xoaPopup.id='xoaPopup';
+    xoaPopup.innerHTML = `
+     <div class="deleteOverlay" id="overlay"></div>
+     <div class="deletePopup" id="deletePopup">
+         <h2>Bạn có chắc chắn muốn xóa tất cả giảng viên?</h2>
+         <br>
+             <div class="delete-popup-buttons">
+                 <button class="delete-popup-button cancel" onclick="ClosePopup()">Quay lại</button>
+                 <button class="delete-popup-button logout" onclick="DongYxoaALLGV()">Xóa</button>
+             </div>
+    </div>
+    `
+    dashboard.appendChild(xoaPopup)
+}
+function DongYxoaALLGV(){
     fetch(`http://localhost:8080/xoagiangvien/`,{method: 'DELETE'})
         .then(response => { if (response.ok)
         {
             showToast('Xóa tất cả giảng viên thành công', 'success');
             timGVBangDieuKien(new Event('fetch'));
+            ClosePopup()
         }
         })
 }

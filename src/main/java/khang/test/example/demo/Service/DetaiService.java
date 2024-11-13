@@ -65,6 +65,7 @@ public class DetaiService {
             if (newDetai.getSoLuongThanhVien() <= 0) {
                 throw new AppException(ErrorCode.Invalid_Number);
             }
+            newDetai.setTinhtrang("Đã hoàn thành");
 
             dtMapper.capNhatDT(detai, newDetai);
         }
