@@ -70,7 +70,9 @@ function taoGVmoi(event) {
     event.preventDefault();
     const maGV = document.getElementById('masogv').value;
     const tenGV = document.getElementById('tenGv').value;
+    const gioiTinh = document.getElementById('sex').value;
     const ngaySinh = document.getElementById('ngaySinh').value;
+    const sdt = document.getElementById('sdt').value;
     const email = document.getElementById('email').value;
     const hocvi = document.getElementById('danhHieu').value;
     const chuyenNganh = document.getElementById('chuyenNganh').value;
@@ -81,6 +83,8 @@ function taoGVmoi(event) {
         {
             "maGV": maGV,
             "ngaySinh": ngaySinh,
+            "gioiTinh": gioiTinh,
+            "sdt": sdt,
             "email": email,
             "hocvi": hocvi,
             "chuyenNganh": chuyenNganh,

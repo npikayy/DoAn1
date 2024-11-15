@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-  <div id="upload-section-body" th:fragment="upload-section">
+<div id="upload-section-body" th:fragment="upload-section">
     <h2>Upload tệp dịnh dạng excel</h2>
-    <form id="uploadForm" enctype="multipart/form-data">
-      <div class="container">
-        <input type="file" id="upload-button"/>
-        <label for="upload-button"><i class="fa-solid fa-upload"></i>&nbsp; Chọn hoặc thả file vào đây</label>
-        <div id="error"></div>
-        <div id="file-display"></div>
-      </div>
-      <button type="submit">Upload</button>
+    <form enctype="multipart/form-data" id="uploadForm">
+        <div class="container">
+            <input id="upload-button" type="file"/>
+            <label for="upload-button"><i class="fa-solid fa-upload"></i>&nbsp; Chọn hoặc thả file vào đây</label>
+            <div id="error"></div>
+            <div id="file-display"></div>
+        </div>
+        <button type="submit">Upload</button>
     </form>
     <footer>
-      <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
+        <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
     </footer>
-  </div>
+</div>
 </body>
 </html>

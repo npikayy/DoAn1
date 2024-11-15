@@ -102,8 +102,9 @@ public class GiangVienController {
                                           @RequestParam(required = false) String tenKhoa,
                                           @RequestParam(required = false) String hocvi,
                                           @RequestParam(required = false) String tenGV,
-                                          @RequestParam(required = false) String magv
+                                          @RequestParam(required = false) String magv,
+                                          @RequestParam(required = false) String gioiTinh
     ) {
-        return gvService.timGiangVien(chuyenNganh, tenKhoa, hocvi, tenGV, magv);
+        return gvService.timGiangVien(chuyenNganh, tenKhoa, hocvi, tenGV, magv, gioiTinh);
     }
 }

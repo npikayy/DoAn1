@@ -33,14 +33,16 @@ public class GiangVienService {
         return gvRepo.findAll();
     }
 
-    public List<GiangVien> timGiangVien(String chuyenNganh, String tenKhoa, String hocVi, String tenGV, String magv) {
-        return gvRepo.findByDieukien(chuyenNganh, tenKhoa, hocVi, tenGV, magv);
+    public List<GiangVien> timGiangVien(String chuyenNganh, String tenKhoa, String hocVi, String tenGV, String magv, String gioiTinh) {
+        return gvRepo.findByDieukien(chuyenNganh, tenKhoa, hocVi, tenGV, magv, gioiTinh);
     }
 
     public GiangVien TaoGVmoi(GiangVien giangVien) {
         String duoiEmail = "@teacher.edu.vn";
         if (gvRepo.existsByMaGV(giangVien.getMaGV()))
             throw new AppException(ErrorCode.MSGV_EXISTED);
+        if (gvRepo.existsBySDT(giangVien.getSDT()))
+            throw new AppException(ErrorCode.PhoneNumber_Existed);
         if (!giangVien.getEmail().endsWith(duoiEmail))
             throw new AppException(ErrorCode.INVALID_Teacher_Email);
         if (gvRepo.existsByEmail(giangVien.getEmail()))
@@ -62,16 +64,24 @@ public class GiangVienService {
         GiangVien giangVien = gvRepo.findByMaGV(magv);
         if (!newGiangVien.getEmail().endsWith(duoiEmail))
             throw new AppException(ErrorCode.INVALID_Teacher_Email);
+
+        boolean giongSDT = giangVien.getSDT().equals(newGiangVien.getSDT());
+        if (gvRepo.existsBySDT(newGiangVien.getSDT()) && !giongSDT)
+            throw new AppException(ErrorCode.PhoneNumber_Existed);
+
         boolean giongEmailGV = giangVien.getEmail().equals(newGiangVien.getEmail());
         if (gvRepo.existsByEmail(newGiangVien.getEmail()) && !giongEmailGV)
             throw new AppException(ErrorCode.Teacher_Email_EXISTED);
+
         gvMapper.capNhatGV(giangVien, newGiangVien);
+
         ThongBao thongBao = ThongBao.builder()
                 .noiDungTbao("Người dùng đã cập nhật thông tin của giảng viên có mã là " + magv)
                 .ngayThucHien(LocalDateTime.now())
                 .nguoiThucHien("ADMIN")
                 .build();
         tbaoRepo.save(thongBao);
+
         return gvRepo.save(giangVien);
     }
 

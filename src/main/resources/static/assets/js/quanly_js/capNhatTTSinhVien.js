@@ -56,6 +56,7 @@ themKhoaNienKhoaChuyenNganh();
 function addDatatoInput(data){
     const mssv = document.getElementById('masosv');
     const tenSV = document.getElementById('tenSV');
+    const gtinh = document.getElementById('sex');
     const ngaySinh = document.getElementById('ngaySinh');
     const sdt = document.getElementById('sdt');
     const email = document.getElementById('email');
@@ -66,6 +67,7 @@ function addDatatoInput(data){
 
     mssv.value=`${data.mssv}`
     tenSV.value=`${data.tenSV}`
+    gtinh.value=`${data.gioiTinh}`
     ngaySinh.value=`${data.ngaySinh}`
     sdt.value=`${data.sdt}`
     email.value=`${data.email}`
@@ -81,6 +83,7 @@ function addDatatoInput(data){
         event.preventDefault();
         const masosv = document.getElementById('masosv').value;
         const tenSV = document.getElementById('tenSV').value;
+        const gtinh = document.getElementById('sex').value;
         const ngaySinh = document.getElementById('ngaySinh').value;
         let sdt = document.getElementById('sdt').value;
         const email = document.getElementById('email').value;
@@ -96,6 +99,7 @@ function addDatatoInput(data){
             {
                 "ngaySinh": ngaySinh,
                 "email": email,
+                "gioiTinh": gtinh,
                 "nienKhoa": nienKhoa,
                 "chuyenNganh": chuyenNganh,
                 "tenSV": tenSV,

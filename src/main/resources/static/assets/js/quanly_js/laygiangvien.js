@@ -36,6 +36,7 @@ async function timGVBangDieuKien(event) {
     let khoa = document.getElementById('khoa').value
     let nganh = document.getElementById('nganh').value
     let hocvi = document.getElementById('hocvi').value
+    let gioiTinh = document.getElementById('gioiTinh').value
     let search = document.getElementById('search').value
     let tenOrmaGV = document.getElementById('tenGVorMagv').value
 
@@ -46,6 +47,8 @@ async function timGVBangDieuKien(event) {
     if (nganh !== 'none') { url += `chuyenNganh=${nganh}&`; }
 
     if (hocvi !== 'none') { url += `hocvi=${hocvi}&`; }
+
+    if (gioiTinh!== 'none') { url += `gioiTinh=${gioiTinh}&`; }
 
     if (search !== '') {
         if (tenOrmaGV === 'tenGV') { url += `tenGV=${search}&`;
@@ -77,7 +80,9 @@ function addTabletitle(){
         `
        <th>Mã giảng viên</th>
        <th>Tên giảng viên</th>
+       <th>Giới tính</th>
        <th>Ngày sinh</th>
+       <th>Số điện thoại</th>
        <th>Email</th>
        <th>Học vị</th>
        <th>Chuyên ngành</th>
@@ -96,7 +101,9 @@ function addDatatoTable(data){
     divItem2.innerHTML=`
         <td>${data.maGV}</td>
         <td>${data.tenGV}</td>
+        <td>${data.gioiTinh}</td>
         <td>${day}/${month}/${year}</td>
+        <td>${data.sdt}</td>
         <td>${data.email}</td>
         <td>${data.hocvi}</td>
         <td>${data.chuyenNganh}</td>
@@ -104,8 +111,8 @@ function addDatatoTable(data){
         <td>${data.kinhNghiemGD}</td>
         <td>
             <div>
-                <button id="capNhatBtn" onclick="laydulieuGV('${magv}')">sửa</button>
-                <button id="xoaBtn" onclick="xoaGV('${magv}')">xóa</button>
+                <button id="capNhatBtn" onclick="laydulieuGV('${magv}')">Sửa</button>
+                <button id="xoaBtn" onclick="xoaGV('${magv}')">Xóa</button>
             </div>
         </td>
         `

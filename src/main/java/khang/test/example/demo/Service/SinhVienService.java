@@ -37,14 +37,16 @@ public class SinhVienService {
         return svRepo.findAll();
     }
 
-    public List<SinhVien> timSinhVien(String chuyenNganh, String tenKhoa, Integer nienKhoa, String tenSV, String mssv) {
-        return svRepo.findByDieukien(chuyenNganh, tenKhoa, nienKhoa, tenSV, mssv);
+    public List<SinhVien> timSinhVien(String chuyenNganh, String tenKhoa, Integer nienKhoa, String tenSV, String mssv,  String gioiTinh) {
+        return svRepo.findByDieukien(chuyenNganh, tenKhoa, nienKhoa, tenSV, mssv, gioiTinh);
     }
 
     public SinhVien TaoSVmoi(SinhVien sinhVien) {
         String duoiEmail = "@student.edu.vn";
         if (svRepo.existsByMSSV(sinhVien.getMSSV()))
             throw new AppException(ErrorCode.MSSV_EXISTED);
+        if (svRepo.existsBySDT(sinhVien.getSDT()))
+            throw new AppException(ErrorCode.PhoneNumber_Existed);
         if (!sinhVien.getEmail().endsWith(duoiEmail))
             throw new AppException(ErrorCode.INVALID_Student_Email);
         if (svRepo.existsByEmail(sinhVien.getEmail()))
@@ -66,16 +68,24 @@ public class SinhVienService {
         String duoiEmail = "@student.edu.vn";
         if (!newSinhVien.getEmail().endsWith(duoiEmail))
             throw new AppException(ErrorCode.INVALID_Student_Email);
+
+        boolean giongSDT = sinhVien.getSDT().equals(newSinhVien.getSDT());
+        if (svRepo.existsBySDT(newSinhVien.getSDT()) && !giongSDT)
+            throw new AppException(ErrorCode.PhoneNumber_Existed);
+
         boolean giongEmailSV = sinhVien.getEmail().equals(newSinhVien.getEmail());
         if (svRepo.existsByEmail(newSinhVien.getEmail()) && !giongEmailSV)
             throw new AppException(ErrorCode.Email_EXISTED);
+
         svMapper.capNhatSV(sinhVien, newSinhVien);
+
         ThongBao thongBao = ThongBao.builder()
                 .noiDungTbao("Người dùng đã cập nhật thông tin của sinh viên có mã là " + mssv)
                 .ngayThucHien(LocalDateTime.now())
                 .nguoiThucHien("ADMIN")
                 .build();
         tbaoRepo.save(thongBao);
+
         return svRepo.save(sinhVien);
     }
 

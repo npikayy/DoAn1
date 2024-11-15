@@ -70,6 +70,7 @@ function taoSVMoi(event) {
     event.preventDefault();
     const masosv = document.getElementById('masosv').value;
     const tenSV = document.getElementById('tenSV').value;
+    const gtinh = document.getElementById('sex').value;
     const ngaySinh = document.getElementById('ngaySinh').value;
     let sdt = document.getElementById('sdt').value;
     const email = document.getElementById('email').value;
@@ -84,6 +85,7 @@ function taoSVMoi(event) {
     const studentData =
         {   "mssv" : masosv,
             "ngaySinh": ngaySinh,
+            "gioiTinh": gtinh,
             "email": email,
             "nienKhoa": nienKhoa,
             "chuyenNganh": chuyenNganh,

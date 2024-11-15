@@ -80,25 +80,31 @@ public class GiangVienExcelUtility {
             Cell tengv = row.createCell(1);
             tengv.setCellValue("tengv");
 
-            Cell ngaySinh = row.createCell(2);
+            Cell gioitinh = row.createCell(2);
+            gioitinh.setCellValue("gioi tinh");
+
+            Cell ngaySinh = row.createCell(3);
             ngaySinh.setCellValue("ngay sinh");
 
-            Cell email = row.createCell(3);
+            Cell sdt = row.createCell(4);
+            sdt.setCellValue("so dien thoai");
+
+            Cell email = row.createCell(5);
             email.setCellValue("email");
 
-            Cell hocvi = row.createCell(4);
+            Cell hocvi = row.createCell(6);
             hocvi.setCellValue("hocvi");
 
-            Cell chuyenNganh = row.createCell(5);
+            Cell chuyenNganh = row.createCell(7);
             chuyenNganh.setCellValue("chuyen nganh");
 
-            Cell tenKhoa = row.createCell(6);
+            Cell tenKhoa = row.createCell(8);
             tenKhoa.setCellValue("ten khoa");
 
-            Cell kinhNghiem = row.createCell(7);
+            Cell kinhNghiem = row.createCell(9);
             kinhNghiem.setCellValue("kinh nghiem gd");
 
-            int rowNumber = row.getRowNum();
+            int rowNumber = 1;
 
             for (GiangVien giangVien : giangVienList) {
                 row = sheet.createRow(rowNumber++);
@@ -109,23 +115,29 @@ public class GiangVienExcelUtility {
                 Cell stdtengv = row.createCell(1);
                 stdtengv.setCellValue(giangVien.getTenGV());
 
-                Cell stdngaySinh = row.createCell(2);
+                Cell stdGioitinh = row.createCell(2);
+                stdGioitinh.setCellValue(giangVien.getGioiTinh());
+
+                Cell stdngaySinh = row.createCell(3);
                 stdngaySinh.setCellValue(giangVien.getNgaySinh());
                 stdngaySinh.setCellStyle(dateCellStyle);
 
-                Cell stdemail = row.createCell(3);
+                Cell stdSDT = row.createCell(4);
+                stdSDT.setCellValue(giangVien.getSDT());
+
+                Cell stdemail = row.createCell(5);
                 stdemail.setCellValue(giangVien.getEmail());
 
-                Cell stdhocvi = row.createCell(4);
+                Cell stdhocvi = row.createCell(6);
                 stdhocvi.setCellValue(giangVien.getHocvi());
 
-                Cell stdchuyenNganh = row.createCell(5);
+                Cell stdchuyenNganh = row.createCell(7);
                 stdchuyenNganh.setCellValue(giangVien.getChuyenNganh());
 
-                Cell stdtenKhoa = row.createCell(6);
+                Cell stdtenKhoa = row.createCell(8);
                 stdtenKhoa.setCellValue(giangVien.getTenKhoa());
 
-                Cell stdkinhNghiem = row.createCell(7);
+                Cell stdkinhNghiem = row.createCell(9);
                 stdkinhNghiem.setCellValue(giangVien.getKinhNghiemGD());
             }
 
@@ -138,7 +150,7 @@ public class GiangVienExcelUtility {
             sheet.autoSizeColumn(6);
             sheet.autoSizeColumn(7);
             sheet.autoSizeColumn(8);
-
+            sheet.autoSizeColumn(9);
 
             final String fileName = "GiangVien";
 
@@ -187,21 +199,27 @@ public class GiangVienExcelUtility {
                             giangvien.setTenGV(currentCell.getStringCellValue());
                             break;
                         case 2:
-                            giangvien.setNgaySinh(currentCell.getLocalDateTimeCellValue().toLocalDate());
+                            giangvien.setGioiTinh(currentCell.getStringCellValue());
                             break;
                         case 3:
-                            giangvien.setEmail(currentCell.getStringCellValue());
+                            giangvien.setNgaySinh(currentCell.getLocalDateTimeCellValue().toLocalDate());
                             break;
                         case 4:
-                            giangvien.setHocvi(currentCell.getStringCellValue());
+                            giangvien.setSDT((int) currentCell.getNumericCellValue());
                             break;
                         case 5:
-                            giangvien.setChuyenNganh(currentCell.getStringCellValue());
+                            giangvien.setEmail(currentCell.getStringCellValue());
                             break;
                         case 6:
-                            giangvien.setTenKhoa(currentCell.getStringCellValue());
+                            giangvien.setHocvi(currentCell.getStringCellValue());
                             break;
                         case 7:
+                            giangvien.setChuyenNganh(currentCell.getStringCellValue());
+                            break;
+                        case 8:
+                            giangvien.setTenKhoa(currentCell.getStringCellValue());
+                            break;
+                        case 9:
                             giangvien.setKinhNghiemGD(currentCell.getStringCellValue());
                             break;
                         default:
@@ -225,6 +243,8 @@ public class GiangVienExcelUtility {
                     hocviRepo.save(hocvi);
                 }
                 if (!gvRepo.existsByMaGV(giangvien.getMaGV())) {
+                    if (gvRepo.existsBySDT(giangvien.getSDT()))
+                        throw new AppException(ErrorCode.PhoneNumber_Existed);
                     if (!giangvien.getEmail().endsWith(duoiEmail))
                         throw new AppException(ErrorCode.INVALID_Teacher_Email);
                     if (gvRepo.existsByEmail(giangvien.getEmail()))

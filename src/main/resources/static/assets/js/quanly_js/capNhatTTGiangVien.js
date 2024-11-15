@@ -26,7 +26,9 @@ function laydulieuGV(magv) {
 function addDatatoInput(data){
     const maGV = document.getElementById('masogv');
     const tenGV = document.getElementById('tenGv');
+    const gioiTinh = document.getElementById('sex');
     const ngaySinh = document.getElementById('ngaySinh');
+    const sdt = document.getElementById('sdt');
     const email = document.getElementById('email');
     const hocvi = document.getElementById('danhHieu');
     const chuyenNganh = document.getElementById('chuyenNganh');
@@ -35,7 +37,9 @@ function addDatatoInput(data){
 
     maGV.value = `${data.maGV}`;
     tenGV.value = `${data.tenGV}`;
+    gioiTinh.value = `${data.gioiTinh}`;
     ngaySinh.value = `${data.ngaySinh}`;
+    sdt.value = `${data.sdt}`;
     email.value = `${data.email}`;
     hocvi.value = `${data.hocvi}`;
     chuyenNganh.value = `${data.chuyenNganh}`;
@@ -79,7 +83,9 @@ themKhoaHocViChuyenNganh();
     event.preventDefault();
         const maGV = document.getElementById('masogv').value;
         const tenGV = document.getElementById('tenGv').value;
+        const gioiTinh = document.getElementById('sex').value;
         const ngaySinh = document.getElementById('ngaySinh').value;
+        const sdt = document.getElementById('sdt').value;
         const email = document.getElementById('email').value;
         const hocvi = document.getElementById('danhHieu').value;
         const chuyenNganh = document.getElementById('chuyenNganh').value;
@@ -90,6 +96,8 @@ themKhoaHocViChuyenNganh();
         {
             "maGV": maGV,
             "ngaySinh": ngaySinh,
+            "gioiTinh": gioiTinh,
+            "sdt": sdt,
             "email": email,
             "hocvi": hocvi,
             "chuyenNganh": chuyenNganh,

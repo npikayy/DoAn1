@@ -18,9 +18,12 @@ public class GiangVien {
     String maGV;
     @Column(columnDefinition = "nvarchar(255)")
     String TenGV;
+    @Column(columnDefinition = "nvarchar(10)")
+    String gioiTinh;
     @Column(columnDefinition = "Date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDate ngaySinh;
+    Integer SDT;
     String email;
     @Column(columnDefinition = "nvarchar(255)")
     String hocvi;

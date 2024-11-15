@@ -2,81 +2,83 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Trang quản lý</title>
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/trang-qlykhoa.css}">
     <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/admin.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          referrerpolicy="no-referrer" rel="stylesheet"/>
 </head>
 <body onload="layKhoaHocViChuyenNganhNienKhoa(event)">
-    <section class="main_page">
-        <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
-            <section class="dashboard">
-                <h1>Quản lý khoa</h1>
-                <div class="form-group">
-                    <form id="themKhoaForm" action="#" method="post">
-                        <label for="tenkhoa">Tên khoa:</label>
-                        <input type="text" id="tenkhoa" name="tenkhoa" required>
-                        <button type="submit">Thêm mới</button>
-                    </form>
-                </div>
-                <br>
-                <div class="form-group">
-                    <form id="themNganhForm" action="#" method="post">
-                        <label for="nganh">Chuyên ngành:</label>
-                        <input type="text" id="nganh" name="nganh" required>
-                        <button type="submit">Thêm mới</button>
-                    </form>
-                </div>
-                <br>
-                <div class="form-group">
-                    <form id="themNKForm" action="#" method="post">
-                        <label for="nienkhoa">Niên khóa:</label>
-                        <input type="number" id="nienkhoa" name="nienkhoa" required>
-                        <button type="submit">Thêm mới</button>
-                    </form>
-                </div>
-                <br>
-                <div class="form-group">
-                    <form id="themHVForm" action="#" method="post">
-                        <label for="hocvi">Học vị:</label>
-                        <input type="text" id="hocvi" name="hocvi" required>
-                        <button type="submit">Thêm mới</button>
-                    </form>
-                </div>
-                <br>
-                <br>
-                <section class="table-section">
-                    <table id="khoaList">
-                        <tr>
-                            <th>Danh sách khoa</th>
-                            <th></th>
-                        </tr>
-                    </table>
-                    <table id="nganhList">
-                        <tr>
-                            <th>Danh sách chuyên ngành</th>
-                            <th></th>
-                        </tr>
-                    </table>
-                    <table id="nienkhoaList">
-                        <tr>
-                            <th>Danh sách niên khóa</th>
-                            <th></th>
-                        </tr>
-                    </table>
-                    <table id="hocviList">
-                        <tr>
-                            <th>Danh sách học vị</th>
-                            <th></th>
-                        </tr>
-                    </table>
-                </section>
-            </section>
+<section class="main_page">
+    <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
+    <section class="dashboard">
+        <h1>Quản lý khoa</h1>
+        <div class="form-group">
+            <form action="#" id="themKhoaForm" method="post">
+                <label for="tenkhoa">Tên khoa:</label>
+                <input id="tenkhoa" name="tenkhoa" required type="text">
+                <button type="submit">Thêm mới</button>
+            </form>
+        </div>
+        <br>
+        <div class="form-group">
+            <form action="#" id="themNganhForm" method="post">
+                <label for="nganh">Chuyên ngành:</label>
+                <input id="nganh" name="nganh" required type="text">
+                <button type="submit">Thêm mới</button>
+            </form>
+        </div>
+        <br>
+        <div class="form-group">
+            <form action="#" id="themNKForm" method="post">
+                <label for="nienkhoa">Niên khóa:</label>
+                <input id="nienkhoa" name="nienkhoa" required type="number">
+                <button type="submit">Thêm mới</button>
+            </form>
+        </div>
+        <br>
+        <div class="form-group">
+            <form action="#" id="themHVForm" method="post">
+                <label for="hocvi">Học vị:</label>
+                <input id="hocvi" name="hocvi" required type="text">
+                <button type="submit">Thêm mới</button>
+            </form>
+        </div>
+        <br>
+        <br>
+        <section class="table-section">
+            <table id="khoaList">
+                <tr>
+                    <th>Danh sách khoa</th>
+                    <th></th>
+                </tr>
+            </table>
+            <table id="nganhList">
+                <tr>
+                    <th>Danh sách chuyên ngành</th>
+                    <th></th>
+                </tr>
+            </table>
+            <table id="nienkhoaList">
+                <tr>
+                    <th>Danh sách niên khóa</th>
+                    <th></th>
+                </tr>
+            </table>
+            <table id="hocviList">
+                <tr>
+                    <th>Danh sách học vị</th>
+                    <th></th>
+                </tr>
+            </table>
+        </section>
     </section>
-    <script th:src="@{/assets/js/quanly_js/layKhoaNganhNienKhoaHocVi.js}"></script>
-    <script th:src="@{/assets/js/quanly_js/sidebar.js}"></script>
-    <script th:src="@{/assets/js/quanly_js/showToast.js}"></script>
+</section>
+<script th:src="@{/assets/js/quanly_js/layKhoaNganhNienKhoaHocVi.js}"></script>
+<script th:src="@{/assets/js/quanly_js/sidebar.js}"></script>
+<script th:src="@{/assets/js/quanly_js/showToast.js}"></script>
 </body>
 </html>

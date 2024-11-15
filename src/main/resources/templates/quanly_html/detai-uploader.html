@@ -2,29 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Trang quản lý</title>
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/trang-upload-detai.css}">
     <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/admin.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          referrerpolicy="no-referrer" rel="stylesheet"/>
 </head>
 <body>
-    <section class="main_page">
-        <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
-            <section class="dashboard">
-                <button id="backbtn" onclick="location.href='http://localhost:8080/quanly/quanly-detai'">Quay về</button>
-                <br>
-                <br>
-                <h1>Thêm Đề Tài</h1>
-                <div th:replace="~{quanly_html/upload-section :: upload-section}"></div>
-            </section>
+<section class="main_page">
+    <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
+    <section class="dashboard">
+        <button id="backbtn" onclick="location.href='http://localhost:8080/quanly/quanly-detai'">Quay về</button>
+        <br>
+        <br>
+        <h1>Thêm Đề Tài</h1>
+        <div th:replace="~{quanly_html/upload-section :: upload-section}"></div>
     </section>
+</section>
 
-    <script th:src="@{/assets/js/quanly_js/detai-upload.js}"></script>
-    <script th:src="@{/assets/js/quanly_js/drag_drop.js}"></script>
-    <script th:src="@{/assets/js/quanly_js/showToast.js}"></script>
-    <script th:src="@{/assets/js/quanly_js/sidebar.js}"></script>
-    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js}"></script>
+<script th:src="@{/assets/js/quanly_js/detai-upload.js}"></script>
+<script th:src="@{/assets/js/quanly_js/drag_drop.js}"></script>
+<script th:src="@{/assets/js/quanly_js/showToast.js}"></script>
+<script th:src="@{/assets/js/quanly_js/sidebar.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js}"></script>
 </body>
 </html>

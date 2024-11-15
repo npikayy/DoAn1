@@ -13,6 +13,8 @@ public interface SinhVienRepository extends JpaRepository<SinhVien, String> {
 
     boolean existsByEmail(String email);
 
+    boolean existsBySDT(Integer sdt);
+
     void deleteByMSSV(String mssv);
 
     SinhVien findByMSSV(String mssv);
@@ -22,7 +24,8 @@ public interface SinhVienRepository extends JpaRepository<SinhVien, String> {
             "AND (:tenKhoa IS NULL OR s.TenKhoa = :tenKhoa) " +
             "AND (:nienKhoa IS NULL OR s.nienKhoa = :nienKhoa)" +
             "AND (:tenSV IS NULL OR s.TenSV like %:tenSV%)" +
-            "AND (:mssv IS NULL OR s.MSSV = :mssv)")
-    List<SinhVien> findByDieukien(String chuyenNganh, String tenKhoa, Integer nienKhoa, String tenSV, String mssv);
+            "AND (:mssv IS NULL OR s.MSSV = :mssv)" +
+            "AND (:gioiTinh IS NULL OR s.gioiTinh = :gioiTinh)")
+    List<SinhVien> findByDieukien(String chuyenNganh, String tenKhoa, Integer nienKhoa, String tenSV, String mssv, String gioiTinh);
 
 }

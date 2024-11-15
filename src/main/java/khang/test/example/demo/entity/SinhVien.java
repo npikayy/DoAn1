@@ -18,6 +18,8 @@ public class SinhVien {
     String MSSV;
     @Column(columnDefinition = "nvarchar(255)")
     String TenSV;
+    @Column(columnDefinition = "nvarchar(10)")
+    String gioiTinh;
     @Column(columnDefinition = "Date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDate ngaySinh;

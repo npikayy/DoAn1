@@ -2,87 +2,94 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Trang quản lý</title>
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/trang-upload.css}">
     <link rel="stylesheet" th:href="@{/assets/css/toast.css}">
     <link rel="stylesheet" th:href="@{/assets/css/quanly_css/admin.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          referrerpolicy="no-referrer" rel="stylesheet"/>
 </head>
 <body>
-    <section class="main_page">
-        <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
-            <section class="dashboard">
-                <button id="backbtn" onclick="location.href='http://localhost:8080/quanly/quanly-giangvien'">Quay về</button>
-                <br>
-                <br>
-                <div class="hidden" id="create-section">
-                    <button onclick="hideCreateSection()">Upload giảng viên mới</button>
-                    <h1>Thêm giảng viên mới bằng form</h1>
-                    <form id="createGVForm" action="#" method="post">
-                        <div class="form-group">
-                            <label for="masogv">Mã giảng viên:</label>
-                            <input type="text" id="masogv" name="masogv" >
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="tenGv">Tên giảng viên:</label>
-                            <input type="text" id="tenGv" name="tenGv" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="ngaySinh">Ngày sinh:</label>
-                            <input type="date" id="ngaySinh" name="ngaySinh" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" placeholder="abc123@teacher.edu.vn" required>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="form-group">
-                            <label for="tenKhoa">Chọn khoa:</label>
-                            <select id="tenKhoa"></select>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="form-group">
-                            <label for="chuyenNganh">Chọn chuyên ngành:</label>
-                            <select id="chuyenNganh"></select>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="form-group">
-                            <label for="danhHieu">Chọn học vị:</label>
-                            <select id="danhHieu"></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="kinhNghiemGD">Kinh nghiệm giảng dạy:</label>
-                            <input type="text" id="kinhNghiemGD" name="kinhNghiemGD" required>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="form-group">
-                            <button type="submit">Cập Nhật Thông Tin</button>
-                        </div>
-                    </form>
-                    <br>
-                    <footer>
-                        <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
-                    </footer>
+<section class="main_page">
+    <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
+    <section class="dashboard">
+        <button id="backbtn" onclick="location.href='http://localhost:8080/quanly/quanly-giangvien'">Quay về</button>
+        <br>
+        <br>
+        <div class="hidden" id="create-section">
+            <button onclick="hideCreateSection()">Upload giảng viên mới</button>
+            <h1>Thêm giảng viên mới bằng form</h1>
+            <form action="#" id="createGVForm" method="post">
+                <div class="form-group">
+                    <label for="masogv">Mã giảng viên:</label>
+                    <input id="masogv" name="masogv" type="text">
                 </div>
-                <section id="upload-section">
-                    <button onclick="unhideCreateSection()">Thêm giảng viên mới bằng form</button>
-                    <div th:replace="~{quanly_html/upload-section :: upload-section}"></div>
-                </section>
-            </section>
+                <div class="form-group">
+                    <label for="tenGv">Tên giảng viên:</label>
+                    <input id="tenGv" name="tenGv" required type="text">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="sex">Giới tính:</label>
+                    <select id="sex">
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ngaySinh">Ngày sinh:</label>
+                    <input id="ngaySinh" name="ngaySinh" required type="date">
+                </div>
+                <div class="form-group">
+                    <label for="sdt">Số điện thoại:</label>
+                    <input id="sdt" name="sdt" required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input id="email" name="email" placeholder="abc123@teacher.edu.vn" required type="email">
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <label for="tenKhoa">Chọn khoa:</label>
+                    <select id="tenKhoa"></select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="chuyenNganh">Chọn chuyên ngành:</label>
+                    <select id="chuyenNganh"></select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="danhHieu">Chọn học vị:</label>
+                    <select id="danhHieu"></select>
+                </div>
+                <div class="form-group">
+                    <label for="kinhNghiemGD">Kinh nghiệm giảng dạy:</label>
+                    <input id="kinhNghiemGD" name="kinhNghiemGD" required type="text">
+                </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit">Thêm Giảng Viên Mới</button>
+                </div>
+            </form>
+            <br>
+            <footer>
+                <p>#All Rights Reserved. CTUT © 2024 Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ</p>
+            </footer>
+        </div>
+        <section id="upload-section">
+            <button onclick="unhideCreateSection()">Thêm giảng viên mới bằng form</button>
+            <div th:replace="~{quanly_html/upload-section :: upload-section}"></div>
+        </section>
     </section>
-    <script th:src="@{/assets/js/quanly_js/teacher-create.js}"></script>
-    <script th:src="@{/assets/js/quanly_js/drag_drop.js}"></script>
-    <script th:src="@{/assets/js/quanly_js/showToast.js}"></script>
-    <script th:src="@{/assets/js/quanly_js/sidebar.js}"></script>
-    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js}"></script>
+</section>
+<script th:src="@{/assets/js/quanly_js/teacher-create.js}"></script>
+<script th:src="@{/assets/js/quanly_js/drag_drop.js}"></script>
+<script th:src="@{/assets/js/quanly_js/showToast.js}"></script>
+<script th:src="@{/assets/js/quanly_js/sidebar.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js}"></script>
 </body>
 </html>

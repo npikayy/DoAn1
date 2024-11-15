@@ -4,38 +4,39 @@
 <div class="sidebar" th:fragment="sidebar">
 
     <section class="user_info">
-        <img th:src="@{/assets/images/dog.png}" alt="" width="30%">
+        <img alt="" th:src="@{/assets/images/dog.png}" width="30%">
         <div class="info">
             <h2>Chào mừng, <span th:text="${username}">[Tên người dùng]</span>!</h2>
         </div>
     </section>
-  <a id="logout" onclick="showPopup()">Đăng xuất</a>
+    <a id="logout" onclick="showPopup()">Đăng xuất</a>
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="logoutPopup">
         <h2>Bạn có chắc chắn muốn đăng xuất?</h2>
-      <br>
+        <br>
         <div class="popup-buttons">
             <button class="popup-button cancel" onclick="hidePopup()">Quay lại</button>
-            <button class="popup-button logout" onclick="location.href='http://localhost:8080/logout'">Đăng Xuất</button>
+            <button class="popup-button logout" onclick="location.href='http://localhost:8080/logout'">Đăng Xuất
+            </button>
         </div>
     </div>
 
     <section class="sidebar-body">
-        <div id="trangchu" class="function" onclick="location.href='http://localhost:8080/quanly'">
-            <img th:src="@{/assets/images/home.png}" class="icon">
+        <div class="function" id="trangchu" onclick="location.href='http://localhost:8080/quanly'">
+            <img class="icon" th:src="@{/assets/images/home.png}">
             <p>Trang chủ</p>
         </div>
-        <div id="quanlydetai" class="function" onclick="location.href='http://localhost:8080/quanly/quanly-detai'">
-            <img th:src="@{/assets/images/folder-management.png}" class="icon">
+        <div class="function" id="quanlydetai" onclick="location.href='http://localhost:8080/quanly/quanly-detai'">
+            <img class="icon" th:src="@{/assets/images/folder-management.png}">
             <p>Quản lý đề tài</p>
         </div>
-        <div id="quanlykhoa" class="function" onclick="location.href='http://localhost:8080/quanly/quanly-khoa'">
-            <img th:src="@{/assets/images/hierarchy.png}" class="icon">
+        <div class="function" id="quanlykhoa" onclick="location.href='http://localhost:8080/quanly/quanly-khoa'">
+            <img class="icon" th:src="@{/assets/images/hierarchy.png}">
             <p>Quản lý khoa</p>
         </div>
         <div class="dropdown">
-            <div id="user" class="function">
-                <img th:src="@{/assets/images/skills.png}" class="icon">
+            <div class="function" id="user">
+                <img class="icon" th:src="@{/assets/images/skills.png}">
                 <p>Quản Lý Người Dùng</p>
             </div>
             <div class="dropdown-content">
@@ -44,7 +45,7 @@
             </div>
         </div>
         <div class="animation start-noti"></div>
-        <img th:src="@{/assets/images/go-up.png}" onclick="toTop()" class="icon" id="toTopBtn">
+        <img class="icon" id="toTopBtn" onclick="toTop()" th:src="@{/assets/images/go-up.png}">
     </section>
 </div>
 </body>

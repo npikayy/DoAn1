@@ -13,6 +13,8 @@ public interface GiangVienRepository extends JpaRepository<GiangVien, String> {
 
     boolean existsByMaGV(String email);
 
+    boolean existsBySDT(Integer sdt);
+
     GiangVien findByMaGV(String masv);
 
     void deleteByMaGV(String magv);
@@ -22,6 +24,8 @@ public interface GiangVienRepository extends JpaRepository<GiangVien, String> {
             "AND (:tenKhoa IS NULL OR g.TenKhoa = :tenKhoa) " +
             "AND (:hocVi IS NULL OR g.hocvi = :hocVi)" +
             "AND (:tenGV IS NULL OR g.TenGV like %:tenGV%)" +
-            "AND (:magv IS NULL OR g.maGV = :magv)")
-    List<GiangVien> findByDieukien(String chuyenNganh, String tenKhoa, String hocVi, String tenGV, String magv);
+            "AND (:magv IS NULL OR g.maGV = :magv)"+
+            "AND (:gioiTinh IS NULL OR g.gioiTinh = :gioiTinh)"
+    )
+    List<GiangVien> findByDieukien(String chuyenNganh, String tenKhoa, String hocVi, String tenGV, String magv, String gioiTinh);
 }

@@ -102,9 +102,10 @@ public class SinhVienController {
                                          @RequestParam(required = false) String tenKhoa,
                                          @RequestParam(required = false) Integer nienKhoa,
                                          @RequestParam(required = false) String tenSV,
-                                         @RequestParam(required = false) String mssv
+                                         @RequestParam(required = false) String mssv,
+                                         @RequestParam(required = false) String gioiTinh
     ) {
-        return svService.timSinhVien(chuyenNganh, tenKhoa, nienKhoa, tenSV, mssv);
+        return svService.timSinhVien(chuyenNganh, tenKhoa, nienKhoa, tenSV, mssv, gioiTinh);
     }
 
 }
