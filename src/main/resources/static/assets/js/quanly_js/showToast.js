@@ -37,6 +37,6 @@ function showToast(message, type) {
     }, 5000);
 }
 
-function toastClose(){
+function toastClose() {
     toast.remove();
 }

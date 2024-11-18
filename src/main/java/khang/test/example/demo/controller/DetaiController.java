@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,9 +87,12 @@ public class DetaiController {
     public List<Detai> searchStudents(@RequestParam(required = false) String tenKhoa,
                                       @RequestParam(required = false) String tinhTrang,
                                       @RequestParam(required = false) String maGV,
-                                      @RequestParam(required = false) String madetai
+                                      @RequestParam(required = false) String madetai,
+                                      @RequestParam(required = false) LocalDate ngayBatdau,
+                                      @RequestParam(required = false) LocalDate ngayKetthuc
+
     ) {
-        return dtService.timDeTai(tenKhoa, tinhTrang, maGV, madetai);
+        return dtService.timDeTai(tenKhoa, tinhTrang, maGV, madetai, ngayBatdau, ngayKetthuc);
     }
 
     @GetMapping("/detai-list")

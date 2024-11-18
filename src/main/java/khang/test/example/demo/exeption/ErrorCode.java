@@ -21,10 +21,12 @@ public enum ErrorCode {
     DUPLICATED_Email(1005, "Email bị trùng lặp", HttpStatus.BAD_REQUEST),
     Invalid_CreateDay(1006, "Ngày tạo đề tài không hợp lệ!", HttpStatus.BAD_REQUEST),
     InvalidDay(1006, "Ngày bắt đầu/kết thúc đề tài không hợp lệ!", HttpStatus.BAD_REQUEST),
-    Invalid_EndDay(1007, "Ngày kết thúc đề tài không hợp lệ!", HttpStatus.BAD_REQUEST),
-    Unnull_EndDay(1007, "Nếu đề tài đã hoàn thành vui lòng nhập vào ngày kết thúc đề tài !", HttpStatus.BAD_REQUEST),
+    Invalid_EndDay(1006, "Ngày kết thúc đề tài không hợp lệ!", HttpStatus.BAD_REQUEST),
+    Unnull_EndDay(1006, "Nếu đề tài đã hoàn thành vui lòng nhập vào ngày kết thúc đề tài !", HttpStatus.BAD_REQUEST),
     Invalid_Number(1007, "Số lượng sinh viên không được dưới 0!", HttpStatus.BAD_REQUEST),
-    PhoneNumber_Existed(1007, "Số điện thoại đã tồn tại!", HttpStatus.BAD_REQUEST)
+    PhoneNumber_Existed(1008, "Số điện thoại đã tồn tại!", HttpStatus.BAD_REQUEST),
+    PhoneNumber_Invalid(1008, "Số điện thoại phải từ 10 - 11 số!", HttpStatus.BAD_REQUEST)
+
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

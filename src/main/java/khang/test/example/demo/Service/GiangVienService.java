@@ -43,6 +43,10 @@ public class GiangVienService {
             throw new AppException(ErrorCode.MSGV_EXISTED);
         if (gvRepo.existsBySDT(giangVien.getSDT()))
             throw new AppException(ErrorCode.PhoneNumber_Existed);
+        Integer dodaiSDT = giangVien.getSDT().length();
+        if (dodaiSDT<10 || dodaiSDT>11){
+            throw new AppException(ErrorCode.PhoneNumber_Invalid);
+        }
         if (!giangVien.getEmail().endsWith(duoiEmail))
             throw new AppException(ErrorCode.INVALID_Teacher_Email);
         if (gvRepo.existsByEmail(giangVien.getEmail()))
@@ -64,7 +68,10 @@ public class GiangVienService {
         GiangVien giangVien = gvRepo.findByMaGV(magv);
         if (!newGiangVien.getEmail().endsWith(duoiEmail))
             throw new AppException(ErrorCode.INVALID_Teacher_Email);
-
+        Integer dodaiSDT = newGiangVien.getSDT().length();
+        if (dodaiSDT<10 || dodaiSDT>11){
+            throw new AppException(ErrorCode.PhoneNumber_Invalid);
+        }
         boolean giongSDT = giangVien.getSDT().equals(newGiangVien.getSDT());
         if (gvRepo.existsBySDT(newGiangVien.getSDT()) && !giongSDT)
             throw new AppException(ErrorCode.PhoneNumber_Existed);

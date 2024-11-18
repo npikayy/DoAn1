@@ -86,11 +86,13 @@ p {
     text-align: left;
 
 }
-#toTopBtn{
+
+#toTopBtn {
     margin-top: 450px;
     margin-left: 300px;
     cursor: pointer;
 }
+
 /*///dashboard///*/
 .dashboard {
     background: rgb(255, 255, 255);
@@ -195,6 +197,7 @@ footer {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+
 /* delete popup */
 .deletePopup {
     position: fixed;

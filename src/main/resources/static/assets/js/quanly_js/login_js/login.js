@@ -6,13 +6,13 @@ function saveLoginInfo() {
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
         localStorage.setItem("rememberMe", "true");
-    }
-    else {
+    } else {
         localStorage.removeItem("username");
         localStorage.removeItem("password");
         localStorage.removeItem("rememberMe");
     }
 }
+
 function loadLoginInfo() {
     const rememberMe = localStorage.getItem("rememberMe");
     if (rememberMe === "true") {
@@ -22,7 +22,8 @@ function loadLoginInfo() {
 
     }
 }
-document.addEventListener("DOMContentLoaded", function() {
+
+document.addEventListener("DOMContentLoaded", function () {
     loadLoginInfo();
 
     const loginForm = document.getElementById("loginForm");

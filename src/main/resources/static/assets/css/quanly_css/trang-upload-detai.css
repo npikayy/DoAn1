@@ -1,19 +1,22 @@
 input {
-    font-size: 18px ;
+    font-size: 18px;
     width: 100%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-footer{
+
+footer {
     margin-top: 245px;
 }
-#uploadForm{
+
+#uploadForm {
     margin-top: 50px;
     display: flex;
     gap: 50px;
     flex-direction: column;
 }
+
 .container {
     background-color: var(--main-color);
     width: 95%;
@@ -21,9 +24,11 @@ footer{
     margin: 20px auto;
     border-radius: 0.5em;
 }
+
 input[type="file"] {
     display: none;
 }
+
 label {
     display: block;
     position: relative;
@@ -49,28 +54,34 @@ button[type="submit"] {
     border-radius: 10px;
     cursor: pointer;
 }
+
 #file-display {
     /* position: relative; */
     width: 90%;
     margin: 0 auto;
     gap: 1.25em;
 }
+
 .active {
     border: 0.2em dashed #025bee;
 }
+
 #error {
     text-align: center;
     color: #ff3030;
 }
-.file-icon{
+
+.file-icon {
     width: 8%;
 }
-.excel-file{
+
+.excel-file {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-#backbtn{
+
+#backbtn {
     background-color: #3dbdf8;
     border: none;
     padding: 10px;
@@ -78,23 +89,27 @@ button[type="submit"] {
     color: hsl(0, 0%, 100%);
     cursor: pointer;
 }
+
 /*animation*!*/
-.animation{
+.animation {
     width: 90%;
     background: var(--button-color);
     top: 67px;
 }
-div:nth-child(1):hover~.animation{
+
+div:nth-child(1):hover ~ .animation {
     width: 90%;
     background: var(--button-color);
     top: 7px;
 }
-div:nth-child(3):hover~.animation{
+
+div:nth-child(3):hover ~ .animation {
     width: 90%;
     background: var(--button-color);
     top: 128px;
 }
-div:nth-child(4):hover~.animation{
+
+div:nth-child(4):hover ~ .animation {
     width: 90%;
     background: var(--button-color);
     top: 189px;

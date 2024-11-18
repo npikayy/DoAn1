@@ -205,7 +205,7 @@ public class GiangVienExcelUtility {
                             giangvien.setNgaySinh(currentCell.getLocalDateTimeCellValue().toLocalDate());
                             break;
                         case 4:
-                            giangvien.setSDT((int) currentCell.getNumericCellValue());
+                            giangvien.setSDT(currentCell.getStringCellValue());
                             break;
                         case 5:
                             giangvien.setEmail(currentCell.getStringCellValue());
@@ -245,6 +245,10 @@ public class GiangVienExcelUtility {
                 if (!gvRepo.existsByMaGV(giangvien.getMaGV())) {
                     if (gvRepo.existsBySDT(giangvien.getSDT()))
                         throw new AppException(ErrorCode.PhoneNumber_Existed);
+                    Integer dodaiSDT = giangvien.getSDT().length();
+                    if (dodaiSDT<10 || dodaiSDT>11){
+                        throw new AppException(ErrorCode.PhoneNumber_Invalid);
+                    }
                     if (!giangvien.getEmail().endsWith(duoiEmail))
                         throw new AppException(ErrorCode.INVALID_Teacher_Email);
                     if (gvRepo.existsByEmail(giangvien.getEmail()))

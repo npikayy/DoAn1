@@ -1,26 +1,30 @@
-.animation{
+.animation {
     width: 90%;
     background: var(--button-color);
     top: 8px;
 }
-div:nth-child(2):hover~.animation{
+
+div:nth-child(2):hover ~ .animation {
     width: 90%;
     background: var(--button-color);
     top: 67px;
     /*top: 239px;*/
 }
-div:nth-child(3):hover~.animation{
+
+div:nth-child(3):hover ~ .animation {
     width: 90%;
     background: var(--button-color);
     top: 128px;
     /*top: 295px;*/
 }
-div:nth-child(4):hover~.animation{
+
+div:nth-child(4):hover ~ .animation {
     width: 90%;
     background: var(--button-color);
     top: 189px;
     /*top: 352px;*/
 }
+
 /*table*/
 table {
     margin-top: 10px;
@@ -28,24 +32,30 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+
 td, th {
     border: 1px solid #c7dbe4;
     text-align: left;
     padding: 10px;
 }
+
 .table-header {
     background-color: #3dbdf8;
 }
+
 .table-header th:nth-child(1) {
     width: 62%;
 }
+
 .table-header th:nth-child(2) {
     width: 20%;
 }
+
 .table-header th:nth-child(3) {
     width: 9.5%;
 }
-#xoaBtn{
+
+#xoaBtn {
     background-color: #ff0000;
     border: none;
     padding: 10px;
@@ -53,11 +63,12 @@ td, th {
     color: hsl(0, 0%, 100%);
     cursor: pointer;
 }
-.hidden{
+
+.hidden {
     display: none;
 }
 
-button{
+button {
     background-color: #3dbdf8;
     border: none;
     padding: 10px;

@@ -47,6 +47,10 @@ public class SinhVienService {
             throw new AppException(ErrorCode.MSSV_EXISTED);
         if (svRepo.existsBySDT(sinhVien.getSDT()))
             throw new AppException(ErrorCode.PhoneNumber_Existed);
+        Integer dodaiSDT = sinhVien.getSDT().length();
+        if (dodaiSDT<10 || dodaiSDT>11){
+            throw new AppException(ErrorCode.PhoneNumber_Invalid);
+        }
         if (!sinhVien.getEmail().endsWith(duoiEmail))
             throw new AppException(ErrorCode.INVALID_Student_Email);
         if (svRepo.existsByEmail(sinhVien.getEmail()))
@@ -72,6 +76,11 @@ public class SinhVienService {
         boolean giongSDT = sinhVien.getSDT().equals(newSinhVien.getSDT());
         if (svRepo.existsBySDT(newSinhVien.getSDT()) && !giongSDT)
             throw new AppException(ErrorCode.PhoneNumber_Existed);
+
+        Integer dodaiSDT = newSinhVien.getSDT().length();
+        if (dodaiSDT<10 || dodaiSDT>11){
+            throw new AppException(ErrorCode.PhoneNumber_Invalid);
+        }
 
         boolean giongEmailSV = sinhVien.getEmail().equals(newSinhVien.getEmail());
         if (svRepo.existsByEmail(newSinhVien.getEmail()) && !giongEmailSV)

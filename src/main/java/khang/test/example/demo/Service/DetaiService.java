@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class DetaiService {
         return detaiRepo.findAll();
     }
 
-    public List<Detai> timDeTai(String tenKhoa, String tinhTrang, String maGV, String madetai) {
-        return detaiRepo.findByDieukien(tenKhoa, tinhTrang, maGV, madetai);
+    public List<Detai> timDeTai(String tenKhoa, String tinhTrang, String maGV, String madetai, LocalDate ngayBatdau, LocalDate ngayKetthuc) {
+        return detaiRepo.findByDieukien(tenKhoa, tinhTrang, maGV, madetai, ngayBatdau, ngayKetthuc);
     }
 
     public void save(MultipartFile file) {

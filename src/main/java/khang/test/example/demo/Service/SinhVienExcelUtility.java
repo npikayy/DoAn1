@@ -40,6 +40,15 @@ public class SinhVienExcelUtility {
     @Autowired
     private ThongBaoRepository tbaoRepo1;
 
+    @PostConstruct
+    private void initStaticRepo() {
+        svRepo = this.svRepo1;
+        nienKhoaRepo = this.nienKhoaRepo1;
+        khoaRepo = this.khoaRepo1;
+        nganhRepo = this.nganhRepo1;
+        tbaoRepo = this.tbaoRepo1;
+    }
+
     public static File xuatFileExcel() {
         File file = null;
         try {
@@ -152,17 +161,8 @@ public class SinhVienExcelUtility {
         return file;
     }
 
-    public SinhVienExcelUtility() {
-    }
 
-    @PostConstruct
-    private void initStaticRepo() {
-        svRepo = this.svRepo1;
-        nienKhoaRepo = this.nienKhoaRepo1;
-        khoaRepo = this.khoaRepo1;
-        nganhRepo = this.nganhRepo1;
-        tbaoRepo = this.tbaoRepo1;
-    }
+
 
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String SHEET = "student";
@@ -210,7 +210,7 @@ public class SinhVienExcelUtility {
                             sinhvien.setNgaySinh(currentCell.getLocalDateTimeCellValue().toLocalDate());
                             break;
                         case 4:
-                            sinhvien.setSDT((int) currentCell.getNumericCellValue());
+                            sinhvien.setSDT(currentCell.getStringCellValue());
                             break;
                         case 5:
                             sinhvien.setEmail(currentCell.getStringCellValue());
@@ -250,6 +250,10 @@ public class SinhVienExcelUtility {
                 if (!svRepo.existsByMSSV(sinhvien.getMSSV())) {
                     if (svRepo.existsBySDT(sinhvien.getSDT()))
                         throw new AppException(ErrorCode.PhoneNumber_Existed);
+                    Integer dodaiSDT = sinhvien.getSDT().length();
+                    if (dodaiSDT<10 || dodaiSDT>11){
+                        throw new AppException(ErrorCode.PhoneNumber_Invalid);
+                    }
                     if (!sinhvien.getEmail().endsWith(duoiEmail))
                         throw new AppException(ErrorCode.INVALID_Student_Email);
                     if (svRepo.existsByEmail(sinhvien.getEmail()))

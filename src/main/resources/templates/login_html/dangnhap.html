@@ -2,34 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Đăng nhập</title>
     <link rel="stylesheet" th:href="@{/assets/css/login_css/dangnhap.css}">
 </head>
-<body >
-<form action="/login" method="post" class="main-page" id="loginForm" >
+<body>
+<form action="/login" class="main-page" id="loginForm" method="post">
     <p>ĐĂNG NHẬP</p>
     <h3>Trang Quản Lý</h3>
     <br>
     <div class="form-group">
         <label for="username">Tên người dùng:</label>
-        <input type="text" id="username" name="username" required>
+        <input id="username" name="username" required type="text">
     </div>
     <br>
     <div class="form-group">
         <label for="password">Mật khẩu:</label>
-        <input type="password" id="password" name="password" required>
+        <input id="password" name="password" required type="password">
     </div>
     <br>
     <section class="remember-section">
-        <input type="checkbox" id="rememberMe" name="rememberMe"><label for="rememberMe">Nhớ mật khẩu</label>
+        <input id="rememberMe" name="rememberMe" type="checkbox"><label for="rememberMe">Nhớ mật khẩu</label>
     </section>
     <br>
     <div id="message"></div>
     <br>
-    <button type="submit" id="loginButton">Đăng Nhập</button>
+    <button id="loginButton" type="submit">Đăng Nhập</button>
 </form>
-<img th:src="@{/assets/images/blue.jpg}" alt="" id="body-img">
+<img alt="" id="body-img" th:src="@{/assets/images/blue.jpg}">
 <script th:src="@{/assets/js/quanly_js/login_js/login.js}"></script>
 </body>
 </html>

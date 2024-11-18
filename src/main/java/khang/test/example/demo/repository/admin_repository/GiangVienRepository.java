@@ -13,7 +13,7 @@ public interface GiangVienRepository extends JpaRepository<GiangVien, String> {
 
     boolean existsByMaGV(String email);
 
-    boolean existsBySDT(Integer sdt);
+    boolean existsBySDT(String sdt);
 
     GiangVien findByMaGV(String masv);
 

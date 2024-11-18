@@ -6,66 +6,71 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     if (fileInput.files.length === 0) {
         showToast('Vui lòng chọn 1 tệp trước khi nhấn nút!', 'error');
     } else {
-    fetch('http://localhost:8080/giangvien/upload', {
-        method: 'POST',
-        body: formData
-    }).then(res => res.json()).then(data => {
-        console.log(data)
-        if (data.code === 0) {
-            showToast(data.message, 'success');
-        }
-        else{
-            showToast(data.message, 'error');
-        }
-    })
+        fetch('http://localhost:8080/giangvien/upload', {
+            method: 'POST',
+            body: formData
+        }).then(res => res.json()).then(data => {
+            console.log(data)
+            if (data.code === 0) {
+                showToast(data.message, 'success');
+            } else {
+                showToast(data.message, 'error');
+            }
+        })
     }
 })
-function hideCreateSection(){
+
+function hideCreateSection() {
     let createSection = document.getElementById('create-section')
     let uploadSection = document.getElementById('upload-section')
     createSection.classList.add("hidden");
     uploadSection.classList.remove("hidden")
 }
+
 hideCreateSection()
-function unhideCreateSection(){
+
+function unhideCreateSection() {
     let createSection = document.getElementById('create-section')
     let uploadSection = document.getElementById('upload-section')
     createSection.classList.remove("hidden");
     uploadSection.classList.add("hidden");
 }
+
 async function themKhoaHocViChuyenNganh() {
     const selectNganh = document.getElementById('chuyenNganh')
     const selectHocVi = document.getElementById('danhHieu')
     const selectKhoa = document.getElementById('tenKhoa')
     const responseAPI1 = await fetch('http://localhost:8080/khoa-list');
-    const { data1 } = await responseAPI1.json();
+    const {data1} = await responseAPI1.json();
     data1.forEach(data1 => {
         const optionItem = document.createElement('option')
-        optionItem.value=`${data1.tenKhoa}`
-        optionItem.innerText=`${data1.tenKhoa}`
+        optionItem.value = `${data1.tenKhoa}`
+        optionItem.innerText = `${data1.tenKhoa}`
         selectKhoa.appendChild(optionItem)
 
     })
     const responseAPI2 = await fetch('http://localhost:8080/hocVi-list');
-    const { data4 } = await responseAPI2.json();
+    const {data4} = await responseAPI2.json();
     data4.forEach(data4 => {
         const optionItem = document.createElement('option')
-        optionItem.value=`${data4.hocVi}`
-        optionItem.innerText=`${data4.hocVi}`
+        optionItem.value = `${data4.hocVi}`
+        optionItem.innerText = `${data4.hocVi}`
         selectHocVi.appendChild(optionItem)
 
     })
     const responseAPI3 = await fetch('http://localhost:8080/chuyenNganh-list');
-    const { data3 } = await responseAPI3.json();
+    const {data3} = await responseAPI3.json();
     data3.forEach(data3 => {
         const optionItem = document.createElement('option')
-        optionItem.value=`${data3.chuyenNganh}`
-        optionItem.innerText=`${data3.chuyenNganh}`
+        optionItem.value = `${data3.chuyenNganh}`
+        optionItem.innerText = `${data3.chuyenNganh}`
         selectNganh.appendChild(optionItem)
 
     })
 }
+
 themKhoaHocViChuyenNganh();
+
 function taoGVmoi(event) {
     event.preventDefault();
     const maGV = document.getElementById('masogv').value;
@@ -102,13 +107,17 @@ function taoGVmoi(event) {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.code===1000){
+            if (data.code === 1000) {
                 showToast('Tạo giảng viên thành công', 'success')
-            }
-            else{
+                setTimeout(function () {
+                        location.reload();
+                    }, 750
+                )
+            } else {
                 showToast(data.message, 'error')
             }
-    })
+        })
 }
+
 document.getElementById('createGVForm').addEventListener('submit', taoGVmoi)
 

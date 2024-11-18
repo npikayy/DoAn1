@@ -1,41 +1,50 @@
 /*///sidebar///*/
-.animation{
+.animation {
     width: 90%;
     top: 189px;
 
 }
-div:nth-child(2):hover~.animation{
+
+div:nth-child(2):hover ~ .animation {
     width: 90%;
     top: 67px;
 }
-div:nth-child(1):hover~.animation{
+
+div:nth-child(1):hover ~ .animation {
     width: 90%;
     top: 8px;
 }
-div:nth-child(3):hover~.animation{
+
+div:nth-child(3):hover ~ .animation {
     width: 90%;
     background: var(--button-color);
     top: 128px;
 }
-.form-container{
+
+.form-container {
     margin-left: 50px;
 }
-.hidden{
+
+.hidden {
     display: none;
 }
+
 /*///footer///*/
-footer{
+footer {
     margin-top: 200px;
 }
+
 /*///search-bar//*/
 .dieukienloc {
     display: flex;
 }
-.search-section{
+
+.search-section {
     margin-top: 20px;
 }
+
 /*search-section */
-button{
+button {
     background-color: #3dbdf8;
     border: none;
     padding: 10px;
@@ -43,33 +52,39 @@ button{
     color: hsl(0, 0%, 100%);
     cursor: pointer;
 }
-.themSV{
+
+.themSV {
     display: flex;
     margin-left: auto;
     width: 250px;
     gap: 50px;
 }
-.themSV p{
+
+.themSV p {
     font-size: 13px;
 }
-.themSV img{
+
+.themSV img {
     width: 100%;
 }
 
-.themGV{
+.themGV {
     display: flex;
     margin-left: auto;
     font-size: 10px;
     width: 250px;
     gap: 50px;
 }
-.themGV img{
+
+.themGV img {
     width: 100%;
 }
-.themGV p{
+
+.themGV p {
     font-size: 13px;
 }
-.add{
+
+.add {
     cursor: pointer;
     margin-top: 100px;
     display: flex;
@@ -85,36 +100,42 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+
 td, th {
     border: 1px solid #c7dbe4;
     text-align: left;
     padding: 10px;
 }
+
 tr:nth-child(1) {
     background-color: #3dbdf8;
 }
-input{
+
+input {
     padding: 5px;
     width: 400px;
     margin-top: 40px;
-    font-size: 16px ;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-select{
+
+select {
     padding: 5px;
-    font-size: 16px ;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-#capNhatBtn{
+
+#capNhatBtn {
     background-color: #4f4fba;
 }
-#xoaBtn{
+
+#xoaBtn {
     background-color: #ff0000;
 }
 
-#updateSVForm button[type="submit"],#updateGVForm button[type="submit"] {
+#updateSVForm button[type="submit"], #updateGVForm button[type="submit"] {
     min-width: 25%;
     padding: 25px;
     margin: auto;

@@ -1,25 +1,29 @@
-.animation{
+.animation {
     width: 90%;
     background: var(--button-color);
     top: 128px;
 
 }
-div:nth-child(2):hover~.animation{
+
+div:nth-child(2):hover ~ .animation {
     width: 90%;
     background: var(--button-color);
     top: 67px;
 }
-div:nth-child(1):hover~.animation{
+
+div:nth-child(1):hover ~ .animation {
     width: 90%;
     background: var(--button-color);
     top: 8px;
 
 }
-div:nth-child(4):hover~.animation{
+
+div:nth-child(4):hover ~ .animation {
     width: 90%;
     background: var(--button-color);
     top: 189px;
 }
+
 /*table*/
 table {
     margin-top: 10px;
@@ -27,15 +31,18 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+
 td, th {
     border: 1px solid #c7dbe4;
     text-align: left;
     padding: 10px;
 }
+
 tr:nth-child(1) {
     background-color: #3dbdf8;
 }
-#xoaBtn{
+
+#xoaBtn {
     background-color: #ff0000;
     border: none;
     padding: 10px;
@@ -43,15 +50,17 @@ tr:nth-child(1) {
     color: hsl(0, 0%, 100%);
     cursor: pointer;
 }
-input{
+
+input {
     padding: 5px;
     width: 400px;
     margin-top: 40px;
-    font-size: 16px ;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-button{
+
+button {
     background-color: #3dbdf8;
     border: none;
     padding: 10px;
@@ -59,6 +68,7 @@ button{
     color: hsl(0, 0%, 100%);
     cursor: pointer;
 }
-.table-section{
+
+.table-section {
     display: flex;
 }

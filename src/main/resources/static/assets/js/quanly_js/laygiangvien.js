@@ -3,34 +3,36 @@ async function layKhoaHocViChuyenNganh() {
     const selectHocVi = document.getElementById('hocvi')
     const selectKhoa = document.getElementById('khoa')
     const responseAPI1 = await fetch('http://localhost:8080/khoa-list');
-    const { data1 } = await responseAPI1.json();
+    const {data1} = await responseAPI1.json();
     data1.forEach(data1 => {
         const optionItem = document.createElement('option')
-        optionItem.value=`${data1.tenKhoa}`
-        optionItem.innerText=`${data1.tenKhoa}`
+        optionItem.value = `${data1.tenKhoa}`
+        optionItem.innerText = `${data1.tenKhoa}`
         selectKhoa.appendChild(optionItem)
 
     })
     const responseAPI2 = await fetch('http://localhost:8080/hocVi-list');
-    const { data4 } = await responseAPI2.json();
+    const {data4} = await responseAPI2.json();
     data4.forEach(data4 => {
         const optionItem = document.createElement('option')
-        optionItem.value=`${data4.hocVi}`
-        optionItem.innerText=`${data4.hocVi}`
+        optionItem.value = `${data4.hocVi}`
+        optionItem.innerText = `${data4.hocVi}`
         selectHocVi.appendChild(optionItem)
 
     })
     const responseAPI3 = await fetch('http://localhost:8080/chuyenNganh-list');
-    const { data3 } = await responseAPI3.json();
+    const {data3} = await responseAPI3.json();
     data3.forEach(data3 => {
         const optionItem = document.createElement('option')
-        optionItem.value=`${data3.chuyenNganh}`
-        optionItem.innerText=`${data3.chuyenNganh}`
+        optionItem.value = `${data3.chuyenNganh}`
+        optionItem.innerText = `${data3.chuyenNganh}`
         selectNganh.appendChild(optionItem)
 
     })
 }
+
 layKhoaHocViChuyenNganh();
+
 async function timGVBangDieuKien(event) {
     event.preventDefault()
     let khoa = document.getElementById('khoa').value
@@ -42,39 +44,59 @@ async function timGVBangDieuKien(event) {
 
     let url = 'http://localhost:8080/quanly-giangvien/search?';
 
-    if (khoa !== 'none') { url += `tenKhoa=${khoa}&`; }
+    if (khoa !== 'none') {
+        url += `tenKhoa=${khoa}&`;
+    }
 
-    if (nganh !== 'none') { url += `chuyenNganh=${nganh}&`; }
+    if (nganh !== 'none') {
+        url += `chuyenNganh=${nganh}&`;
+    }
 
-    if (hocvi !== 'none') { url += `hocvi=${hocvi}&`; }
+    if (hocvi !== 'none') {
+        url += `hocvi=${hocvi}&`;
+    }
 
-    if (gioiTinh!== 'none') { url += `gioiTinh=${gioiTinh}&`; }
+    if (gioiTinh !== 'none') {
+        url += `gioiTinh=${gioiTinh}&`;
+    }
 
     if (search !== '') {
-        if (tenOrmaGV === 'tenGV') { url += `tenGV=${search}&`;
+        if (tenOrmaGV === 'tenGV') {
+            url += `tenGV=${search}&`;
+        } else {
+            url += `magv=${search}&`;
         }
-        else {
-            url += `magv=${search}&`; }
     }
     url = url.slice(0, -1);
 
-    if (url === 'http://localhost:8080/quanly-giangvien/search')
-    { const responseAPI = await fetch('http://localhost:8080/giangVien-list');
-        const { data } = await responseAPI.json(); addTabletitle();
-        data.forEach(data => { addDatatoTable(data); }); }
-    else { fetch(url) .then(response => response.json())
-        .then(data => { addTabletitle(); data.forEach(data => { addDatatoTable(data); }); })
-        .catch(error => console.error('Error:', error));
+    if (url === 'http://localhost:8080/quanly-giangvien/search') {
+        const responseAPI = await fetch('http://localhost:8080/giangVien-list');
+        const {data} = await responseAPI.json();
+        addTabletitle();
+        data.forEach(data => {
+            addDatatoTable(data);
+        });
+    } else {
+        fetch(url).then(response => response.json())
+            .then(data => {
+                addTabletitle();
+                data.forEach(data => {
+                    addDatatoTable(data);
+                });
+            })
+            .catch(error => console.error('Error:', error));
     }
 }
+
 function extractDateComponentsFromNgaySinh(ngaySinh) {
     const date = new Date(ngaySinh);
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    return { day, month, year };
+    return {day, month, year};
 }
-function addTabletitle(){
+
+function addTabletitle() {
     const list = document.getElementById('userList')
     list.innerHTML =
         `
@@ -93,12 +115,13 @@ function addTabletitle(){
         </th>
         `
 }
-function addDatatoTable(data){
+
+function addDatatoTable(data) {
     const list = document.getElementById('userList')
     const divItem2 = document.createElement('tr')
-    const { day, month, year } = extractDateComponentsFromNgaySinh(data.ngaySinh);
+    const {day, month, year} = extractDateComponentsFromNgaySinh(data.ngaySinh);
     let magv = data.maGV
-    divItem2.innerHTML=`
+    divItem2.innerHTML = `
         <td>${data.maGV}</td>
         <td>${data.tenGV}</td>
         <td>${data.gioiTinh}</td>
@@ -118,11 +141,12 @@ function addDatatoTable(data){
         `
     list.appendChild(divItem2)
 }
+
 function xoaGV(magv) {
     const dashboard = document.getElementById('dashboard')
     const xoaPopup = document.createElement('div');
     let masogv = magv;
-    xoaPopup.id='xoaPopup';
+    xoaPopup.id = 'xoaPopup';
     xoaPopup.innerHTML = `
      <div class="deleteOverlay" id="overlay"></div>
      <div class="deletePopup" id="deletePopup">
@@ -136,23 +160,26 @@ function xoaGV(magv) {
     `
     dashboard.appendChild(xoaPopup)
 }
-function ClosePopup(){
+
+function ClosePopup() {
     xoaPopup.remove();
 }
-function DongYxoaGV(magv){
-    fetch(`http://localhost:8080/giangvien/${magv}`,{method: 'DELETE'})
-        .then(response => { if (response.ok)
-        {
-            showToast('Xóa giảng viên thành công', 'success');
-            timGVBangDieuKien(new Event('fetch'));
-            ClosePopup()
-        }
+
+function DongYxoaGV(magv) {
+    fetch(`http://localhost:8080/giangvien/${magv}`, {method: 'DELETE'})
+        .then(response => {
+            if (response.ok) {
+                showToast('Xóa giảng viên thành công', 'success');
+                timGVBangDieuKien(new Event('fetch'));
+                ClosePopup()
+            }
         })
 }
+
 function xoaAllGV() {
     const dashboard = document.getElementById('dashboard')
     const xoaPopup = document.createElement('div');
-    xoaPopup.id='xoaPopup';
+    xoaPopup.id = 'xoaPopup';
     xoaPopup.innerHTML = `
      <div class="deleteOverlay" id="overlay"></div>
      <div class="deletePopup" id="deletePopup">
@@ -166,16 +193,18 @@ function xoaAllGV() {
     `
     dashboard.appendChild(xoaPopup)
 }
-function DongYxoaALLGV(){
-    fetch(`http://localhost:8080/xoagiangvien/`,{method: 'DELETE'})
-        .then(response => { if (response.ok)
-        {
-            showToast('Xóa tất cả giảng viên thành công', 'success');
-            timGVBangDieuKien(new Event('fetch'));
-            ClosePopup()
-        }
+
+function DongYxoaALLGV() {
+    fetch(`http://localhost:8080/xoagiangvien/`, {method: 'DELETE'})
+        .then(response => {
+            if (response.ok) {
+                showToast('Xóa tất cả giảng viên thành công', 'success');
+                timGVBangDieuKien(new Event('fetch'));
+                ClosePopup()
+            }
         })
 }
+
 ///print//
 
 document.getElementById('print-button').addEventListener('click', () => {
@@ -187,7 +216,9 @@ document.getElementById('print-button').addEventListener('click', () => {
 
     // Remove the last column from the table
     const rows = table.rows;
-    for (let i = 0; i < rows.length; i++) { rows[i].deleteCell(-1); }
+    for (let i = 0; i < rows.length; i++) {
+        rows[i].deleteCell(-1);
+    }
 
     // Create print-friendly styles
     const printStyles = `
@@ -220,9 +251,9 @@ document.getElementById('print-button').addEventListener('click', () => {
 
     // Wait for content to load then print
     printWindow.document.close();
-    printWindow.onload = function() {
+    printWindow.onload = function () {
         printWindow.print();
-        printWindow.onafterprint = function() {
+        printWindow.onafterprint = function () {
             printWindow.close();
         };
     };

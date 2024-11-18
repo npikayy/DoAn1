@@ -13,7 +13,7 @@ public interface SinhVienRepository extends JpaRepository<SinhVien, String> {
 
     boolean existsByEmail(String email);
 
-    boolean existsBySDT(Integer sdt);
+    boolean existsBySDT(String sdt);
 
     void deleteByMSSV(String mssv);
 

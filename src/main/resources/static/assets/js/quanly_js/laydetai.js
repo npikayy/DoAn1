@@ -55,15 +55,40 @@ function laydulieuDT(madetai) {
         })
 
 }
+function changeTinhtrang(){
+    let tinhtrang = document.getElementById('tinhtrang')
+    tinhtrang.value = "Đã hoàn thành"
+    tinhtrang.disabled = true;
+}
+function changeTinhtrangtoDefault(){
 
+}
 async function timDTBangDieuKien(event) {
     event.preventDefault()
     let khoa = document.getElementById('khoa').value
     let tinhtrang = document.getElementById('tinhtrang').value
+    let start = document.getElementById('startDay').value
+    let end = document.getElementById('endDay').value
     let search = document.getElementById('search').value
     let magvOrmadetai = document.getElementById('magvOrmadetai').value
 
     let url = 'http://localhost:8080/quanly-detai/search?';
+    changeTinhtrangtoDefault()
+    if (start !== null) {
+        url += `ngayBatdau=${start}&`;
+    }
+    if (end) {
+        url += `ngayKetthuc=${end}&`;
+        // changeTinhtrang();
+        let tinhtrang = document.getElementById('tinhtrang')
+        tinhtrang.value = "Đã hoàn thành"
+        tinhtrang.disabled = true;
+    }
+    else{
+        let tinhtrang = document.getElementById('tinhtrang')
+        tinhtrang.value = "none"
+        tinhtrang.disabled = false;
+    }
 
     if (khoa !== 'none') {
         url += `tenKhoa=${khoa}&`;
@@ -172,7 +197,7 @@ function xoaDT(madetai) {
     const dashboard = document.getElementById('dashboard')
     const xoaPopup = document.createElement('div');
     let detai = madetai
-    xoaPopup.id='xoaPopup';
+    xoaPopup.id = 'xoaPopup';
     xoaPopup.innerHTML = `
      <div class="deleteOverlay" id="overlay"></div>
      <div class="deletePopup" id="deletePopup">
@@ -186,9 +211,11 @@ function xoaDT(madetai) {
     `
     dashboard.appendChild(xoaPopup)
 }
-function ClosePopup(){
+
+function ClosePopup() {
     xoaPopup.remove();
 }
+
 function DongYxoaDT(madetai) {
     fetch(`http://localhost:8080/detai/${madetai}`, {method: 'DELETE'})
         .then(response => {
@@ -199,10 +226,11 @@ function DongYxoaDT(madetai) {
             }
         })
 }
+
 function xoaAllDT() {
     const dashboard = document.getElementById('dashboard')
     const xoaPopup = document.createElement('div');
-    xoaPopup.id='xoaPopup';
+    xoaPopup.id = 'xoaPopup';
     xoaPopup.innerHTML = `
      <div class="deleteOverlay" id="overlay"></div>
      <div class="deletePopup" id="deletePopup">
@@ -216,6 +244,7 @@ function xoaAllDT() {
     `
     dashboard.appendChild(xoaPopup)
 }
+
 function DongYxoaAllDT() {
     fetch(`http://localhost:8080/xoadetai/`, {method: 'DELETE'})
         .then(response => {

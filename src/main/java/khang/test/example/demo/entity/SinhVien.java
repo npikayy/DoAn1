@@ -23,7 +23,7 @@ public class SinhVien {
     @Column(columnDefinition = "Date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDate ngaySinh;
-    Integer SDT;
+    String SDT;
     @Column(columnDefinition = "nvarchar(255)")
     String email;
     String Lop;
