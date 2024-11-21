@@ -74,7 +74,7 @@ public class DetaiController {
             } catch (Exception exp) {
                 log.warn(String.valueOf(exp));
                 code = 1000;
-                message = "Upload tệp " + file.getOriginalFilename() + " không thành công! Vui lòng kiểm tra lại";
+                message = "Upload tệp " + file.getOriginalFilename() + " không thành công! " +String.valueOf(exp.getMessage()) ;
             }
         }
         return apiResponse.<String>builder()

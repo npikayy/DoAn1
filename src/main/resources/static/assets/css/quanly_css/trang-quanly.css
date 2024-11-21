@@ -100,7 +100,9 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
-
+table th:last-child {
+    width: 8%;
+}
 td, th {
     border: 1px solid #c7dbe4;
     text-align: left;

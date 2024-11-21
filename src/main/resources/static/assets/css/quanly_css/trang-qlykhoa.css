@@ -34,6 +34,7 @@ table {
 table th:nth-child(1) {
     width: 90%;
 }
+
 td, th {
     border: 1px solid #c7dbe4;
     text-align: left;

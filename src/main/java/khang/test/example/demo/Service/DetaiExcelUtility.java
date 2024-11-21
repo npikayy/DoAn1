@@ -99,7 +99,7 @@ public class DetaiExcelUtility {
 
             Cell header9 = row.createCell(8);
             header9.setCellValue("tinh trang");
-            int rowNumber = row.getRowNum();
+            int rowNumber = 1;
 
             for (Detai detai : DetaiList) {
                 row = sheet.createRow(rowNumber++);

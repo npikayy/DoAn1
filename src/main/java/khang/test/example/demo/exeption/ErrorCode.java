@@ -9,7 +9,7 @@ public enum ErrorCode {
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_FIlE(1001, "Lỗi, vui lòng kiểm tra lại", HttpStatus.INTERNAL_SERVER_ERROR),
     Email_EXISTED(1002, "Email sinh viên đã tồn tại", HttpStatus.BAD_REQUEST),
-    nienKhoa_EXISTED(1002, "Niên khá đã tồn tại", HttpStatus.BAD_REQUEST),
+    nienKhoa_EXISTED(1002, "Niên khoá đã tồn tại", HttpStatus.BAD_REQUEST),
     Nganh_EXISTED(1002, "Chuyên ngành đã tồn tại", HttpStatus.BAD_REQUEST),
     TenKhoa_EXISTED(1002, "Tên khoa đã tồn tại", HttpStatus.BAD_REQUEST),
     Hocvi_EXISTED(1002, "Học vị đã tồn tại", HttpStatus.BAD_REQUEST),
