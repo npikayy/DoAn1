@@ -14,7 +14,7 @@
 <body onload="layKhoaHocViChuyenNganhNienKhoa(event)">
 <section class="main_page">
     <div th:replace="~{quanly_html/sidebar :: sidebar}"></div>
-    <section class="dashboard">
+    <section class="dashboard" id="dashboard">
         <h1>Quản lý khoa</h1>
         <div class="form-group">
             <form action="#" id="themKhoaForm" method="post">
@@ -35,7 +35,7 @@
         <div class="form-group">
             <form action="#" id="themNKForm" method="post">
                 <label for="nienkhoa">Niên khóa:</label>
-                <input id="nienkhoa" name="nienkhoa" required type="number">
+                <input id="nienkhoa" name="nienkhoa" required type="number" min="1900", max="9999">
                 <button type="submit">Thêm mới</button>
             </form>
         </div>

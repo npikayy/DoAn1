@@ -124,8 +124,11 @@ async function FetchAndcreateChart() {
         },
         options: {
             scales: {
-                y:
-                    {beginAtZero: true}
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1
+                    }
+                }
             }
         }
     });

@@ -31,7 +31,9 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
-
+table th:nth-child(1) {
+    width: 90%;
+}
 td, th {
     border: 1px solid #c7dbe4;
     text-align: left;
@@ -69,6 +71,6 @@ button {
     cursor: pointer;
 }
 
-.table-section {
-    display: flex;
-}
+/*.table-section {*/
+/*    display: flex;*/
+/*}*/

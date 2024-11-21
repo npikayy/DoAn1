@@ -29,7 +29,7 @@ async function layKhoaHocViChuyenNganhNienKhoa(event) {
         divItem2.innerHTML = `
         <td>${data1.tenKhoa}</td>
         <td>
-            <button id="xoaBtn" onclick="xoaKhoa('${tenkhoa}')">xóa</button>
+            <button id="xoaBtn" onclick="xoaItem('khoa','${tenkhoa}')">xóa</button>
         </td>
         `
         Khoa.appendChild(divItem2)
@@ -47,7 +47,7 @@ async function layKhoaHocViChuyenNganhNienKhoa(event) {
         divItem2.innerHTML = `
         <td>${data2.nienKhoa}</td>
         <td>
-            <button id="xoaBtn" onclick="xoaNienKhoa('${nienkhoa}')">xóa</button>
+            <button id="xoaBtn" onclick="xoaItem('nienkhoa','${nienkhoa}')">xóa</button>
         </td>
         `
         nienKhoa.appendChild(divItem2)
@@ -65,7 +65,7 @@ async function layKhoaHocViChuyenNganhNienKhoa(event) {
         divItem2.innerHTML = `
         <td>${data3.chuyenNganh}</td>
         <td>
-            <button id="xoaBtn" onclick="xoaNganh('${nganh}')">xóa</button>
+            <button id="xoaBtn" onclick="xoaItem('nganh', '${nganh}')">xóa</button>
         </td>
         `
         Nganh.appendChild(divItem2)
@@ -83,13 +83,14 @@ async function layKhoaHocViChuyenNganhNienKhoa(event) {
         divItem2.innerHTML = `
         <td>${data4.hocVi}</td>
         <td>
-            <button id="xoaBtn" onclick="xoaHocVi('${hocvi}')">xóa</button>
+            <button id="xoaBtn" onclick="xoaItem('hocvi', '${hocvi}')">xóa</button>
         </td>
         `
         HocVi.appendChild(divItem2)
     })
 
 }
+
 
 function taoKhoaMoi(event) {
     event.preventDefault();
@@ -101,6 +102,7 @@ function taoKhoaMoi(event) {
         tenKhoa = tenKhoa.replace(/\s+/g, '');
     }
     tenKhoa = tenKhoa.toUpperCase();
+    tenKhoa = tenKhoa.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z0-9 ]/g, '');
     const KhoaData =
         {
             "tenKhoa": tenKhoa
@@ -125,6 +127,10 @@ function taoKhoaMoi(event) {
 }
 
 document.getElementById('themKhoaForm').addEventListener('submit', taoKhoaMoi)
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function taoNienKhoaMoi(event) {
     event.preventDefault();
@@ -160,6 +166,7 @@ function taoNganhMoi(event) {
     if (/\d/.test(nganh)) {
         nganh = nganh.replace(/\d/g, '');
     }
+    nganh = capitalizeFirstLetter(nganh);
     const CNData =
         {
             "chuyenNganh": nganh
@@ -191,6 +198,7 @@ function taoHocViMoi(event) {
     if (/\d/.test(hocvi)) {
         hocvi = hocvi.replace(/\d/g, '');
     }
+    hocvi = capitalizeFirstLetter(hocvi);
     const HVData =
         {
             "hocVi": hocvi
@@ -216,45 +224,44 @@ function taoHocViMoi(event) {
 
 document.getElementById('themHVForm').addEventListener('submit', taoHocViMoi)
 
-function xoaKhoa(tenKhoa) {
-    fetch(`http://localhost:8080/khoa/${tenKhoa}`, {method: 'DELETE'})
-        .then(response => {
-            if (response.ok) {
-                showToast('Xóa khoa thành công', 'success');
-                layKhoaHocViChuyenNganhNienKhoa(new Event('fetch'));
-            }
-        })
+function xoaItem(type, id) {
+    const dashboard = document.getElementById('dashboard');
+    const xoaPopup = document.createElement('div');
+    let itemId = id;
+    let message = '';
+    switch (type) {
+        case 'khoa':
+            message = 'Bạn có chắc chắn muốn xóa khoa này?';
+            break;
+        case 'nienkhoa':
+            message = 'Bạn có chắc chắn muốn xóa niên khóa này?';
+            break;
+        case 'hocvi':
+            message = 'Bạn có chắc chắn muốn xóa học vị này?';
+            break;
+        case 'nganh':
+            message = 'Bạn có chắc chắn muốn xóa chuyên ngành này?';
+            break;
+        default:
+            message = 'Bạn có chắc chắn muốn xóa mục này?';
+    }
+    xoaPopup.id = 'xoaPopup';
+    xoaPopup.innerHTML = ` <div class="deleteOverlay" id="overlay"></div> <div class="deletePopup" id="deletePopup"> <h2>${message}</h2> <br> <div class="delete-popup-buttons"> <button class="delete-popup-button cancel" onclick="ClosePopup()">Quay lại</button> <button class="delete-popup-button logout" onclick="DongYxoaItem('${type}', '${itemId}')">Xóa</button> </div> </div> `;
+    dashboard.appendChild(xoaPopup);
 }
 
-function xoaNganh(nganh) {
-    fetch(`http://localhost:8080/nganh/${nganh}`, {method: 'DELETE'})
-        .then(response => {
-            if (response.ok) {
-                showToast('Xóa chuyên ngành thành công', 'success');
-                layKhoaHocViChuyenNganhNienKhoa(new Event('fetch'));
-            }
-        })
+function ClosePopup() {
+    xoaPopup.remove();
 }
 
-function xoaNienKhoa(nienKhoa) {
-    fetch(`http://localhost:8080/nienkhoa/${nienKhoa}`, {method: 'DELETE'})
-        .then(response => {
-            if (response.ok) {
-                showToast('Xóa niên khóa thành công', 'success');
-                layKhoaHocViChuyenNganhNienKhoa(new Event('fetch'));
-            }
-        })
+function DongYxoaItem(type, itemId) {
+    fetch(`http://localhost:8080/${type}/${itemId}`, {method: 'DELETE'}).then(response => {
+        if (response.ok) {
+            showToast('Xóa thành công', 'success');
+            ClosePopup();
+            layKhoaHocViChuyenNganhNienKhoa(new Event('fetch'));
+        }
+    })
 }
 
-function xoaHocVi(hocvi) {
-    fetch(`http://localhost:8080/hocvi/${hocvi}`, {method: 'DELETE'})
-        .then(response => {
-            if (response.ok) {
-                showToast('Xóa học vị thành công', 'success');
-                layKhoaHocViChuyenNganhNienKhoa(new Event('fetch'));
-            }
-        })
-}
-
-///print//
 

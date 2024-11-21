@@ -23,6 +23,10 @@ function loadLoginInfo() {
     }
 }
 
+function enableLoginButton() {
+    document.getElementById("loginButton").disabled = false;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     loadLoginInfo();
 
@@ -38,4 +42,4 @@ document.addEventListener("DOMContentLoaded", function () {
     if (params.has("error")) {
         messageDiv.innerHTML = "Tên người dùng hoặc mật khẩu không đúng!";
     }
-});
+    });

@@ -5,6 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Đăng nhập</title>
     <link rel="stylesheet" th:href="@{/assets/css/login_css/dangnhap.css}">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 <form action="/login" class="main-page" id="loginForm" method="post">
@@ -25,11 +26,14 @@
         <input id="rememberMe" name="rememberMe" type="checkbox"><label for="rememberMe">Nhớ mật khẩu</label>
     </section>
     <br>
+    <div class="g-recaptcha" data-sitekey="6LfD3PIbAAAAAJs_eEHvoOl75_83eXSqpPSRFJ_u" id="recaptcha" data-callback="enableLoginButton"></div>
+    <br>
     <div id="message"></div>
     <br>
-    <button id="loginButton" type="submit">Đăng Nhập</button>
+    <button id="loginButton" type="submit" disabled>Đăng Nhập</button>
 </form>
 <img alt="" id="body-img" th:src="@{/assets/images/blue.jpg}">
 <script th:src="@{/assets/js/quanly_js/login_js/login.js}"></script>
+
 </body>
 </html>
